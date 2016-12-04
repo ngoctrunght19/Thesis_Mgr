@@ -3,16 +3,27 @@
 @section('title', 'Đăng nhập')
 
 @section('body')
-    <form action="" class="w3-container w3-card-4 w3-light-grey form-login">
-        <h2 class="w3-center">ĐĂNG NHẬP</h2>
-        <div class="w3-row w3-section">
-            <h6>Tên truy cập</h6>
-            <input class="w3-input w3-border" type="text" name="">
+    <div class="row">
+        <div class="col-sm-8">
+            <h3>Thông báo:</h3>
         </div>
-        <div class="w3-row w3-section">
-            <h6>Mật khẩu</h6>
-            <input class="w3-input w3-border" type="password" name="">
+
+        <div class="col-sm-4">
+            <div class="box-login">
+                <div class="title-login">Đăng nhập hệ thống</div>
+                <form class="login">
+                    <div class="form-group">
+                        <label for="email">Tên truy cập</label>
+                        <input type="text" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Mật khẩu</label>
+                        <input type="password" class="form-control" required="">
+                    </div>
+                    <button class="btn btn-block btn-success">Đăng nhập</button>
+                </form>
+            </div>
+            
         </div>
-        <button class="w3-btn-block w3-section w3-green w3-padding">Đăng nhập</button>
-    </form>
+    </div>
 @endsection

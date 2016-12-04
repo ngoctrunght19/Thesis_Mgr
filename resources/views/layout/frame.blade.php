@@ -10,13 +10,24 @@
         <!-- Fonts -->
 
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/w3.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
 
     </head>
     <body>
-        @yield('body')    
+
+        <div class="container">
+            @yield('body')
+        </div>
+
+    
+    <!-- JavaScrip -->
+    <script type="text/javascript" src="{{ asset('js/jquery-2.1.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+
     </body>
+
 </html>
