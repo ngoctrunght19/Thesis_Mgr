@@ -12,5 +12,13 @@
 */
 
 Route::get('/', function () {
+    return view('admin');
+});
+
+Route::get('/login', function () {
     return view('login');
 });
+
+// Route::controller([
+// 	'auth' => 'Auth/LoginController'
+// ]);
