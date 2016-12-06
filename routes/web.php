@@ -26,6 +26,10 @@ Route::get('logout', 'LoginController@getLogout');
 
 Route::get('addGV', 'Controller@addGV');
 
+Route::get('upload', 'Controller1@getView');
+
+Route::post('upload', ['as'=>'upload','uses'=>'Controller1@upload']);
+
 
 // Route::controller([
 // 	'auth' => 'Auth/LoginController'
