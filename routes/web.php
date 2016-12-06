@@ -11,26 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', 'LoginController@home');
 
 Route::get('login', [ 'as' => 'login', 'uses' => 'LoginController@getLogin']);
 Route::post('login', 'LoginController@postLogin');
 
-Route::get('admin', [ 'as' => 'admin', 'uses' => function () {
-    return view('admin');
-}]);
+Route::get('admin', [ 'as' => 'admin', 'uses' => 'LoginController@redirectPage']);
+Route::get('khoa', [ 'as' => 'khoa', 'uses' => 'LoginController@redirectPage']);
+Route::get('hocvien', [ 'as' => 'hocvien', 'uses' => 'LoginController@redirectPage']);
+Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'LoginController@redirectPage']);
 
-Route::get('hocvien', [ 'as' => 'hocvien', 'uses' => function () {
-    return view('hocvien');
-}]);
-
-Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => function () {
-    return view('giangvien');
-}]);
 
 Route::get('logout', 'LoginController@getLogout');
+
+Route::get('addGV', 'Controller@addGV');
 
 
 // Route::controller([

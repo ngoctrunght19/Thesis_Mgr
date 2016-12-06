@@ -20,15 +20,23 @@ class DatabaseSeeder extends Seeder
 	            "password" => Hash::make("admin"),
 	            "quyen"  => "admin"
 	        ],
+
 	        [
-	            'username'    => 'trung',
-	            "password" => Hash::make("trung123"),
-	            "quyen"  => "hv"
+	        	'username'    => 'khoa',
+	            "password" => Hash::make("khoa"),
+	            "quyen"  => "khoa"
 	        ],
+
+	        [
+	            'username'    => 'hocvien',
+	            "password" => Hash::make("hocvien"),
+	            "quyen"  => "hocvien"
+	        ],
+
 	        [
 	        	'username'    => 'giangvien',
 	            "password" => Hash::make("giangvien"),
-	            "quyen"  => "gv"
+	            "quyen"  => "giangvien"
 	        ]
 	    ];
 	    

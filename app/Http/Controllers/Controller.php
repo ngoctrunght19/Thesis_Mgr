@@ -14,4 +14,10 @@ class Controller extends BaseController
     public function test() {
     	return "Hello";
     }
+
+    public function addGV() {
+    	echo "string";
+    	// s
+    
+    }
 }
