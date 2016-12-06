@@ -92,7 +92,6 @@ body {
 p {
     color: #777;
 }
-
 a, a:hover, a:focus {
     color: #30a5ff;
 }
@@ -640,6 +639,7 @@ a.bg-danger:hover {
 .sidebar ul.nav li.parent ul li a:hover {
     text-decoration: none;
     background-color: #e9ecf2;
+    cursor: pointer;
 }
 
 .sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active,
