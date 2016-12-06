@@ -14,6 +14,8 @@
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
+        <!--Icons-->
+        <script src="js/lumino.glyphs.js"></script>
 
     </head>
     <body>
