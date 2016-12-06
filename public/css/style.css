@@ -36,14 +36,14 @@ a.nav-account {
 }
 @media (min-width: 768px) {
     a.nav-account {
-    position: absolute;
-    top: 25px;
-    padding: 10px;
-}
-.drop-account {
-    position: absolute;
-    top: 60px;
-}
+        position: absolute;
+        top: 25px;
+        padding: 10px;
+    }
+    .drop-account {
+        position: absolute;
+        top: 60px;
+    }
 }
 a.nav-account, a.nav-account:hover, a.nav-account:focus {
     color: #fff;

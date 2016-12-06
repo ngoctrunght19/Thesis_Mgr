@@ -15,7 +15,7 @@
         <div class="col-sm-4">
             <div class="box-login">
                 <div class="title-login">Đăng nhập hệ thống</div>
-                <form class="login" method="POST">
+                <form class="login" method="POST" action="{{ url('login') }}">
                     <div class="form-group">
                         <label for="email">Tên truy cập</label>
                         <input type="text" class="form-control" name="username" id="username" required="" oninvalid="this.setCustomValidity('Chưa nhập tên truy cập')">
@@ -24,7 +24,9 @@
                         <label for="pwd">Mật khẩu</label>
                         <input type="password" class="form-control" name="password" id="password" required="" oninvalid="this.setCustomValidity('Chưa nhập mật khẩu')">
                     </div>
-                    <button class="btn btn-block btn-success">Đăng nhập</button>
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-block btn-success">Đăng nhập</button>
                 </form>
             </div>
             
