@@ -26,9 +26,10 @@ Route::get('logout', 'LoginController@getLogout');
 
 Route::get('addGV', 'KhoaController@addGV');
 
-Route::post('khoa/addKhoaHoc', 'KhoaController@addKhoaHoc');
-Route::get('khoa/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
-Route::post('khoa/addNganh', 'KhoaController@addNganh');
+Route::get('khoa/{tenkhoahoc}/themKhoaHoc', 'KhoaController@themKhoaHoc');
+Route::get('khoa/{id}/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
+Route::get('khoa/{tennganh}/themNganh', 'KhoaController@themNganh');
+Route::get('khoa/{id}/xoaNganh', 'KhoaController@xoaNganh');
 
 Route::get('upload', 'Controller1@getView');
 

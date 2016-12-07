@@ -1,16 +1,11 @@
 <div id="tabs-3">
 <button>Thêm giảng viên</button> <br />
-
-<form id="form-upload" method="post" action="upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
+<form method="GET" action="addGV">
+    <label>Chọn tệp</label><input type="file" name="filename" accept=".xls,.xlsx">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-    <label>Thêm giảng viên bằng file excel: </label><input type="file" name="excel" id="select-file" accept=".xlsx, .xls"/>
-    <input type="submit" value="Tải lên"  id="submit-upload"/>
+    <input type="submit" value="Thêm giảng viên">
 </form>
-
-<div id="result">
-</div>
-
 <table class="table">
     <thead>
       <tr>

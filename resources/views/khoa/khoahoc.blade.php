@@ -11,13 +11,13 @@
 		</div>
 	</div>
 	<div class="panel-body">
-		<ul class="todo-list" id="listKhoaHoc">
+		<ul class="todo-list">
 			<?php $KhoaHoc = DB::table('khoahoc')->get();
 				foreach ($KhoaHoc as $khoa): ?>
 			<li class="todo-list-item">
-				<label makhoahoc= <?php echo $khoa->id; ?> > <?php echo $khoa->tenkhoahoc; ?> </label>
+				<label> <?php echo $khoa->tenkhoahoc; ?> </label>
 				<div class="pull-right action-buttons">
-					<a href="khoa/xoaKhoahoc" id="btn-xoakhoahoc" class="trash"><svg class="glyph stroked trash"><use xlink:href="#stroked-trash"></use>
+					<a makhoahoc="<?php echo $khoa->id; ?>" class="trash btn-xoakhoahoc"><svg class="glyph stroked trash"><use xlink:href="#stroked-trash"></use>
 					</svg></a>
 				</div>
 			</li>

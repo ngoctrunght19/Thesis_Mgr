@@ -15,15 +15,25 @@ class KhoaController extends Controller
     
     }
 
-    public function addKhoaHoc(Request $request) {
-    	$tenkhoahoc = $request->get('khoahoc');
+    public function themKhoaHoc($tenkhoahoc) {
     	$khoahoc = new KhoaHoc();
     	$khoahoc->insert(['tenkhoahoc' => $tenkhoahoc]);
+    	return redirect()->route('khoa');
     }
 
-    public function addNganh(Request $request) {
-    	$tennganh = $request->get('nganh');
-    	$nganhhoc = new NganhHoc();
-    	$nganhhoc->insert(['tennganh' => $tennganh]);
+    public function themNganh($tennganh) {
+    	$nganh = new NganhHoc();
+    	$nganh->insert(['tennganh' => $tennganh]);
+    	return redirect()->route('khoa');
+    }
+
+    public function xoaKhoaHoc($id) {
+    	KhoaHoc::find($id)->delete();
+    	return redirect()->route('khoa');
+    }
+
+    public function xoaNganh($id) {
+    	NganhHoc::find($id)->delete();
+    	return redirect()->route('khoa');
     }
 }
