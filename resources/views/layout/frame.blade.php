@@ -57,6 +57,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/main1.js"></script>
 
     </body>
 
