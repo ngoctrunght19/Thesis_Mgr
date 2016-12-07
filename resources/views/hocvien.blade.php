@@ -57,63 +57,16 @@
             </li>
             <li class="parent">
                 <a href="#tabs-3">
-                  <div data-toggle="collapse" href="#item-linhvuc">
                     <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
                      Lĩnh vực
-                   </div>
                 </a >
-              <ul class="children collapse" id="item-linhvuc">
-                @foreach ($linhvuc as $l)
-                <li>
-                  <a data-toggle="collapse" href="#item-{{ $l->id+1000 }}">{{ $l->tenlinhvuc }}</a>
-                  <ul class="children collapse deeper" id="item-{{ $l->id+1000 }}">
-                    @foreach ($cdnc as $c)
-                      @if($c->linhvuc == $l->id)
-                        <li>
-                          <a href="#">{{ $c->tenchude }}</a>
-                        </li>
-                      @endif
-                    @endforeach
-                  </ul>
-                </li>
-                @endforeach
-              </ul>
 
-            </li>
-            <li>
-                <a href="#tabs-4">
-                    <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
-                     Chủ đề nghiên cứu
-                </a>
             </li>
             <li>
                 <a href="#tabs-5">
                     <svg class="glyph stroked star"><use xlink:href="#stroked-star"/></svg>
                      Đề tài khóa luận
                 </a>
-            </li>
-            <li class="parent">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>
-                     Dropdown
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a>
-                            Sub Item 1
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 2
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 3
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
 
@@ -122,8 +75,9 @@
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         @include('hocvien.donvi')
         @include('hocvien.giangvien')
-        @include('khoa.qlgv')
-        @include('khoa.qlhv')
+        @include('hocvien.linhvuc')
+        <!-- @include('khoa.qlgv')
+        @include('khoa.qlhv') -->
     </div>
 </div>
 @endsection
