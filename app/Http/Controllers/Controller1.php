@@ -35,8 +35,7 @@ class Controller1 extends Controller
                 try {
                     $errorMessage = Khoa::importLecturerFromExcel($path);
                 } catch(Exception $e) {
-                    echo 'cannot insert into giangvien';
-                    echo $e->getMessage();
+                    
                 }
             }
         }
@@ -44,9 +43,15 @@ class Controller1 extends Controller
             $errorMessage = 'Bạn chưa chọn file';
             return;
         }
+        $info = null;
+        if ($errorMessage == null) {
+            $info = "Đã thêm giảng viên";
+        }
+        else {
+            $info = $errorMessage;
+        }
         
-    //    echo $errorMessage;
-        return view('khoa.danhsachgiangvien');
+        return view('khoa.danhsachgiangvien')->with(['info'=> $info]);
     }
 
     public function upload0() {
