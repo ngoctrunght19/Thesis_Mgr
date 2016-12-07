@@ -1,12 +1,20 @@
 <div id="tabs-3">
 <button>Thêm giảng viên</button> <br />
-<form method="GET" action="addGV">
-    <label>Chọn tệp</label><input type="file" name="filename" accept=".xls,.xlsx">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+<form id="form-upload" method="post" action="upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
+    {{ csrf_field() }}
 
-    <input type="submit" value="Thêm giảng viên">
+    <input type="file" name="excel" class="file" id="select-file" accept=".xlsx, .xls"/>
+    <input type="submit" value="Upload"  id="submit-upload"/>
 </form>
-<table class="table">
+
+<div id="result">
+</div>
+
+<div id="danhsachgiangvien">
+@include('khoa.danhsachgiangvien')
+</div>
+
+<!-- <table class="table">
     <thead>
       <tr>
         <th>Họ và tên</th>
@@ -31,5 +39,5 @@
         <td>july@example.com</td>
       </tr>
     </tbody>
-</table>
+</table> -->
 </div>

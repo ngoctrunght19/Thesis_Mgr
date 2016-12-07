@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use PHPExcel_IOFactory;
 use DB;
 use Exception;
+use App\Models\Khoa;
 
 class Controller1 extends Controller
 {
@@ -15,6 +16,40 @@ class Controller1 extends Controller
 	}
 
     public function upload() {
+        $path = null;
+        $success = true;
+        $errorMessage = null;
+
+        if (isset($_FILES['excel']))
+        {
+            // Nếu file upload không bị lỗi,
+            // Tức là thuộc tính error > 0
+            if ($_FILES['excel']['error'] > 0)
+            {
+                $errorMessage = 'File Upload Bị Lỗi';
+            }
+            else{
+                // Upload file
+                move_uploaded_file($_FILES['excel']['tmp_name'], './uploads'.$_FILES['excel']['name']);
+                $path = './uploads'.$_FILES['excel']['name'];
+                try {
+                    $errorMessage = Khoa::importLecturerFromExcel($path);
+                } catch(Exception $e) {
+                    echo 'cannot insert into giangvien';
+                    echo $e->getMessage();
+                }
+            }
+        }
+        else {
+            $errorMessage = 'Bạn chưa chọn file';
+            return;
+        }
+        
+    //    echo $errorMessage;
+        return view('khoa.danhsachgiangvien');
+    }
+
+    public function upload0() {
         $path = null;
 
         if (isset($_FILES['excel']))
@@ -42,7 +77,7 @@ class Controller1 extends Controller
         $objWorksheet = $objPHPExcel->getActiveSheet();
         $nRows = $objWorksheet->getHighestRow();
   
-        for ($row = 1; $row <= $nRows; ++$row) {
+        for ($row = 1; $row < $nRows; ++$row) {
         	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $email = $objWorksheet->getCell("C" . $row)->getValue();
