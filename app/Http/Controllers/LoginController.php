@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Khoa;
+use App\LinhVuc;
+use App\NganhHoc;
+use App\KhoaHoc;
+use App\ChuDeNghienCuu;
 
 class LoginController extends Controller
 {
@@ -61,14 +66,18 @@ class LoginController extends Controller
                 return view('admin');
             }
             else if (Auth::user()->quyen=='khoa') {
-                $khoahoc = \DB::table('khoahoc')->get();
-                $nganhhoc = \DB::table('nganhhoc')->get();
+                $khoahoc = KhoaHoc::all();
+                $nganhhoc = NganhHoc::all();
                 return view('khoa', compact('khoahoc'), compact('nganhhoc'));
             }
             else if (Auth::user()->quyen=='hocvien') {
-                $khoa = \DB::table('khoa')->get();
-                $linhvuc = \DB::table('linhvuc')->get();
-                return view('hocvien', compact('khoa'), compact('linhvuc'));
+                $khoa = Khoa::all();
+                $linhvuc = LinhVuc::all();
+                $cdnc = ChuDeNghienCuu::all();
+
+                return view('hocvien')->with('khoa', $khoa)
+                                      ->with('linhvuc', $linhvuc)
+                                      ->with('cdnc', $cdnc);
             }
             else if (Auth::user()->quyen=='giangvien') {
                 return view('giangvien');

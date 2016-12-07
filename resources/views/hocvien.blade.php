@@ -67,12 +67,13 @@
                 <li>
                   <a data-toggle="collapse" href="#item-{{ $l->id+1000 }}">{{ $l->tenlinhvuc }}</a>
                   <ul class="children collapse deeper" id="item-{{ $l->id+1000 }}">
-                    <li>
-                      <a href="#"> Chủ đề nghiên cứu </a>
-                    </li>
-                    <li>
-                      <a href="#"> Chủ đề nghiên cứu </a>
-                    </li>
+                    @foreach ($cdnc as $c)
+                      @if($c->linhvuc == $l->id)
+                        <li>
+                          <a href="#">{{ $c->tenchude }}</a>
+                        </li>
+                      @endif
+                    @endforeach
                   </ul>
                 </li>
                 @endforeach
