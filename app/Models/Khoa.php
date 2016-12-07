@@ -26,30 +26,25 @@ class Khoa extends Model
             try {
 				DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
 			} catch(Illuminate\Database\QueryException $e){
-				echo 'vai cả exception';
-				return;
+				return 'Đã có lỗi xảy ra';
             } catch(Exception $e) {
-			//    echo $e . '<br />' . 'kệ tôi' . '<br />';
+				return 'Đã có lỗi xảy ra';
 			}
 			
 			$query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
 			if (isset($query[0]))
 				$account_id = $query[0]->id;
 			else {
-				echo 'failed';
-				return;
+				return 'Đã có lỗi xảy ra';
 			}
 
             $data = [$magiangvien, $hoten, $email, 0, $account_id];
 			try {
 				DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, taikhoan	) values (?, ?, ?, ?, ?)', $data);
 			} catch(Exception $e) {
-				echo 'cannot insert into giangvien';
-				echo $e->getMessage();
+				return 'Đã có lỗi xảy ra';
 			}
 		}
-       	
-       	echo "done";
 
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);

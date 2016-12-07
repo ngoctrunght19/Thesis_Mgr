@@ -7,7 +7,8 @@ $(document).ready(function(){
 	$('#form-upload').ajaxForm({
 	    complete: function(xhr) {
 	      // Add response text to div #result
-	      $('#result').html(xhr.responseText);
+	//      $('#result').html(xhr.responseText);
+			$('#danhsachgiangvien').html(xhr.responseText);
 	    }
 	});
 

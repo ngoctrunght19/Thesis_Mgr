@@ -1,7 +1,10 @@
+@if( !empty($info) )
+    {{ $info }}
+@endif
+
 <h3>Danh sách giảng viên</h3>
 
 <table class="table">
-
     <thead>
       <tr>
         <th>Mã giảng viên</th>
@@ -15,8 +18,8 @@
       foreach ($list as $gv) {
           echo '<tr>
             <td>'.$gv->magiangvien.'</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
+            <td>'.$gv->hoten.'</td>
+            <td>'.$gv->email.'</td>
           </tr>';
       }
 
