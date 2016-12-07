@@ -66,7 +66,8 @@ class LoginController extends Controller
                 return view('khoa', compact('khoahoc'), compact('nganhhoc'));
             }
             else if (Auth::user()->quyen=='hocvien') {
-                return view('hocvien');
+                $khoa = \DB::table('khoa')->get();
+                return view('hocvien', compact('khoa'));
             }
             else if (Auth::user()->quyen=='giangvien') {
                 return view('giangvien');
