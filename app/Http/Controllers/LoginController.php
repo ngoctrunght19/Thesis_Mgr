@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function getLogin() {
         if (isset(Auth::user()->quyen) ) {
             if(Auth::user()->quyen=='admin') {
-                return redirect()->route('admin');            
+                return redirect()->route('admin');
             }
             else if (Auth::user()->quyen=='khoa') {
                 return redirect()->route('khoa');
@@ -46,7 +46,7 @@ class LoginController extends Controller
         }
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'hocvien'])) {
         	return redirect()->route('hocvien');
-        } 
+        }
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'giangvien'])) {
         	return redirect()->route('giangvien');
         }
@@ -61,7 +61,9 @@ class LoginController extends Controller
                 return view('admin');
             }
             else if (Auth::user()->quyen=='khoa') {
-                return view('khoa');
+                $khoahoc = \DB::table('khoahoc')->get();
+                $nganhhoc = \DB::table('nganhhoc')->get();
+                return view('khoa', compact('khoahoc'), compact('nganhhoc'));
             }
             else if (Auth::user()->quyen=='hocvien') {
                 return view('hocvien');

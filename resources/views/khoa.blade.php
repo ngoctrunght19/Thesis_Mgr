@@ -15,17 +15,34 @@
             </div>
         </form>
         <ul class="nav menu">
-            <li>
-                <a href="#tabs-1">
-                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
-                     Khóa học
-                </a>
-            </li>
-            <li>
-                <a href="#tabs-2">
-                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
-                     Chương trình đào tạo
-                </a>
+            <li class="parent ">
+      				<a href="#tabs-1">
+                <div data-toggle="collapse" href="#item-khoahoc">
+                  <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg> Khóa học
+                </div>
+      				</a>
+      				<ul class="children collapse" id="item-khoahoc">
+                @foreach ($khoahoc as $khoa)
+                  <li>
+                    <a class="" href="#">{{ $khoa->tenkhoahoc }}</a>
+                  </li>
+                @endforeach
+      				</ul>
+      			</li>
+            <li class="parent">
+              <a href="#tabs-2">
+                <div data-toggle="collapse" href="#item-nganhhoc">
+                  <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                  Chương trình đào tạo
+                </div>
+              </a>
+              <ul class="children collapse" id="item-nganhhoc">
+                @foreach ($nganhhoc as $nganh)
+                  <li>
+                    <a class="" href="#">{{ $nganh->tennganh }}</a>
+                  </li>
+                @endforeach
+              </ul>
             </li>
             <li>
                 <a href="#tabs-3">
@@ -39,34 +56,12 @@
                      Quản lý học viên
                 </a>
             </li>
-            <li class="parent">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>
-                     Dropdown
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a>
-                            Sub Item 1
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 2
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 3
-                        </a>
-                    </li>
-                </ul>
-            </li>
+
         </ul>
 
     </div><!--/.sidebar-->
 
-    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main"> 
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         @include('khoa.khoahoc')
         @include('khoa.ctdt')
         @include('khoa.qlgv')
