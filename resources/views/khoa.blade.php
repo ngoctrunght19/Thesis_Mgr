@@ -62,9 +62,9 @@
     </div><!--/.sidebar-->
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        @include('khoa.khoahoc')
-        @include('khoa.ctdt')
-        @include('khoa.qlgv')
+        @include('khoa.khoahoc', ['khoahoc' => $khoahoc])
+        @include('khoa.ctdt', ['nganhhoc', $nganhhoc])
+        @include('khoa.qlgv', ['giangvien' => $giangvien])
         @include('khoa.qlhv')
     </div>
 </div>

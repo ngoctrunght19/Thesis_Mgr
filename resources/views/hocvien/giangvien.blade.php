@@ -14,108 +14,14 @@
 						    </tr>
 						    </thead>
 						    <tbody>
+						    @foreach ($giangvien as $gv)
 								<tr>
-									<td>Nguyễn Bá Tú</td>
+									<td>{{ $gv->hoten }}</td>
 									<td>Khoa công nghệ thông tin</td>
 									<td>Phát triển ứng dụng web</td>
 									<td>web app</td>
 								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
-								<tr>
-									<td>Nguyễn Bá Tú</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
-								</tr>
+							@endforeach
 							</tbody>
 						</table>
 					</div>

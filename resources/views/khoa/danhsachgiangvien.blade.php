@@ -13,17 +13,13 @@
       </tr>
     </thead>
     <tbody>
-    <?php
-      $list = DB::select('select * from giangvien');
-      foreach ($list as $gv) {
-          echo '<tr>
-            <td>'.$gv->magiangvien.'</td>
-            <td>'.$gv->hoten.'</td>
-            <td>'.$gv->email.'</td>
-          </tr>';
-      }
-
-      ?>
+    @foreach($giangvien as $gv)
+      <tr>
+        <td>{{ $gv->magiangvien }}</td>
+        <td>{{ $gv->hoten }}</td>
+        <td>{{ $gv->email }}</td>
+      </tr>
     </tbody>
+    @endforeach
 
 </table>

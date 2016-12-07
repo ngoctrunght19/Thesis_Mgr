@@ -11,6 +11,7 @@ use App\LinhVuc;
 use App\NganhHoc;
 use App\KhoaHoc;
 use App\ChuDeNghienCuu;
+use App\GiangVien;
 
 class LoginController extends Controller
 {
@@ -68,16 +69,21 @@ class LoginController extends Controller
             else if (Auth::user()->quyen=='khoa') {
                 $khoahoc = KhoaHoc::all();
                 $nganhhoc = NganhHoc::all();
-                return view('khoa', compact('khoahoc'), compact('nganhhoc'));
+                $giangvien = GiangVien::all();
+                return view('khoa')->with('khoahoc', $khoahoc)
+                                   ->with('nganhhoc', $nganhhoc)
+                                   ->with('giangvien', $giangvien);
             }
             else if (Auth::user()->quyen=='hocvien') {
                 $khoa = Khoa::all();
                 $linhvuc = LinhVuc::all();
                 $cdnc = ChuDeNghienCuu::all();
+                $giangvien = GiangVien::all();
 
                 return view('hocvien')->with('khoa', $khoa)
                                       ->with('linhvuc', $linhvuc)
-                                      ->with('cdnc', $cdnc);
+                                      ->with('cdnc', $cdnc)
+                                      ->with('giangvien', $giangvien);
             }
             else if (Auth::user()->quyen=='giangvien') {
                 return view('giangvien');
