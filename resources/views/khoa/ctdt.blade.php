@@ -12,7 +12,7 @@
 	</div>
 	<div class="panel-body">
 		<ul class="todo-list">
-			<?php $NganhHoc = DB::table('nganhhoc')->get();
+			<?php $NganhHoc = DB::table('nghanhhoc')->get();
 				foreach ($NganhHoc as $nganh): ?>
 			<li class="todo-list-item">
 				<label> <?php echo $nganh->tennganh; ?> </label>
