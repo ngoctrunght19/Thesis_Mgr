@@ -1,12 +1,43 @@
-$("#menu a").click(function(event){
-	var menu = $(this).attr("menu");
-	console.log(menu);
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-	   	if (this.readyState == 4 && this.status == 200) {
-	    	document.getElementById("content").innerHTML = this.responseText;
-	    }
-	};
-	xhttp.open("GET", "../resources/views/khoa/" + menu + ".blade.php", true);
-	xhttp.send();
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+$( function() {
+    $( "#tabs" ).tabs();
+});
+
+//them khoa hoc
+$("#btn-themkhoahoc").click(function(event) {
+	/* Act on the event */
+	var tenkhoahoc = $('#input-khoahoc').val();
+	$.ajax({
+		url: 'khoa/addKhoaHoc',
+		type: 'post',
+		dataType: 'text',
+		data: {
+			khoahoc : tenkhoahoc
+		},
+		success : function (result){
+            window.location = 'khoa';
+        }
+	});
+	
+});
+
+$("#btn-themnganh").click(function(event) {
+	/* Act on the event */
+	$.ajax({
+		url: 'khoa/addNganh',
+		type: 'post',
+		dataType: 'text',
+		data: {
+			nganh : $('#input-nganh').val()
+		},
+		success : function (result){
+            window.location = 'khoa';
+        }
+	})
+	
 });

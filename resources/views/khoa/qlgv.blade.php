@@ -1,3 +1,4 @@
+<div id="tabs-3">
 <button>Thêm giảng viên</button> <br />
 <form method="GET" action="addGV">
     <label>Chọn tệp</label><input type="file" name="filename" accept=".xls,.xlsx">
@@ -31,3 +32,4 @@
       </tr>
     </tbody>
 </table>
+</div>

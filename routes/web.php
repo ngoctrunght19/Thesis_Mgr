@@ -24,12 +24,15 @@ Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'LoginController@redire
 
 Route::get('logout', 'LoginController@getLogout');
 
-Route::get('addGV', 'Controller@addGV');
+Route::get('addGV', 'KhoaController@addGV');
+
+Route::post('khoa/addKhoaHoc', 'KhoaController@addKhoaHoc');
+Route::get('khoa/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
+Route::post('khoa/addNganh', 'KhoaController@addNganh');
 
 Route::get('upload', 'Controller1@getView');
 
 Route::post('upload', ['as'=>'upload','uses'=>'Controller1@upload']);
-
 
 // Route::controller([
 // 	'auth' => 'Auth/LoginController'
