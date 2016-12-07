@@ -74,7 +74,7 @@
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         @include('hocvien.donvi')
-        @include('hocvien.giangvien')
+        @include('hocvien.giangvien', ['giangvien' => $giangvien, 'khoa' => $khoa, 'cdnc' => $cdnc])
         @include('hocvien.linhvuc')
         <!-- @include('khoa.qlgv')
         @include('khoa.qlhv') -->
