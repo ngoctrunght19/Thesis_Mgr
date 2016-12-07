@@ -55,11 +55,29 @@
                      Giảng viên
                 </a>
             </li>
-            <li>
+            <li class="parent">
                 <a href="#tabs-3">
+                  <div data-toggle="collapse" href="#item-linhvuc">
                     <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
                      Lĩnh vực
+                   </div>
                 </a >
+              <ul class="children collapse" id="item-linhvuc">
+                @foreach ($linhvuc as $l)
+                <li>
+                  <a data-toggle="collapse" href="#item-{{ $l->id+1000 }}">{{ $l->tenlinhvuc }}</a>
+                  <ul class="children collapse deeper" id="item-{{ $l->id+1000 }}">
+                    <li>
+                      <a href="#"> Chủ đề nghiên cứu </a>
+                    </li>
+                    <li>
+                      <a href="#"> Chủ đề nghiên cứu </a>
+                    </li>
+                  </ul>
+                </li>
+                @endforeach
+              </ul>
+
             </li>
             <li>
                 <a href="#tabs-4">
