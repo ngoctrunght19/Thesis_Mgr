@@ -23,7 +23,7 @@
                 </tr>';
             }
 
-            ?>
+        ?>
         </tbody>
 
     </table>
@@ -38,3 +38,27 @@
     $pagination = $paginationObj->getPagination();
 ?>
 </div>
+
+<--
+=======
+<table class="table">
+    <thead>
+      <tr>
+        <th>Mã giảng viên</th>
+        <th>Họ và tên</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($giangvien as $gv)
+      <tr>
+        <td>{{ $gv->magiangvien }}</td>
+        <td>{{ $gv->hoten }}</td>
+        <td>{{ $gv->email }}</td>
+      </tr>
+    </tbody>
+    @endforeach
+
+</table>
+>>>>>>> origin/master
+-->

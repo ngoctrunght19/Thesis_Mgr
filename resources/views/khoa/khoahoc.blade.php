@@ -12,16 +12,15 @@
 	</div>
 	<div class="panel-body">
 		<ul class="todo-list">
-			<?php $KhoaHoc = DB::table('khoahoc')->get();
-				foreach ($KhoaHoc as $khoa): ?>
+			@foreach ($khoahoc as $k)
 			<li class="todo-list-item">
-				<label> <?php echo $khoa->tenkhoahoc; ?> </label>
+				<label>{{ $k->tenkhoahoc }}</label>
 				<div class="pull-right action-buttons">
-					<a makhoahoc="<?php echo $khoa->id; ?>" class="trash btn-xoakhoahoc"><svg class="glyph stroked trash"><use xlink:href="#stroked-trash"></use>
+					<a makhoahoc="{{ $k->id }}" class="trash btn-xoakhoahoc"><svg class="glyph stroked trash"><use xlink:href="#stroked-trash"></use>
 					</svg></a>
 				</div>
 			</li>
-			<?php endforeach; ?>
+			@endforeach
 		</ul>
 	</div>
 </div>

@@ -19,35 +19,10 @@
               <a href="#tabs-1">
                   <div data-toggle="collapse" href="#item-khoa">
                     <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
-                    Khoa
+                    Đơn vị
                   </div>
               </a>
-              <ul class="children collapse" id="item-khoa">
-                @foreach ($khoa as $khoa)
-                  <li>
-                    <a data-toggle="collapse" href="#item-{{ $khoa->makhoa }}">{{ $khoa->tenkhoa }}</a>
-                    <ul class="children collapse deeper" id="item-{{ $khoa->makhoa }}">
-                      <li>
-                        <a data-toggle="collapse" href="#item-{{ $khoa->makhoa+100 }}"> Bộ môn </a>
-                          <ul class="children collapse deeper" id="item-{{ $khoa->makhoa+100 }}">
-                            <li>
-                                <a href="#"> Phòng thí nghiệm </a>
-                            </li>
-                            <li>
-                                <a href="#"> Phòng thí nghiệm </a>
-                            </li>
-                          </ul>
-                      </li>
-                      <li>
-                        <a href="#"> Bộ môn </a>
-                      </li>
-                      <li>
-                        <a href="#"> Bộ môn </a>
-                      </li>
-                    </ul>
-                  </li>
-                @endforeach
-              </ul>
+
             </li>
             <li>
                 <a href="#tabs-2">
@@ -57,33 +32,10 @@
             </li>
             <li class="parent">
                 <a href="#tabs-3">
-                  <div data-toggle="collapse" href="#item-linhvuc">
                     <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
                      Lĩnh vực
-                   </div>
                 </a >
-              <ul class="children collapse" id="item-linhvuc">
-                @foreach ($linhvuc as $l)
-                <li>
-                  <a data-toggle="collapse" href="#item-{{ $l->id+1000 }}">{{ $l->tenlinhvuc }}</a>
-                  <ul class="children collapse deeper" id="item-{{ $l->id+1000 }}">
-                    <li>
-                      <a href="#"> Chủ đề nghiên cứu </a>
-                    </li>
-                    <li>
-                      <a href="#"> Chủ đề nghiên cứu </a>
-                    </li>
-                  </ul>
-                </li>
-                @endforeach
-              </ul>
 
-            </li>
-            <li>
-                <a href="#tabs-4">
-                    <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
-                     Chủ đề nghiên cứu
-                </a>
             </li>
             <li>
                 <a href="#tabs-5">
@@ -91,38 +43,16 @@
                      Đề tài khóa luận
                 </a>
             </li>
-            <li class="parent">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg>
-                     Dropdown
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-                    <li>
-                        <a>
-                            Sub Item 1
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 2
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            Sub Item 3
-                        </a>
-                    </li>
-                </ul>
-            </li>
         </ul>
 
     </div><!--/.sidebar-->
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         @include('hocvien.donvi')
-        @include('hocvien.giangvien')
-        @include('khoa.qlgv')
-        @include('khoa.qlhv')
+        @include('hocvien.giangvien', ['giangvien' => $giangvien, 'khoa' => $khoa, 'cdnc' => $cdnc])
+        @include('hocvien.linhvuc') 
+        <!-- @include('khoa.qlgv')
+        @include('khoa.qlhv') -->
     </div>
 </div>
 @endsection

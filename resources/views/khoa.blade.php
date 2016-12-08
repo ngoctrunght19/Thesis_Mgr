@@ -17,32 +17,14 @@
         <ul class="nav menu">
             <li class="parent ">
       				<a href="#tabs-1">
-                <div data-toggle="collapse" href="#item-khoahoc">
-                  <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg> Khóa học
-                </div>
+                <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg> Khóa học
       				</a>
-      				<ul class="children collapse" id="item-khoahoc">
-                @foreach ($khoahoc as $khoa)
-                  <li>
-                    <a class="" href="#">{{ $khoa->tenkhoahoc }}</a>
-                  </li>
-                @endforeach
-      				</ul>
       			</li>
             <li class="parent">
               <a href="#tabs-2">
-                <div data-toggle="collapse" href="#item-nganhhoc">
-                  <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
-                  Chương trình đào tạo
-                </div>
+                <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                Chương trình đào tạo
               </a>
-              <ul class="children collapse" id="item-nganhhoc">
-                @foreach ($nganhhoc as $nganh)
-                  <li>
-                    <a class="" href="#">{{ $nganh->tennganh }}</a>
-                  </li>
-                @endforeach
-              </ul>
             </li>
             <li>
                 <a href="#tabs-3">
@@ -62,9 +44,9 @@
     </div><!--/.sidebar-->
 
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        @include('khoa.khoahoc')
-        @include('khoa.ctdt')
-        @include('khoa.qlgv')
+        @include('khoa.khoahoc', ['khoahoc' => $khoahoc])
+        @include('khoa.ctdt', ['nganhhoc', $nganhhoc])
+        @include('khoa.qlgv', ['giangvien' => $giangvien])
         @include('khoa.qlhv')
     </div>
 </div>
