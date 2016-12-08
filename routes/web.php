@@ -25,7 +25,7 @@ Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'LoginController@redire
 Route::get('logout', 'LoginController@getLogout');
 
 //routes trang khoa
-Route::get('khoa/khoahoc', 'KhoaController@getKhoaHoc');
+Route::get('khoa/khoahoc', [ 'as' => 'khoa/khoahoc', 'uses' => 'KhoaController@getKhoaHoc']);
 Route::get('khoa/ctdt', 'KhoaController@getCTDT');
 Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 Route::get('khoa/qlhv', 'KhoaController@getQLHV');
@@ -36,10 +36,10 @@ Route::get('khoa/{tennganh}/themNganh', 'KhoaController@themNganh');
 Route::get('khoa/{id}/xoaNganh', 'KhoaController@xoaNganh');
 
 //routes trang hocvien + giang vien
-Route::get('donvi', 'HocVienController@getDonVi');
-Route::get('giangvien', 'HocVienController@getGiangVien');
-Route::get('linhvuc', 'HocVienController@getLinhVuc');
-Route::get('detaikhoaluan', 'HocVienController@getDeTaiKhoaLuan');
+Route::get('hocvien/donvi', 'HocVienController@getDonVi');
+Route::get('hocvien/giangvien', 'HocVienController@getGiangVien');
+Route::get('hocvien/linhvuc', 'HocVienController@getLinhVuc');
+Route::get('hocvien/detaikhoaluan', 'HocVienController@getDeTaiKhoaLuan');
 
 Route::get('upload', 'Controller1@getView');
 

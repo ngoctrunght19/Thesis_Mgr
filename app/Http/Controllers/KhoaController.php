@@ -23,10 +23,10 @@ class KhoaController extends Controller
     	// s
     }
 
-    public function themKhoaHoc($tenkhoahoc) {
+    public function themKhoaHoc(Request $request) {
+        $tenkhoahoc = $request->input('khoahoc');
     	$khoahoc = new KhoaHoc();
     	$khoahoc->insert(['tenkhoahoc' => $tenkhoahoc]);
-    	return redirect()->route('khoa');
     }
 
     public function themNganh($tennganh) {

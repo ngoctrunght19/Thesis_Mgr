@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="panel-body">
-		<ul class="todo-list">
+		<ul class="todo-list" id="list-khoahoc">
 			@foreach ($khoahoc as $k)
 			<li class="todo-list-item">
 				<label>{{ $k->tenkhoahoc }}</label>

@@ -16,27 +16,27 @@
         </form>
         <ul class="nav menu">
             <li class="parent">
-              <a href="{{ url('donvi') }}">
+              <a href="{{ url('hocvien/donvi') }}">
                     <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
                     Đơn vị
               </a>
 
             </li>
             <li>
-                <a href="{{ url('giangvien') }}">
+                <a href="{{ url('hocvien/giangvien') }}">
                     <svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>
                      Giảng viên
                 </a>
             </li>
             <li class="parent">
-                <a href="{{ url('linhvuc') }}">
+                <a href="{{ url('hocvien/linhvuc') }}">
                     <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
                      Lĩnh vực
                 </a >
 
             </li>
             <li>
-                <a href="{{ url('detaikhoaluan') }}">
+                <a href="{{ url('hocvien/detaikhoaluan') }}">
                     <svg class="glyph stroked star"><use xlink:href="#stroked-star"/></svg>
                      Đề tài khóa luận
                 </a>
