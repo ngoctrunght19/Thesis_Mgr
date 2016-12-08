@@ -2,6 +2,6 @@
 
 @section('tab-view')
 
-chu de
+de tai khoa luan
 
 @endsection

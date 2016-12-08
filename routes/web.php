@@ -35,6 +35,12 @@ Route::get('khoa/{id}/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
 Route::get('khoa/{tennganh}/themNganh', 'KhoaController@themNganh');
 Route::get('khoa/{id}/xoaNganh', 'KhoaController@xoaNganh');
 
+//routes trang hocvien + giang vien
+Route::get('donvi', 'HocVienController@getDonVi');
+Route::get('giangvien', 'HocVienController@getGiangVien');
+Route::get('linhvuc', 'HocVienController@getLinhVuc');
+Route::get('detaikhoaluan', 'HocVienController@getDeTaiKhoaLuan');
+
 Route::get('upload', 'Controller1@getView');
 
 Route::post('upload', ['as'=>'upload','uses'=>'Controller1@upload']);

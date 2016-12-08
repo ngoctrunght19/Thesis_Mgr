@@ -1,4 +1,8 @@
-<div id="tabs-1">
+@extends('hocvien')
+
+@section('tab-view')
+
+<div>
 	<h1>Đơn vị</h1>
 	<ul class="nav menu" id="item-donvi">
 		@foreach ($khoa as $khoa)
@@ -27,3 +31,5 @@
 		@endforeach
 	</ul>
 </div>
+
+@endsection

@@ -1,4 +1,8 @@
-<div id="tabs-2">
+@extends('hocvien')
+
+@section('tab-view')
+
+<div>
 	<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -29,3 +33,5 @@
 			</div>
 		</div><!--/.row-->	
 </div>
+
+@endsection

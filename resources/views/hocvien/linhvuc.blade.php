@@ -1,4 +1,8 @@
-<div id="tabs-3">
+@extends('hocvien')
+
+@section('tab-view')
+
+<div>
 	<h1>Lĩnh vực & Chủ đề nghiên cứu</h1>
   <ul class="nav menu" id="item-linhvuc">
     @foreach ($linhvuc as $l)
@@ -17,3 +21,5 @@
     @endforeach
   </ul>
 </div>
+
+@endsection
