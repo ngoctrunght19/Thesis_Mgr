@@ -1,5 +1,5 @@
 <div id="tabs-3">
-<button>Thêm giảng viên</button> <br />
+<label>Nhập tay: </label><button>Thêm giảng viên</button> <br />
 <form id="form-upload" method="post" action="upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
     {{ csrf_field() }}
 

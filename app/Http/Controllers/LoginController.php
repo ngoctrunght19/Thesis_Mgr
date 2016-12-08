@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use DB;
+use Session;    
 
 class LoginController extends Controller
 {
@@ -42,6 +44,10 @@ class LoginController extends Controller
         	return redirect()->route('admin');
         }
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'khoa'])) {
+            $query = DB::select('select makhoa from canbokhoa where mataikhoan = ?', [Auth::user()->id]);
+            $makhoa = $query[0]->makhoa;
+            Session::put('makhoa', $makhoa);
+    //        echo 'makhoa: ' . Session::get('makhoa');
             return redirect()->route('khoa');
         }
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'hocvien'])) {

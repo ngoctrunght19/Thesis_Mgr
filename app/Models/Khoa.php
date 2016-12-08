@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use PHPExcel_IOFactory;
 use Exception;
 use DB;
+use Session;
 
 class Khoa extends Model
 {
@@ -26,7 +27,8 @@ class Khoa extends Model
             try {
 				DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
 			} catch(Illuminate\Database\QueryException $e){
-				return 'Đã có lỗi xảy ra';
+				echo $e->getMessage();
+				return 'lôi thêm tài khoản';
             } catch(Exception $e) {
 				return 'Đã có lỗi xảy ra';
 			}
@@ -35,14 +37,15 @@ class Khoa extends Model
 			if (isset($query[0]))
 				$account_id = $query[0]->id;
 			else {
-				return 'Đã có lỗi xảy ra';
+				return 'lỗi lấy id tài khoản';
 			}
 
-            $data = [$magiangvien, $hoten, $email, 0, $account_id];
+			$makhoa = Session::get('makhoa');
+            $data = [$magiangvien, $hoten, $email, $makhoa, $account_id];
 			try {
-				DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, taikhoan	) values (?, ?, ?, ?, ?)', $data);
+				DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan	) values (?, ?, ?, ?, ?)', $data);
 			} catch(Exception $e) {
-				return 'Đã có lỗi xảy ra';
+				return 'lỗi thêm giảng viên';
 			}
 		}
 

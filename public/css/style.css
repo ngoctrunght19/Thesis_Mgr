@@ -73,6 +73,12 @@ a.nav-account, a.nav-account:hover, a.nav-account:focus {
     border: solid 1px #30A5FF;
 }
 
+.center {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 /*Global Styles*/
 body {
