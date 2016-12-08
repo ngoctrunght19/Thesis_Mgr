@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
 use Session;    
-=======
 use App\Khoa;
 use App\LinhVuc;
 use App\NganhHoc;
