@@ -7,6 +7,7 @@ use PHPExcel_IOFactory;
 use Exception;
 use DB;
 use Session;
+use Mail;
 
 class Khoa extends Model
 {
@@ -22,7 +23,8 @@ class Khoa extends Model
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $email = $objWorksheet->getCell("C" . $row)->getValue();
 
-            $password = str_random(8);
+        //    $password = str_random(8);
+            $password = \Hash::make('hello');
             $account = [$magiangvien, $password, 'giangvien'];
             try {
 				DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
@@ -30,7 +32,7 @@ class Khoa extends Model
 				echo $e->getMessage();
 				return 'lôi thêm tài khoản';
             } catch(Exception $e) {
-				return 'Đã có lỗi xảy ra';
+				return $e->getMessage();
 			}
 			
 			$query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
@@ -53,6 +55,31 @@ class Khoa extends Model
         unset($objPHPExcel);
 
         return $message;
+    }
+
+    public static function sendEmailToLecturer() {
+    	$gv = DB::select('select * from giangvien limit 3');
+
+
+    	foreach ($gv as $g) {
+    		$data = array('email'=>$g->email, 'hoten' => $g->hoten);
+    	 	Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
+    	 	{
+	            $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
+	        });
+    	}
+
+        if( count(Mail::failures()) > 0 ) {
+
+           echo "There was one or more failures. They were: <br />";
+
+           foreach(Mail::failures as $email_address) {
+               echo " - $email_address <br />";
+            }
+
+        } else {
+            echo "No errors, all sent successfully!";
+        }
     }
 
 }

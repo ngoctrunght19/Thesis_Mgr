@@ -54,6 +54,10 @@ class Controller1 extends Controller
         return view('khoa.danhsachgiangvien')->with(['info'=> $info]);
     }
 
+    public function sendEmailToLecturer() {
+        Khoa::sendEmailToLecturer();
+    }
+
     public function upload0() {
         $path = null;
 
