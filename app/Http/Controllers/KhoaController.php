@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\KhoaHoc;
+use App\Khoa;
 use App\NganhHoc;
+use App\LinhVuc;
+use App\GiangVien;
+use App\ChuDeNghienCuu;
 
 class KhoaController extends Controller
 {
     //
+    public function show() {
+      $khoahoc = KhoaHoc::all();
+      $nganhhoc = NganhHoc::all();
+      $giangvien = GiangVien::all();
+      return view('khoa')->with('khoahoc', $khoahoc)
+                         ->with('nganhhoc', $nganhhoc)
+                         ->with('giangvien', $giangvien);
+    }
+
     public function addGV() {
     	echo "string";
     	// s
-    
+
     }
 
     public function themKhoaHoc($tenkhoahoc) {
