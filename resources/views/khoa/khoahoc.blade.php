@@ -1,4 +1,8 @@
-<div class="panel panel-blue" id="tabs-1">
+@extends('khoa')
+
+@section('tab-view')
+
+<div class="panel panel-blue">
 	<div class="panel-heading dark-overlay">
 		KHÓA HỌC
 	</div>
@@ -24,3 +28,5 @@
 		</ul>
 	</div>
 </div>
+
+@endsection

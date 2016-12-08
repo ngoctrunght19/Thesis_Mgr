@@ -5,11 +5,6 @@ $.ajaxSetup({
   }
 });
 
-//ajax tab
-$( function() {
-    $( "#tabs" ).tabs();
-});
-
 //them khoa hoc
 $("#btn-themkhoahoc").click(function(event) {
 	/* Act on the event */

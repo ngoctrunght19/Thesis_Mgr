@@ -10,7 +10,7 @@
             <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Cập nhật tài khoản</a>
         </li>
         <li>
-            <a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
+            <a href="{{ url('logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất</a>
         </li>
     </ul>
 </div>

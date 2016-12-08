@@ -1,4 +1,8 @@
-<div id="tabs-3">
+@extends('khoa')
+
+@section('tab-view')
+
+<div>
 <label>Nhập tay: </label>
 <button class="btn btn-primary" data-toggle="modal" data-target="#modalthemgv">Thêm tay</button> 
 <br />
@@ -62,3 +66,5 @@
 </div>
 
 </div>
+
+@endsection

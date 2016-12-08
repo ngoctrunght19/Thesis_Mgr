@@ -1,3 +1,9 @@
-<div id="tabs-4">
+@extends('khoa')
+
+@section('tab-view')
+
+<div>
 quan ly hoc vien
 </div>
+
+@endsection

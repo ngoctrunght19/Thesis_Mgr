@@ -11,12 +11,12 @@
         <!-- Fonts -->
 
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
 
         <!--Icons-->
-        <script src="js/lumino.glyphs.js"></script>
+        <script src="{{ URL::asset('js/lumino.glyphs.js') }}"></script>
 
     </head>
     <body>
@@ -33,7 +33,7 @@
                 <a class="navbar-brand" href="#"></a>
                 <div class="row">
                     <div class="col-md-1 hidden-sm hidden-xs">
-                        <img src="img/uet_logo.png" class="img-responsive">
+                        <img src="{{ URL::asset('img/uet_logo.png') }}" class="img-responsive">
                     </div>
                     <div class="col-md-3 hidden-sm hidden-xs">
                         <h4>Trường Đại Học Công Nghệ</h4>
@@ -53,13 +53,12 @@
     @yield('body')
 
     <!-- JavaScrip -->
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.form.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap-table.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/main1.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery-2.1.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jquery.form.js') }}"></script>
+    <script src="{{ URL::asset('js/bootstrap-table.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/main1.js') }}"></script>
 
     </body>
 
