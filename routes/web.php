@@ -49,3 +49,5 @@ Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'C
 // Route::controller([
 // 	'auth' => 'Auth/LoginController'
 // ]);
+
+Route::get('sendemail', 'Controller1@sendEmailToLecturer');

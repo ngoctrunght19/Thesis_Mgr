@@ -69,11 +69,6 @@ class Controller1 extends Controller
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
-    //    $id = Input::get('name');
-    //    var_dump($_POST);
-        // var_dump($_POST['id']);
-        // var_dump($_POST['name']);
-        // var_dump($_POST['email']);
     }
 
     public function sendEmailToLecturer() {
