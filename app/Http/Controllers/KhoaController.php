@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
-use Session;    
+use Session;
 use App\Khoa;
 use App\LinhVuc;
 use App\NganhHoc;
@@ -50,7 +50,7 @@ class KhoaController extends Controller
     }
 
     public function xoaNganh(Request $request) {
-        $id = $request->input('id');
+      $id = $request->input('id');
     	NganhHoc::find($id)->delete();
     	$nganhhoc = NganhHoc::all();
         return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);

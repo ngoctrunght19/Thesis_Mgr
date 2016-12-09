@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
-use Session;    
+use Session;
 use App\Khoa;
 use App\LinhVuc;
 use App\NganhHoc;
@@ -44,6 +44,8 @@ class HocVienController extends Controller
   }
   public function getDeTaiKhoaLuan() {
   	$khoa = Khoa::all();
-    return view('hocvien.detaikhoaluan')->with('khoa', $khoa);
+    $giangvien = GiangVien::all();
+    return view('hocvien.detaikhoaluan')->with('khoa', $khoa)
+                                        ->with('giangvien', $giangvien);
   }
 }
