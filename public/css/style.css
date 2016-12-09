@@ -29,6 +29,12 @@ a.nav-account {
     position: absolute;
     top: 42px;
 }
+
+.error {
+    color: red;
+    font-size: 1.1em;
+}
+
 @media (min-width: 768px) {
     a.nav-account {
         position: absolute;

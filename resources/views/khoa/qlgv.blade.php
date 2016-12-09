@@ -30,6 +30,8 @@
           </div>
         </div>
     </form>
+
+    <span class="error form-error"></span>
     
     <div id="result">
     </div>
