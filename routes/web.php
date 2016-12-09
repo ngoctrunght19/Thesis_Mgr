@@ -31,9 +31,9 @@ Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 Route::get('khoa/qlhv', 'KhoaController@getQLHV');
 Route::get('addGV', 'KhoaController@addGV');
 Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
-Route::get('khoa/{id}/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
+Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
 Route::post('khoa/themnganh', 'KhoaController@themNganh');
-Route::get('khoa/{id}/xoaNganh', 'KhoaController@xoaNganh');
+Route::post('khoa/xoanganh', 'KhoaController@xoaNganh');
 
 //routes trang hocvien + giang vien
 Route::get('hocvien/donvi', 'HocVienController@getDonVi');

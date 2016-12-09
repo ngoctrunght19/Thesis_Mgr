@@ -50,35 +50,39 @@ $(document).ready(function(){
 	});
 
 	//xoa khoa hoc
-	$(".btn-xoakhoahoc").each(function () {
-		this.addEventListener("click", function() {
-		/* Act on the event */
-			var makhoahoc = $(this).attr("makhoahoc");
-			console.log(makhoahoc);
-			url = "khoa/" + makhoahoc + "/xoaKhoaHoc";
-			$.get(url, function(data, status){
-					console.log("done");
-					var newDoc = document.open("text/html", "replace");
-					newDoc.write(data);
-					newDoc.close();
-			});
-		});
+	$('body').on('click', '.btn-xoakhoahoc', function () {
+		var makhoahoc = $(this).attr("makhoahoc");
+		console.log(makhoahoc);
+		$.ajax({
+	        url : "xoakhoahoc", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+	             id : makhoahoc
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            $( "#list-khoahoc" ).html(result);
+	        }
+    	});
 	});
 
 	//xoa nganh
-	$(".btn-xoanganh").each(function () {
-		this.addEventListener("click", function() {
-		/* Act on the event */
-			var manganh = $(this).attr("manganh");
-			console.log(manganh);
-			url = "khoa/" + manganh + "/xoaNganh";
-			$.get(url, function(data, status){
-					console.log("done");
-					var newDoc = document.open("text/html", "replace");
-					newDoc.write(data);
-					newDoc.close();
-			});
-		});
+	$('body').on('click', '.btn-xoanganh', function () {
+		var manganh = $(this).attr("manganh");
+		console.log(manganh);
+		$.ajax({
+	        url : "xoanganh", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+	             id : manganh
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            $( "#list-nganh" ).html(result);
+	        }
+    	});
 	});
 
 	

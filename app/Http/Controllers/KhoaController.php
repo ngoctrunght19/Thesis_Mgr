@@ -37,14 +37,18 @@ class KhoaController extends Controller
         return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);
     }
 
-    public function xoaKhoaHoc($id) {
+    public function xoaKhoaHoc(Request $request) {
+        $id = $request->input('id');
     	KhoaHoc::find($id)->delete();
-    	return redirect()->route('khoa');
+    	$khoahoc = KhoaHoc::all();
+        return view('khoa.danhsachkhoahoc')->with('khoahoc', $khoahoc);
     }
 
-    public function xoaNganh($id) {
+    public function xoaNganh(Request $request) {
+        $id = $request->input('id');
     	NganhHoc::find($id)->delete();
-    	return redirect()->route('khoa');
+    	$nganhhoc = NganhHoc::all();
+        return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);
     }
 
     public function getKhoaHoc() {
