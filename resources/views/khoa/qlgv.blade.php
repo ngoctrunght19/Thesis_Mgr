@@ -14,6 +14,7 @@
 
 <div class="tab-content">
   <div id="uploadLecturer" class="tab-pane active">
+    <h2>Thêm giảng viên bằng upload excel</h2>
     <form id="form-upload" class="form-horizontal" method="post" action="qlgv/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
         {{ csrf_field() }}
 

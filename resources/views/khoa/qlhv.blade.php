@@ -14,6 +14,7 @@
 
 <div class="tab-content">
   <div id="uploadStudent" class="tab-pane active">
+  	<h2>Thêm học viên bằng upload excel</h2>
     <form id="form-upload" class="form-horizontal" method="post" action="qlhv/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
         {{ csrf_field() }}
 
@@ -25,7 +26,7 @@
         </div>
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Thêm hoc viên</button>
+            <button type="submit" class="btn btn-primary">Thêm học viên</button>
           </div>
         </div>
     </form>
