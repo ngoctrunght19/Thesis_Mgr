@@ -21,9 +21,11 @@ class KhoaController extends Controller
       $khoahoc = KhoaHoc::all();
       $nganhhoc = NganhHoc::all();
       $giangvien = GiangVien::all();
+      $khoa = Khoa::all();
       return view('khoa')->with('khoahoc', $khoahoc)
                          ->with('nganhhoc', $nganhhoc)
-                         ->with('giangvien', $giangvien);
+                         ->with('giangvien', $giangvien)
+                         ->with('khoa', $khoa);
     }
 
     public function themKhoaHoc(Request $request) {
@@ -66,7 +68,9 @@ class KhoaController extends Controller
 
     public function getQLGV() {
         $giangvien = GiangVien::all();
-        return view('khoa.qlgv')->with('giangvien', $giangvien);
+        $khoa = Khoa::all();
+        return view('khoa.qlgv')->with('giangvien', $giangvien)
+                                ->with('khoa', $khoa);
     }
 
     public function getQLHV() {
