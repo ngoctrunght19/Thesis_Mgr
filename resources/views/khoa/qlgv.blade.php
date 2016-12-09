@@ -2,67 +2,81 @@
 
 @section('tab-view')
 
-<div>
-<label>Nhập tay: </label>
-<button class="btn btn-primary" data-toggle="modal" data-target="#modalthemgv">Thêm tay</button> 
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#uploadLecturer">Upload excel</a></li>
+  <li><a data-toggle="tab" href="#typelecturer">Nhập tay</a></li>
+  <li><a data-toggle="tab" href="#menu2">Giảng viên</a></li>
+</ul>
+
 <br />
-<form id="form-upload" method="post" action="qlgv/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
-    {{ csrf_field() }}
 
-    <input type="file" name="excel" class="file" id="select-file" accept=".xlsx, .xls"/>
-    <input type="submit" value="Upload"  id="submit-upload"/>
-</form>
 
-<div id="result">
-</div>
+<div class="tab-content">
+  <div id="uploadLecturer" class="tab-pane active">
+    <form id="form-upload" class="form-horizontal" method="post" action="qlgv/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
+        {{ csrf_field() }}
 
-<div id="danhsachgiangvien">
-@include('khoa.danhsachgiangvien')
-</div>
-
-<!-- Modal Add Group -->
-<div class="modal fade" id="modalthemgv" role="dialog">
-    <div class="modal-dialog modal-lg">
-    	<div class="modal-content">
-        	<div class="modal-header">
-	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
-	        	<h2 class="modal-title">Thêm giảng viên</h2>
-	        </div>
-	        <div class="modal-body">
-	        	<form class="form" id="themgiangvien" method="post" action="">
-					<div class="row">
-						<div class="col-sm-2 col-sm-offset-1">
-							<label class="detail-label">Mã giảng viên: </label>
-						</div>
-						<div class="col-sm-8">
-							<input class="form-control" type="text">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-2 col-sm-offset-1">
-							<label class="detail-label">Tên giảng viên: </label>
-						</div>
-						<div class="col-sm-8">
-							<input class="form-control" type="text">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-2 col-sm-offset-1">
-							<label class="detail-label">Email: </label>
-						</div>
-						<div class="col-sm-8">
-							<input class="form-control" type="text">
-						</div>
-					</div>
-
-				</form>
-	        </div>
-        	<div class="modal-footer">
-        		<button type="button" class="btn btn-primary">Chấp nhận</button>
-        		<button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
-        	</div>
-    	</div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="select-file">Chọn file excel:</label>
+          <div class="col-sm-10">          
+            <input type="file" name="excel" class="file" id="select-file" accept=".xlsx, .xls"/>
+          </div>
+        </div>
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Thêm giảng viên</button>
+          </div>
+        </div>
+    </form>
+    
+    <div id="result">
     </div>
+
+    <div id="danhsachgiangvien">
+    @include('khoa.danhsachgiangvien')
+    </div>
+  </div>
+
+  <div id="typelecturer" class="tab-pane">
+    <div class="container col-md-8" >
+      <h2>Nhập thông tin giảng viên</h2>
+      <form class="form-horizontal" form id="typelecturer" method="post" action="qlgv/typelecturer">
+        {{ csrf_field() }}
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="magv">Mã giảng viên:</label>
+          <div class="col-sm-10">          
+            <input type="text" class="form-control" name="id" id="magv" placeholder="Nhập mã giảng viên" required=""  oninvalid="this.setCustomValidity('Bạn chưa nhập mã giảng viên')" oninput="setCustomValidity('')">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Họ và tên:</label>
+          <div class="col-sm-10">          
+            <input type="text" class="form-control" name="name" id="name" placeholder="Nhập họ và tên" required=""  oninvalid="this.setCustomValidity('Bạn chưa nhập tên')" oninput="setCustomValidity('')">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email:</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" name="email"  id="email" placeholder="Nhập email" required="" oninvalid="this.setCustomValidity('Bạn chưa nhập email')" oninput="setCustomValidity('')">
+          </div>
+        </div>
+  
+        <div class="form-group">        
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Thêm giảng viên</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="lecturer" class="tab-pane">
+    
+  </div>
+</div>
+
+
 </div>
 
 </div>

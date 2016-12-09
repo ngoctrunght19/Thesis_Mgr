@@ -56,6 +56,26 @@ class Controller1 extends Controller
         return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
 
+    public function typeLecturer(Request $request) {
+        $name = $request->get('name');
+        $id = $request->get('id');
+        $email = $request->get('email');
+        if ($name == null || $id == null || $email == null
+            || trim($name)=="" || trim($id) == "" || trim($email)=="") 
+        {
+            echo 'Nhập thiếu thông tin';
+            return;
+        }
+        $name = trim($name);
+        $id = trim($id);
+        $email = trim($email);
+    //    $id = Input::get('name');
+    //    var_dump($_POST);
+        // var_dump($_POST['id']);
+        // var_dump($_POST['name']);
+        // var_dump($_POST['email']);
+    }
+
     public function sendEmailToLecturer() {
         Khoa::sendEmailToLecturer();
     }

@@ -23,38 +23,72 @@ class Khoa extends Model
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $email = $objWorksheet->getCell("C" . $row)->getValue();
 
-        //    $password = str_random(8);
-            $password = \Hash::make('hello');
-            $account = [$magiangvien, $password, 'giangvien'];
-            try {
-				DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
-			} catch(Illuminate\Database\QueryException $e){
-				echo $e->getMessage();
-				return 'lôi thêm tài khoản';
-            } catch(Exception $e) {
-				return $e->getMessage();
-			}
-			
-			$query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
-			if (isset($query[0]))
-				$account_id = $query[0]->id;
-			else {
-				return 'lỗi lấy id tài khoản';
-			}
+            $makhoa = Session::get('makhoa');
 
-			$makhoa = Session::get('makhoa');
-            $data = [$magiangvien, $hoten, $email, $makhoa, $account_id];
-			try {
-				DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan	) values (?, ?, ?, ?, ?)', $data);
-			} catch(Exception $e) {
-				return 'lỗi thêm giảng viên';
-			}
+            $message = self::themGiangVien($magiangvien, $hoten, $email, $makhoa);
+
+        //    $password = str_random(8);
+   //          $password = \Hash::make('hello');
+   //          $account = [$magiangvien, $password, 'giangvien'];
+   //          try {
+			// 	DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
+			// } catch(Illuminate\Database\QueryException $e){
+			// 	echo $e->getMessage();
+			// 	return 'lôi thêm tài khoản';
+   //          } catch(Exception $e) {
+			// 	return $e->getMessage();
+			// }
+			
+			// $query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
+			// if (isset($query[0]))
+			// 	$account_id = $query[0]->id;
+			// else {
+			// 	return 'lỗi lấy id tài khoản';
+			// }
+
+			
+   //          $data = [$magiangvien, $hoten, $email, $makhoa, $account_id];
+			// try {
+			// 	DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan	) values (?, ?, ?, ?, ?)', $data);
+			// } catch(Exception $e) {
+			// 	return 'lỗi thêm giảng viên';
+			// }
 		}
 
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);
 
         return $message;
+    }
+
+    // Thêm một giảng viên vào csdl
+    public static function themGiangVien($magiangvien, $hoten, $email, $makhoa) {
+        //    $password = str_random(8);
+        $password = \Hash::make('hello');
+        $account = [$magiangvien, $password, 'giangvien'];
+        try {
+            DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
+        } catch(Illuminate\Database\QueryException $e){
+            echo $e->getMessage();
+            return 'lôi thêm tài khoản';
+        } catch(Exception $e) {
+            return $e->getMessage();
+        }
+        
+        $query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
+        if (isset($query[0]))
+            $account_id = $query[0]->id;
+        else {
+            return 'lỗi lấy id tài khoản';
+        }
+
+        $makhoa = Session::get('makhoa');
+        $data = [$magiangvien, $hoten, $email, $makhoa, $account_id];
+        try {
+            DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan    ) values (?, ?, ?, ?, ?)', $data);
+        } catch(Exception $e) {
+            return 'lỗi thêm giảng viên';
+        }
     }
 
     public static function sendEmailToLecturer() {

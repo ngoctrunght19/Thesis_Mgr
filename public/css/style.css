@@ -515,21 +515,9 @@ a.bg-danger:hover {
     padding: 0;
 }
 
-.nav-tabs {
-    background: #e9ecf2;
-    border: 0;
-}
 
 .nav-tabs li a:hover {
     background: #fff;
-}
-
-.nav-tabs li a,
-.nav-tabs li a:hover,
-.nav-tabs li.active a,
-.nav-tabs li.active a:hover {
-    border: 0;
-    padding: 15px 20px;
 }
 
 .nav-pills {
