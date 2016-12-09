@@ -17,6 +17,17 @@ use App\GiangVien;
 
 class HocVienController extends Controller
 {
+  public function show() {
+    $khoa      = Khoa::all();
+    $linhvuc   = LinhVuc::all();
+    $cdnc      = ChuDeNghienCuu::all();
+    $giangvien = GiangVien::all();
+
+    return view('hocvien')->with('khoa', $khoa)
+                          ->with('linhvuc', $linhvuc)
+                          ->with('cdnc', $cdnc)
+                          ->with('giangvien', $giangvien);
+  }
   public function getDonVi() {
   	$khoa = Khoa::all();
     return view('hocvien.donvi')->with('khoa', $khoa);

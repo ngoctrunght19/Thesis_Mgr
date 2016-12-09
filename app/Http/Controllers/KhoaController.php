@@ -17,10 +17,13 @@ use App\GiangVien;
 
 class KhoaController extends Controller
 {
-    //
-    public function addGV() {
-    	echo "string";
-    	// s
+    public function show() {
+      $khoahoc = KhoaHoc::all();
+      $nganhhoc = NganhHoc::all();
+      $giangvien = GiangVien::all();
+      return view('khoa')->with('khoahoc', $khoahoc)
+                         ->with('nganhhoc', $nganhhoc)
+                         ->with('giangvien', $giangvien);
     }
 
     public function themKhoaHoc(Request $request) {

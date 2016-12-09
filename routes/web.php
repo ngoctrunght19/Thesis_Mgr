@@ -16,10 +16,10 @@ Route::get('login', [ 'as' => 'login', 'uses' => 'LoginController@getLogin']);
 Route::post('login', 'LoginController@postLogin');
 
 //chuyển trang khi đăng nhập
-Route::get('admin', [ 'as' => 'admin', 'uses' => 'LoginController@redirectPage']);
-Route::get('khoa', [ 'as' => 'khoa', 'uses' => 'LoginController@redirectPage']);
-Route::get('hocvien', [ 'as' => 'hocvien', 'uses' => 'LoginController@redirectPage']);
-Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'LoginController@redirectPage']);
+Route::get('admin', [ 'as' => 'admin', 'uses' => 'AdminController@show']);
+Route::get('khoa', [ 'as' => 'khoa', 'uses' => 'KhoaController@show']);
+Route::get('hocvien', [ 'as' => 'hocvien', 'uses' => 'HocVienController@show']);
+Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'GiangVienController@show']);
 
 //chuyển trang khi đăng xuất
 Route::get('logout', 'LoginController@getLogout');
