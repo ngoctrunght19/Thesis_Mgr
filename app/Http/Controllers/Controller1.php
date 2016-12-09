@@ -12,6 +12,8 @@ use App\GiangVien;
 class Controller1 extends Controller
 {
 
+    
+
 	public function getView() {
 		return view('uploadexcel');
 	}
@@ -69,10 +71,29 @@ class Controller1 extends Controller
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
+    //    Khoa::themGiangVien($id, $name)
     }
 
     public function sendEmailToLecturer() {
-        Khoa::sendEmailToLecturer();
+        echo 'hello';
+        echo Khoa::sendEmailToLecturer(GiangVien::all()[0]);
+    }
+
+    public function test() {
+        Khoa::sendEmail();
+    }
+
+    public function getActive(Request $request)
+    {
+        return view('general.active');
+    }
+
+    public function active(Request $request)
+    {
+        $username = $request->get('username');
+        $token = $request->get('token');
+        echo 'hello';
+    //    return back();
     }
 
     public function upload0() {

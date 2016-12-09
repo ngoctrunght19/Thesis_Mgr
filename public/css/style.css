@@ -32,7 +32,9 @@ a.nav-account {
 
 .error {
     color: red;
-    font-size: 1.1em;
+    font-size: 1em;
+    margin: 0.5em auto;
+    display: inline-block;
 }
 
 @media (min-width: 768px) {

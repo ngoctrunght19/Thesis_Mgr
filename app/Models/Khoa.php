@@ -11,6 +11,7 @@ use Mail;
 
 class Khoa extends Model
 {
+
     public static function importLecturerFromExcel($path) {
     	$message = null;
 
@@ -25,7 +26,12 @@ class Khoa extends Model
 
             $makhoa = Session::get('makhoa');
 
-            $message = self::themGiangVien($magiangvien, $hoten, $email, $makhoa);
+            $success = self::themGiangVien($magiangvien, $hoten, $email, $makhoa);
+            
+            if ($success) {
+                $token = Giangvien::select('password')->where('username', $hoten)->first();
+        //        sendEmailToLecturer($email, $hoten, $token);
+            }
 		}
 
         $objPHPExcel->disconnectWorksheets();
@@ -41,18 +47,15 @@ class Khoa extends Model
         $account = [$magiangvien, $password, 'giangvien'];
         try {
             DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
-        } catch(Illuminate\Database\QueryException $e){
-            echo $e->getMessage();
-            return 'lôi thêm tài khoản';
         } catch(Exception $e) {
-            return $e->getMessage();
+            return false;
         }
         
         $query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
         if (isset($query[0]))
             $account_id = $query[0]->id;
         else {
-            return 'lỗi lấy id tài khoản';
+            return false;
         }
 
         $makhoa = Session::get('makhoa');
@@ -60,31 +63,43 @@ class Khoa extends Model
         try {
             DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan) values (?, ?, ?, ?, ?)', $data);
         } catch(Exception $e) {
-            return 'lỗi thêm giảng viên';
+            return false;
         }
+
+        return true;
     }
 
-    public static function sendEmailToLecturer($gv) {
-    	$gv = DB::select('select * from giangvien limit 3');
-
-		$data = array('email'=>$gv->email, 'hoten' => $gv->hoten);
+    public static function sendEmailToLecturer($email, $hoten, $token) {
+    	
+		$data = array('email'=>$email, 'hoten' => $hoten);
 	 	Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
 	 	{
             $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
         });
-    	
 
-        if( count(Mail::failures()) > 0 ) {
-
-           echo "There was one or more failures. They were: <br />";
-
-           foreach(Mail::failures as $email_address) {
-               echo " - $email_address <br />";
-            }
-
-        } else {
-            echo "No errors, all sent successfully!";
-        }
+        return(count(Mail::failures()) == 0 );
     }
+
+
+    public static function sendEmail() {
+
+        $gv = DB::table('giangvien')->where('magiangvien', 'gv01')->first();
+        $magiangvien = $gv->magiangvien;
+        $query = DB::table('taikhoan')->where('username', $magiangvien)->first();
+        $token = $query->password;
+        $url = self::$domain . 'active?username='.$query->username.'&token='.$token;
+        
+        $data = array('email'=>$gv->email, 'hoten' => $gv->hoten, 'url' => $url);
+        echo $url;
+        Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
+        {
+            $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
+        });
+
+        return(count(Mail::failures()) == 0 );
+    }
+
+
+    static $domain = 'http://localhost:8000/';
 
 }
