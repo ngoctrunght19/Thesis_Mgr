@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-3" for="email">Khoa:</label>
+          <label class="control-label col-sm-3" for="khoa">Khoa:</label>
           <div class="col-sm-9">
             <select class="form-control" id="sel-khoa">
               @foreach($khoa as $k)

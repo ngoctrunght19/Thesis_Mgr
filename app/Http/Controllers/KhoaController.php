@@ -74,7 +74,13 @@ class KhoaController extends Controller
     }
 
     public function getQLHV() {
+        $khoahoc = KhoaHoc::all();
         $nganhhoc = NganhHoc::all();
-        return view('khoa.qlhv')->with('nganhhoc', $nganhhoc);
+        $giangvien = GiangVien::all();
+        $khoa = Khoa::all();
+        return view('khoa.qlhv')->with('khoahoc', $khoahoc)
+                                ->with('nganhhoc', $nganhhoc)
+                                ->with('giangvien', $giangvien)
+                                ->with('khoa', $khoa);
     }
 }
