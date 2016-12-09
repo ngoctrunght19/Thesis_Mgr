@@ -43,7 +43,7 @@ Route::get('hocvien/detaikhoaluan', 'HocVienController@getDeTaiKhoaLuan');
 
 Route::get('upload', 'Controller1@getView');
 
-Route::post('upload', ['as'=>'upload','uses'=>'Controller1@upload']);
+Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@upload']);
 
 // Route::controller([
 // 	'auth' => 'Auth/LoginController'

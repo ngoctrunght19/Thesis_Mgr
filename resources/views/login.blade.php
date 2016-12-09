@@ -18,11 +18,11 @@
                 <form class="login" method="POST" action="{{ url('login') }}">
                     <div class="form-group">
                         <label for="email">Tên truy cập</label>
-                        <input type="text" class="form-control" name="username" id="username" required="" oninvalid="this.setCustomValidity('Chưa nhập tên truy cập')">
+                        <input type="text" class="form-control" name="username" id="username" required="" oninvalid="this.setCustomValidity('Bạn chưa nhập tên')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Mật khẩu</label>
-                        <input type="password" class="form-control" name="password" id="password" required="" oninvalid="this.setCustomValidity('Chưa nhập mật khẩu')">
+                        <input type="password" class="form-control" name="password" id="password" required="" oninvalid="this.setCustomValidity('Bạn chưa nhập mật khẩu')" oninput="setCustomValidity('')">
                     </div>
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

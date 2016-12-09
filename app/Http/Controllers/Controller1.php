@@ -7,6 +7,7 @@ use PHPExcel_IOFactory;
 use DB;
 use Exception;
 use App\Models\Khoa;
+use App\GiangVien;
 
 class Controller1 extends Controller
 {
@@ -51,7 +52,8 @@ class Controller1 extends Controller
             $info = $errorMessage;
         }
         
-        return view('khoa.danhsachgiangvien')->with(['info'=> $info]);
+        $giangvien = GiangVien::take(15)->get();
+        return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
 
     public function sendEmailToLecturer() {

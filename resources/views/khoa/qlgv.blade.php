@@ -6,7 +6,7 @@
 <label>Nhập tay: </label>
 <button class="btn btn-primary" data-toggle="modal" data-target="#modalthemgv">Thêm tay</button> 
 <br />
-<form id="form-upload" method="post" action="upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
+<form id="form-upload" method="post" action="qlgv/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
     {{ csrf_field() }}
 
     <input type="file" name="excel" class="file" id="select-file" accept=".xlsx, .xls"/>
