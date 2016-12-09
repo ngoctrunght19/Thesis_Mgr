@@ -26,13 +26,13 @@ Route::get('logout', 'LoginController@getLogout');
 
 //routes trang khoa
 Route::get('khoa/khoahoc', [ 'as' => 'khoa/khoahoc', 'uses' => 'KhoaController@getKhoaHoc']);
-Route::get('khoa/ctdt', 'KhoaController@getCTDT');
+Route::get('khoa/ctdt', [ 'as' => 'khoa/ctdt', 'uses' => 'KhoaController@getCTDT']);
 Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 Route::get('khoa/qlhv', 'KhoaController@getQLHV');
 Route::get('addGV', 'KhoaController@addGV');
-Route::post('khoa/khoahoc', 'KhoaController@themKhoaHoc');
+Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 Route::get('khoa/{id}/xoaKhoaHoc', 'KhoaController@xoaKhoaHoc');
-Route::get('khoa/{tennganh}/themNganh', 'KhoaController@themNganh');
+Route::post('khoa/themnganh', 'KhoaController@themNganh');
 Route::get('khoa/{id}/xoaNganh', 'KhoaController@xoaNganh');
 
 //routes trang hocvien + giang vien

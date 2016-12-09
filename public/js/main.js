@@ -13,7 +13,7 @@ $(document).ready(function(){
 		var tenkhoahoc = $('#input-khoahoc').val();
 		console.log(tenkhoahoc);
 		$.ajax({
-	        url : "khoahoc", // gửi ajax đến file result.php
+	        url : "themkhoahoc", // gửi ajax đến url
 	        type : "post", // chọn phương thức gửi là post
 	        dateType:"text", // dữ liệu trả về dạng text
 	        data : { // Danh sách các thuộc tính sẽ gửi đi
@@ -21,8 +21,8 @@ $(document).ready(function(){
 	        },
 	        success : function (result){
 	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
-	            // đó vào thẻ div có id = result
-	            window.location.replace("khoahoc");// chua biet ajax kieu gi
+	            $("#input-khoahoc").val("");
+	            $( "#list-khoahoc" ).html(result);
 	        }
     	});
 		
@@ -33,13 +33,19 @@ $(document).ready(function(){
 		/* Act on the event */
 		var tennganh = $('#input-nganh').val();
 		console.log(tennganh);
-		url = "khoa/" + tennganh + "/themNganh";
-		$.get(url, function(data, status){
-				console.log("done");
-				var newDoc = document.open("text/html", "replace");
-				newDoc.write(data);
-				newDoc.close();
-		});
+		$.ajax({
+	        url : "themnganh", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+	             nganh : tennganh
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            $("#input-nganh").val("");
+	            $( "#list-nganh" ).html(result);
+	        }
+    	});
 		
 	});
 
