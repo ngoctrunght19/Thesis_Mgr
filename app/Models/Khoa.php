@@ -8,7 +8,6 @@ use Exception;
 use DB;
 use Session;
 use Mail;
-use App\Giangvien;
 
 class Khoa extends Model
 {
@@ -22,30 +21,32 @@ class Khoa extends Model
 
         // đếm số giảng viên đã thêm thành công
         $count = 0;
-  
+
         for ($row = 1; $row < $nRows; ++$row) {
         	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $email = $objWorksheet->getCell("C" . $row)->getValue();
+            $donvi = $objWorksheet->getCell("D" . $row)->getValue();
 
             $makhoa = Session::get('makhoa');
 
-            $success = self::themGiangVien($magiangvien, $hoten, $email, $makhoa);
+            $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
             
             if ($success) {
-                $token = Giangvien::select('password')->where('username', $hoten)->first();
+                $token = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
         //        sendEmailToLecturer($email, $hoten, $token);
+                $count++;
             }
 		}
 
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);
-
-        return $message;
+     
+        return $count;
     }
 
     // Thêm một giảng viên vào csdl
-    public static function themGiangVien($magiangvien, $hoten, $email, $makhoa) {
+    public static function themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa) {
         //    $password = str_random(8);
         $password = \Hash::make('hello');
         $account = [$magiangvien, $password, 'giangvien'];
@@ -63,9 +64,9 @@ class Khoa extends Model
         }
 
         $makhoa = Session::get('makhoa');
-        $data = [$magiangvien, $hoten, $email, $makhoa, $account_id];
+        $data = [$magiangvien, $hoten, $email, $makhoa, $account_id, $donvi];
         try {
-            DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa, mataikhoan) values (?, ?, ?, ?, ?)', $data);
+            echo 'test: '.DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa,mataikhoan, donvi) values (?, ?, ?, ?, ?, ?)', $data);
         } catch(Exception $e) {
             return false;
         }

@@ -81,6 +81,9 @@
           </div>
         </div>
       </form>
+
+      <div id="type-result">
+      </div>
     </div>
   </div>
 

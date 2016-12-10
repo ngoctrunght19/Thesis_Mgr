@@ -24,6 +24,7 @@ class Controller1 extends Controller
         $path = null;
         $success = true;
         $errorMessage = null;
+        $message = null;
 
         if (isset($_FILES['excel']))
         {
@@ -36,11 +37,12 @@ class Controller1 extends Controller
             else{
                 // Upload file
                 move_uploaded_file($_FILES['excel']['tmp_name'], './uploads/'.$_FILES['excel']['name']);
-                $path = './uploads'.$_FILES['excel']['name'];
+                $path = './uploads/'.$_FILES['excel']['name'];
                 try {
-                    $errorMessage = Khoa::importLecturerFromExcel($path);
+                    $message = Khoa::importLecturerFromExcel($path);
                 } catch(Exception $e) {
-                    
+                    echo 'exception ';
+                    echo $e->getMessage();
                 }
             }
         }
@@ -49,15 +51,16 @@ class Controller1 extends Controller
             return;
         }
         $info = null;
-        if ($errorMessage == null) {
-            $info = "Đã thêm giảng viên";
+        if ($message == null) {
+            $info = 'Đã thêm thành công '.$message.' giảng viên';
         }
         else {
             $info = $errorMessage;
         }
         
         $giangvien = GiangVien::take(15)->get();
-        return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
+        echo $info;
+    //    return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
 
     public function typeLecturer(Request $request) {

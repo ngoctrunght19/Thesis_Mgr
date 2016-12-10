@@ -20,7 +20,7 @@ $(document).ready(function(){
 	$('#type-lecturer').ajaxForm({
 	    complete: function(xhr) {
 	//      $('#result').html(xhr.responseText);
-			$('#rp-error').html(xhr.responseText);
+			$('#type-result').html(xhr.responseText);
 	    }
 	});
 
