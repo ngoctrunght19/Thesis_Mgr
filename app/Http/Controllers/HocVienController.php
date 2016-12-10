@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Exception;
 use DB;
 use Session;
 use App\Khoa;
@@ -14,6 +15,7 @@ use App\NganhHoc;
 use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
+use App\HocVien;
 
 class HocVienController extends Controller
 {
@@ -45,7 +47,13 @@ class HocVienController extends Controller
   public function getDeTaiKhoaLuan() {
   	$khoa = Khoa::all();
     $giangvien = GiangVien::all();
+    $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
     return view('hocvien.detaikhoaluan')->with('khoa', $khoa)
+                                        ->with('student', $student)
                                         ->with('giangvien', $giangvien);
+  }
+
+  public function dangkydetai() {
+    
   }
 }

@@ -59,3 +59,5 @@ Route::post('test', 'Controller1@test');
 Route::get('active', 'Controller1@getActive');
 
 Route::post('active', 'Controller1@active');
+
+Route::post('hocvien/dangkydetai', 'HocVienController@dakydetai');
