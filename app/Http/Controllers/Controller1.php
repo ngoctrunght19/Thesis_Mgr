@@ -9,6 +9,7 @@ use Exception;
 use App\Models\Khoa;
 use App\GiangVien;
 use App\Models\Taikhoan;
+use App\Helpers\CreateTree;
 
 class Controller1 extends Controller
 {
@@ -81,12 +82,31 @@ class Controller1 extends Controller
         echo Khoa::sendEmailToLecturer(GiangVien::all()[0]);
     }
 
+    public function gettest() {
+//        Khoa::sendEmail();
+//        $tree = CreateTree::create_list(CreateTree::$list);
+
+//        echo $tree;
+        return view('vendor.test');
+    }
+
     public function test() {
-        Khoa::sendEmail();
+//        Khoa::sendEmail();
+//        $tree = CreateTree::create_list(CreateTree::$list);
+
+//        echo $tree;
+//        return CreateTree::$list;
+        $js_array = json_encode(CreateTree::$list);
+        echo $js_array;
     }
 
     public function getActive(Request $request)
     {
+        $token = $request->get('token');
+        if ($token == null || $token == '')
+            return view('login');
+        if (Taikhoan::where('password', '=', $token)->first() == null)
+            return view('errors.404');
         return view('general.active');
     }
 

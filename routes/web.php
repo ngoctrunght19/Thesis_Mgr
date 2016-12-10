@@ -52,7 +52,9 @@ Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'C
 
 Route::get('sendemail', 'Controller1@sendEmailToLecturer');
 
-Route::get('test', 'Controller1@test');
+Route::get('test', 'Controller1@gettest');
+
+Route::post('test', 'Controller1@test');
 
 Route::get('active', 'Controller1@getActive');
 

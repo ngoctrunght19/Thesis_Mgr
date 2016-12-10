@@ -8,6 +8,7 @@ use Exception;
 use DB;
 use Session;
 use Mail;
+use App\Giangvien;
 
 class Khoa extends Model
 {
@@ -18,6 +19,9 @@ class Khoa extends Model
     	$objPHPExcel = PHPExcel_IOFactory::load($path);
         $objWorksheet = $objPHPExcel->getActiveSheet();
         $nRows = $objWorksheet->getHighestRow();
+
+        // đếm số giảng viên đã thêm thành công
+        $count = 0;
   
         for ($row = 1; $row < $nRows; ++$row) {
         	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
