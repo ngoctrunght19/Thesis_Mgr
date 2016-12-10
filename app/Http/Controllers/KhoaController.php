@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
 use Session;
+use App\Models\Donvi;
 use App\Khoa;
 use App\LinhVuc;
 use App\NganhHoc;
@@ -20,12 +21,10 @@ class KhoaController extends Controller
     public function show() {
       $khoahoc = KhoaHoc::all();
       $nganhhoc = NganhHoc::all();
-      $giangvien = GiangVien::all();
-      $khoa = Khoa::all();
+      $donvi = Donvi::all();
       return view('khoa')->with('khoahoc', $khoahoc)
                          ->with('nganhhoc', $nganhhoc)
-                         ->with('giangvien', $giangvien)
-                         ->with('khoa', $khoa);
+                         ->with('donvi', $donvi);
     }
 
     public function themKhoaHoc(Request $request) {
@@ -68,9 +67,9 @@ class KhoaController extends Controller
 
     public function getQLGV() {
         $giangvien = GiangVien::all();
-        $khoa = Khoa::all();
+        $donvi = Donvi::all();
         return view('khoa.qlgv')->with('giangvien', $giangvien)
-                                ->with('khoa', $khoa);
+                                ->with('donvi', $donvi);
     }
 
     public function getQLHV() {

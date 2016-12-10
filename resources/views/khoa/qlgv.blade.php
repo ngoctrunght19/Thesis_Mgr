@@ -58,6 +58,16 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label col-sm-3" for="khoa">Đơn vị:</label>
+          <div class="col-sm-9">
+            <select class="form-control" id="sel-khoa">
+              @foreach($donvi as $dv)
+              <option value={{ $dv->id }}>{{ $k->tendonvi }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
           <label class="control-label col-sm-3" for="email">Email:</label>
           <div class="col-sm-9">
             <input type="email" class="form-control" name="email"  id="email" placeholder="Nhập email" required="" oninvalid="this.setCustomValidity('Bạn chưa nhập email')" oninput="setCustomValidity('')">
