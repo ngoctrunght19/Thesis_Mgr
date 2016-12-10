@@ -10,6 +10,7 @@ use App\Models\Khoa;
 use App\GiangVien;
 use App\Models\Taikhoan;
 use App\Helpers\CreateTree;
+use Session;    
 
 class Controller1 extends Controller
 {
@@ -41,8 +42,8 @@ class Controller1 extends Controller
                 try {
                     $message = Khoa::importLecturerFromExcel($path);
                 } catch(Exception $e) {
-                    echo 'exception ';
-                    echo $e->getMessage();
+                //    echo 'exception ';
+                //    echo $e->getMessage();
                 }
             }
         }
@@ -51,14 +52,14 @@ class Controller1 extends Controller
             return;
         }
         $info = null;
-        if ($message == null) {
+        if ($errorMessage == null) {
             $info = 'Đã thêm thành công '.$message.' giảng viên';
         }
         else {
             $info = $errorMessage;
         }
         
-        $giangvien = GiangVien::take(15)->get();
+    //    $giangvien = GiangVien::take(15)->get();
         echo $info;
     //    return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
@@ -67,8 +68,10 @@ class Controller1 extends Controller
         $name = $request->get('name');
         $id = $request->get('id');
         $email = $request->get('email');
-        if ($name == null || $id == null || $email == null
-            || trim($name)=="" || trim($id) == "" || trim($email)=="") 
+        $donvi = $request->get('donvi');
+    
+        if ($name == null || $id == null || $email == null || $donvi == null
+            || trim($name)=="" || trim($id) == "" || trim($email)=="" || trim($donvi)=="") 
         {
             echo 'Nhập thiếu thông tin';
             return;
@@ -76,8 +79,18 @@ class Controller1 extends Controller
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
-        echo 'hello';
-    //    Khoa::themGiangVien($id, $name)
+    
+        $makhoa = Session::get('makhoa');
+        $success = Khoa::themGiangVien($id, $name, $email, $donvi, $makhoa);
+        if ($success) {
+            $query = Taikhoan::select('password')->where('username','=',$id)->first();
+            $token = $query->password;
+            $success = Khoa::sendEmailToLecturer($email, $id, $name, $token);
+            echo 'Đã thêm giảng viên';
+        }
+        else {
+            echo 'Giảng viên đã tồn tại, không thể thêm vào nữa.';
+        }
     }
 
     public function sendEmailToLecturer() {
@@ -122,10 +135,14 @@ class Controller1 extends Controller
             echo 'error';
             return;
         }
-
-        Taikhoan::changeOldPassword($username, $token, $password);
-    //    echo 'hello';
-    //    return back();
+   
+        $actived = Taikhoan::active($username, $token, $password);
+        if ($actived) {
+            echo 'Đã kích hoạt thành công';
+        }
+        else {
+            echo 'Không thể kích hoạt tài khoản của bạn';
+        }     
     }
 
     public function upload0() {
