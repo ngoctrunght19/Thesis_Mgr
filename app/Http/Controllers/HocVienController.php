@@ -16,6 +16,7 @@ use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\HocVien;
+use App\DeTai;
 
 class HocVienController extends Controller
 {
@@ -48,12 +49,25 @@ class HocVienController extends Controller
   	$khoa = Khoa::all();
     $giangvien = GiangVien::all();
     $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
+    $detai = DeTai::where('mahocvien', $student->mahocvien)->first();
     return view('hocvien.detaikhoaluan')->with('khoa', $khoa)
                                         ->with('student', $student)
-                                        ->with('giangvien', $giangvien);
+                                        ->with('giangvien', $giangvien)
+                                        ->with('detai', $detai);
   }
 
-  public function dangkydetai() {
-    
+  public function dangkydetai(Request $request) {
+    $tendetai = $request->input('tendetai');
+    $giangvien = $request->input('giangvien');
+    $motadetai = $request->input('motadetai');
+    $mahocvien = HocVien::where('mataikhoan', Auth::user()->id)
+                        ->pluck('mahocvien')
+                        ->first();
+    DeTai::insert(['tendetai' => $tendetai, 
+                    'mahocvien' => $mahocvien, 
+                    'giangvienhuongdan' => $giangvien,
+                    'trangthai' => 'cho']);
+    return "Đăng ký thành công, chờ phê duyệt";
   }
+
 }

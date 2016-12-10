@@ -85,5 +85,13 @@ $(document).ready(function(){
     	});
 	});
 
+	//dang ky de tai
+	$('#form-detai').ajaxForm({
+	    complete: function(xhr) {
+	    	var html = "<h3>" + xhr.responseText + "</h3>";
+	      $('#detai-result').html(html);
+	    }
+	});
+
 	
 });
