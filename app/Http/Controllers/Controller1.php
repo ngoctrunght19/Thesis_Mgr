@@ -34,7 +34,7 @@ class Controller1 extends Controller
             }
             else{
                 // Upload file
-                move_uploaded_file($_FILES['excel']['tmp_name'], './uploads'.$_FILES['excel']['name']);
+                move_uploaded_file($_FILES['excel']['tmp_name'], './uploads/'.$_FILES['excel']['name']);
                 $path = './uploads'.$_FILES['excel']['name'];
                 try {
                     $errorMessage = Khoa::importLecturerFromExcel($path);

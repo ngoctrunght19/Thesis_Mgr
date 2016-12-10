@@ -67,6 +67,7 @@ function validateUploadForm(self) {
 
 	// la phai excel
 	$('#uploadLecturer .form-error').html("");
+	$('#uploadLecturer #upload-result').html("");
 	return true;
 }
 
