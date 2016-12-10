@@ -11,7 +11,7 @@ class Pagination
 	public $limit;
 	public $total;
 	
-	function __construct($current, $total, $limit=10)
+	function __construct($current, $total, $limit)
 	{
 		$this->current = $current;
 		$this->total = $total;
@@ -39,7 +39,7 @@ class Pagination
 				$pagination .= '<li><a href="#">'.$i.'</a></li>';
 		}
 		$pagination .= '</ul>';
-		echo $pagination;
+	//	echo $pagination;
 		return $pagination;
 	}
 }

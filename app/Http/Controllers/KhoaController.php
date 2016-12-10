@@ -16,9 +16,13 @@ use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\DeTai;
+use App\Helpers\Pagination;
 
 class KhoaController extends Controller
 {
+
+    static $limit = 3;    // sô bản ghi trong một trang
+
     public function show() {
       $khoahoc = KhoaHoc::all();
       $nganhhoc = NganhHoc::all();
@@ -67,10 +71,15 @@ class KhoaController extends Controller
     }
 
     public function getQLGV() {
-        $giangvien = GiangVien::all();
+        $giangvien = GiangVien::take(self::$limit)->get();
+        $total = GiangVien::count();
+        $current = 1;
+        $paginationObj = new Pagination($current, $total, self::$limit);
+        $pagination = $paginationObj->getPagination();
         $donvi = Donvi::all();
         return view('khoa.qlgv')->with('giangvien', $giangvien)
-                                ->with('donvi', $donvi);
+                                ->with('donvi', $donvi)
+                                ->with('pagination', $pagination);
     }
 
     public function getQLHV() {

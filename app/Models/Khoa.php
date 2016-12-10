@@ -33,8 +33,9 @@ class Khoa extends Model
             $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
             
             if ($success) {
-                $token = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
-                Khoa::endEmailToLecturer($email, $magiangvien,$hoten, $token);
+                $query = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
+                $token = $query->password;
+                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
                 $count++;
             }
 		}

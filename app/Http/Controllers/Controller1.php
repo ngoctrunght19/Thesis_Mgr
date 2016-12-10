@@ -10,7 +10,8 @@ use App\Models\Khoa;
 use App\GiangVien;
 use App\Models\Taikhoan;
 use App\Helpers\CreateTree;
-use Session;    
+use Session;  
+use App\Values\Value;  
 
 class Controller1 extends Controller
 {
@@ -42,8 +43,8 @@ class Controller1 extends Controller
                 try {
                     $message = Khoa::importLecturerFromExcel($path);
                 } catch(Exception $e) {
-                //    echo 'exception ';
-                //    echo $e->getMessage();
+                    $errorMessage = "Đã xảy ra lỗi";
+                    $errorMessage = $e->getMessage();
                 }
             }
         }
@@ -210,5 +211,10 @@ class Controller1 extends Controller
 
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);
+    }
+
+    public function danhsachgiangvien(Request $request) {
+        $page = $request->get('page');
+        echo Value::$nItemInList;
     }
 }

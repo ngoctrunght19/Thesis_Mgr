@@ -1,7 +1,3 @@
-@if( !empty($info) )
-    {{ $info }}
-@endif
-
 <h3>Danh sách giảng viên</h3>
 <div>
     <table class="table">
@@ -25,13 +21,6 @@
     </table>
 </div>
 <div class="row center">
-<?php
-    use App\Helpers\Pagination;
-    $query = DB::select('select count(*) as total from giangvien');
-    $total = $query[0]->total;
-    $limit = 10;
-    $paginationObj = new Pagination(1, $total, $limit);
-    $pagination = $paginationObj->getPagination();
-?>
+  {!! $pagination !!}
 </div>
 
