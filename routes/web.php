@@ -36,11 +36,17 @@ Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
 Route::post('khoa/themnganh', 'KhoaController@themNganh');
 Route::post('khoa/xoanganh', 'KhoaController@xoaNganh');
 
-//routes trang hocvien + giang vien
+//routes trang hocvien
 Route::get('hocvien/donvi', 'HocVienController@getDonVi');
 Route::get('hocvien/giangvien', 'HocVienController@getGiangVien');
 Route::get('hocvien/linhvuc', 'HocVienController@getLinhVuc');
 Route::get('hocvien/detaikhoaluan', [ 'as' => 'hocvien/detaikhoaluan', 'uses' => 'HocVienController@getDeTaiKhoaLuan']);
+//routes trang giangvien
+Route::get('giangvien/donvi', 'GiangVienController@getDonVi');
+Route::get('giangvien/giangvien', 'GiangVienController@getGiangVien');
+Route::get('giangvien/linhvuc', 'GiangVienController@getLinhVuc');
+Route::get('giangvien/detaikhoaluan', 
+	[ 'as' => 'giangvien/detaikhoaluan', 'uses' => 'GiangVienController@getDeTaiKhoaLuan']);
 
 Route::get('upload', 'Controller1@getView');
 
@@ -62,3 +68,4 @@ Route::get('active', 'Controller1@getActive');
 Route::post('active', 'Controller1@active');
 
 Route::post('hocvien/dangkydetai', 'HocVienController@dangkydetai');
+
