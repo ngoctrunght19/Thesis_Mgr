@@ -33,7 +33,7 @@
 
     <span class="error form-error"></span>
     
-    <div id="result">
+    <div id="upload-result">
     </div>
 
   </div>
@@ -60,9 +60,9 @@
         <div class="form-group">
           <label class="control-label col-sm-3" for="khoa">Đơn vị:</label>
           <div class="col-sm-9">
-            <select class="form-control" id="sel-khoa">
+            <select class="form-control" id="sel-donvi">
               @foreach($donvi as $dv)
-              <option value={{ $dv->id }}>{{ $k->tendonvi }}</option>
+              <option value={{ $dv->id }}>{{ $dv->tendonvi }}</option>
               @endforeach
             </select>
           </div>

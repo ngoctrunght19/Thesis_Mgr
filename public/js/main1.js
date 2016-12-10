@@ -6,8 +6,7 @@ $(document).ready(function(){
 
 	$('#form-upload').ajaxForm({
 	    complete: function(xhr) {
-	//      $('#result').html(xhr.responseText);
-			$('#danhsachgiangvien').html(xhr.responseText);
+	      $('#upload-result').html(xhr.responseText);
 	    }
 	});
 
