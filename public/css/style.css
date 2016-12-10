@@ -80,6 +80,7 @@ a.nav-account, a.nav-account:hover, a.nav-account:focus {
     display: table;
     margin-left: auto;
     margin-right: auto;
+    float: none;
 }
 
 

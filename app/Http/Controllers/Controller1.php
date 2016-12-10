@@ -8,6 +8,7 @@ use DB;
 use Exception;
 use App\Models\Khoa;
 use App\GiangVien;
+use App\Models\Taikhoan;
 
 class Controller1 extends Controller
 {
@@ -92,7 +93,14 @@ class Controller1 extends Controller
     {
         $username = $request->get('username');
         $token = $request->get('token');
-        echo 'hello';
+        $password = $request->get('password');
+        if ($password == null) {
+            echo 'error';
+            return;
+        }
+
+        Taikhoan::changeOldPassword($username, $token, $password);
+    //    echo 'hello';
     //    return back();
     }
 

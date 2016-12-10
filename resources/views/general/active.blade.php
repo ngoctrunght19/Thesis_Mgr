@@ -1,6 +1,6 @@
 @extends('layout.frame')
 
-@section('title', 'Đăng nhập')
+@section('title', 'Kích hoạt tài khoản')
 
 @section('nav_account')
 @endsection
@@ -9,8 +9,9 @@
     
     <div class="center">
         <div class="box-login">
+            <div class="title-login">Xin chào </div>
             <div class="title-login">Đặt mật khẩu để kích hoạt tài khoản</div>
-            <form id="active" class="login" method="POST" action="{{ url('active') }}" onsubmit="return validateActive()">
+            <form id="active" class="login" method="POST" action="" onsubmit="return validateActive()">
                 <div class="form-group">
                     <label for="pwd">Mật khẩu:</label>
                     <input type="password" class="form-control" name="password" id="password" required="" oninvalid="this.setCustomValidity('Bạn chưa nhập mật khẩu')" oninput="setCustomValidity('')">
