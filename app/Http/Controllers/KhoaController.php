@@ -15,6 +15,7 @@ use App\NganhHoc;
 use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
+use App\DeTai;
 
 class KhoaController extends Controller
 {
@@ -81,5 +82,10 @@ class KhoaController extends Controller
                                 ->with('nganhhoc', $nganhhoc)
                                 ->with('giangvien', $giangvien)
                                 ->with('khoa', $khoa);
+    }
+
+    public function getDeTai() {
+        $detai = DeTai::all();
+        return view('khoa.detai')->with('detai', $detai);
     }
 }

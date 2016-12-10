@@ -38,7 +38,12 @@
                      Quản lý học viên
                 </a>
             </li>
-
+            <li>
+                <a href="{{ url('khoa/detai') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                     Đề tài
+                </a>
+            </li>
         </ul>
 
     </div><!--/.sidebar-->

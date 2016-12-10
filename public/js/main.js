@@ -25,7 +25,7 @@ $(document).ready(function(){
 	            $( "#list-khoahoc" ).html(result);
 	        }
     	});
-		
+
 	});
 
 	//thêm ngành
@@ -46,7 +46,7 @@ $(document).ready(function(){
 	            $( "#list-nganh" ).html(result);
 	        }
     	});
-		
+
 	});
 
 	//xoa khoa hoc
@@ -93,5 +93,13 @@ $(document).ready(function(){
 	    }
 	});
 
-	
+	$(".btn-xoadetai").click(function(event) {
+		alert("Xoa");
+	});
+
+	$(".btn-suadetai").click(function(event) {
+		alert("Sua");
+	});
+
+
 });

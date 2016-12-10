@@ -29,6 +29,7 @@ Route::get('khoa/khoahoc', [ 'as' => 'khoa/khoahoc', 'uses' => 'KhoaController@g
 Route::get('khoa/ctdt', [ 'as' => 'khoa/ctdt', 'uses' => 'KhoaController@getCTDT']);
 Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 Route::get('khoa/qlhv', 'KhoaController@getQLHV');
+Route::get('khoa/detai', 'KhoaController@getDeTai');
 Route::get('addGV', 'KhoaController@addGV');
 Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
