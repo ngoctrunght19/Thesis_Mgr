@@ -14,6 +14,7 @@ use App\NganhHoc;
 use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
+use App\Canbokhoa;
 
 class LoginController extends Controller
 {
@@ -50,16 +51,17 @@ class LoginController extends Controller
         	return redirect()->route('admin');
         }
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'khoa'])) {
-            $query = DB::select('select makhoa from canbokhoa where mataikhoan = ?', [Auth::user()->id]);
-            $makhoa = $query[0]->makhoa;
+            $query = Canbokhoa::where('mataikhoan','=',Auth::user()->id)->first();
+            $makhoa = $query->makhoa;
             Session::put('makhoa', $makhoa);
-    //        echo 'makhoa: ' . Session::get('makhoa');
+        //    echo 'makhoa: ' . Session::get('makhoa');
             return redirect()->route('khoa');
         }
-        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'hocvien'])) {
+        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'hocvien', 'actived'=>'1'])) {
         	return redirect()->route('hocvien');
         }
-        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'giangvien'])) {
+        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'giangvien', 
+            'actived'=>'1'])) {
         	return redirect()->route('giangvien');
         }
         else {

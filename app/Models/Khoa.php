@@ -34,7 +34,7 @@ class Khoa extends Model
             
             if ($success) {
                 $token = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
-        //        sendEmailToLecturer($email, $hoten, $token);
+                Khoa::endEmailToLecturer($email, $magiangvien,$hoten, $token);
                 $count++;
             }
 		}
@@ -66,7 +66,7 @@ class Khoa extends Model
         $makhoa = Session::get('makhoa');
         $data = [$magiangvien, $hoten, $email, $makhoa, $account_id, $donvi];
         try {
-            echo 'test: '.DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa,mataikhoan, donvi) values (?, ?, ?, ?, ?, ?)', $data);
+            DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa,mataikhoan, donvi) values (?, ?, ?, ?, ?, ?)', $data);
         } catch(Exception $e) {
             return false;
         }
@@ -74,9 +74,10 @@ class Khoa extends Model
         return true;
     }
 
-    public static function sendEmailToLecturer($email, $hoten, $token) {
+    public static function sendEmailToLecturer($email, $id, $hoten, $token) {
     	
-		$data = array('email'=>$email, 'hoten' => $hoten);
+        $url = self::$domain.$id.'&token='.$token;
+		$data = array('url'=>$url, 'email'=>$email, 'hoten' => $hoten);
 	 	Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
 	 	{
             $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
@@ -92,7 +93,7 @@ class Khoa extends Model
         $magiangvien = $gv->magiangvien;
         $query = DB::table('taikhoan')->where('username', $magiangvien)->first();
         $token = $query->password;
-        $url = self::$domain . 'active?username='.$query->username.'&token='.$token;
+        $url = self::$domain.$query->username.'&token='.$token;
         
         $data = array('email'=>$gv->email, 'hoten' => $gv->hoten, 'url' => $url);
         echo $url;
@@ -105,6 +106,6 @@ class Khoa extends Model
     }
 
 
-    static $domain = 'http://localhost:8000/';
+    static $domain = 'http://localhost:8000/active?username=';
 
 }

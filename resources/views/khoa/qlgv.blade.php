@@ -60,7 +60,7 @@
         <div class="form-group">
           <label class="control-label col-sm-3" for="khoa">Đơn vị:</label>
           <div class="col-sm-9">
-            <select class="form-control" id="sel-donvi">
+            <select class="form-control" id="sel-donvi" name="donvi">
               @foreach($donvi as $dv)
               <option value={{ $dv->id }}>{{ $dv->tendonvi }}</option>
               @endforeach

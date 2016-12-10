@@ -14,19 +14,28 @@ class Taikhoan extends Model
 {
 	protected $table = 'taikhoan';
 
+	// thay đổi mật khẩu của người dùng có $username
+	// trả về true nếu thành công
+	// ngược lại trả về false: tên đăng nhập hoặc mật khẩu không đúng
 	public static function changeOldPassword($username, $oldPassword, $newPassword) {
-		echo 'username: ' . $username . '  password: ' . $newPassword . '<br>';
-		echo 'username: ' . $username . '  old password: ' . $oldPassword . '<br>';
+		$oldPassword = Hash::make($oldPassword);
 		$newPassword = Hash::make($newPassword);
-		echo Taikhoan::where([['username', '=', $username],
+		return Taikhoan::where([['username', '=', $username],
 							['password','=',$oldPassword]])
 							->update(['password' => $newPassword]);
 	}
 
 	public static function changePassword($username, $newPassword) {
-		echo 'username: ' . $username . '  password: ' . $newPassword . '<br>';
-		echo Taikhoan::where('username', '=', $username)
+		Taikhoan::where('username', '=', $username)
 					->update(['password' => $newPassword]);
+	}
+
+	// kích hoạt tài khoản
+	public static function active($username, $token, $password) {
+		$password = Hash::make($password);
+		return Taikhoan::where([['username', '=',$username],
+								['password', '=', $token]])
+							->update(['password'=>$password, 'actived'=>'1']);
 	}
 
 }
