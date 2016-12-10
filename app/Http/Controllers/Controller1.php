@@ -72,6 +72,7 @@ class Controller1 extends Controller
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
+        echo 'hello';
     //    Khoa::themGiangVien($id, $name)
     }
 

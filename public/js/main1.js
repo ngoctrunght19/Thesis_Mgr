@@ -17,6 +17,13 @@ $(document).ready(function(){
 	    }
 	});
 
+	$('#type-lecturer').ajaxForm({
+	    complete: function(xhr) {
+	//      $('#result').html(xhr.responseText);
+			$('#rp-error').html(xhr.responseText);
+	    }
+	});
+
 	$("#select-file").change(function(){
     	var file = $(this).val();
     	if (isExcelFile(file)) {	

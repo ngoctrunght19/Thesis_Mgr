@@ -43,7 +43,7 @@
       <div class="col-sm-offset-3 col-sm-9">
         <h2>Nhập thông tin giảng viên</h2>
       </div>
-      <form class="form-horizontal" form id="typelecturer" method="post" action="qlgv/typelecturer">
+      <form class="form-horizontal" form id="type-lecturer" method="post" action="qlgv/typelecturer">
         {{ csrf_field() }}
         <div class="form-group">
           <label class="control-label col-sm-3" for="magv">Mã giảng viên:</label>
