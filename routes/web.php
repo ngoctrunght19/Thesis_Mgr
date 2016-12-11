@@ -71,3 +71,5 @@ Route::post('hocvien/dangkydetai', 'HocVienController@dangkydetai');
 
 Route::get('danhsachgiangvien', 'Controller1@danhsachgiangvien');
 
+Route::get('query', 'QueryController@getResult');
+

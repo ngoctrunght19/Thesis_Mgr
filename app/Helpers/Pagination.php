@@ -7,14 +7,16 @@ namespace App\Helpers;
 */
 class Pagination
 {
-	public $current;
-	public $limit;
-	public $total;
+	private $current;
+	private $limit;
+	private $total;
+	private $preurl;
 	
-	function __construct($current, $total, $limit)
+	function __construct($current, $total, $limit, $preurl)
 	{
 		$this->current = $current;
 		$this->total = $total;
+		$this->preurl = $preurl;
 		
 		if ($limit <= 0) 
 			$this->limit = 10;
@@ -33,10 +35,11 @@ class Pagination
 
 		$pagination = '<ul class="pagination">';
 		for ($i = 1; $i <= $totalPage; $i++) {
+			$url = $this->preurl . '&page=' . $i;
 			if ($i == $this->current)
 				$pagination .= '<li class="active"><a href="#">'.$i.'</a></li>';
 			else
-				$pagination .= '<li><a href="#">'.$i.'</a></li>';
+				$pagination .= '<li><a href="'.$url.'">'.$i.'</a></li>';
 		}
 		$pagination .= '</ul>';
 	//	echo $pagination;

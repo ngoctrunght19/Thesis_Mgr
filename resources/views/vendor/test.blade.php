@@ -3,6 +3,10 @@
 <head>
 	<title></title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/font-awesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/style.css') }}">
+</head>
 </head>
 <body>
 
@@ -12,6 +16,7 @@
 </div>
 
 <script type="text/javascript" src="{{ URL::asset('js/jquery-2.1.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 
 <script type="text/javascript">
 	//them khoa hoc
@@ -52,18 +57,24 @@ $(document).ready(function(){
 
 });
 
-function createTree(list=null, parent_id=null) {
-	var html = '<ul>';
+function createTree(list=null, item=null, parent_id=null) {
+	var c = "nav ";
+	if (parent_id != null) {
+		c += "collapse deeper"
+		console.log("parent not null: " + parent_id);
+	}
+	else 
+		console.log("parent: " + parent_id);
+	var html = '<ul class="'+ c +'" id='+item+'>';
 	for(var i = 0; i < list.length; i++){
 		if(list[i]['parent_id'] == parent_id){
-		    html += '<li id='+ list[i]['id'] +'>'+ list[i]['name'] + createTree(list, list[i]['id']) + '</li>';
+			item = list[i]['id'];
+		    html += '<li><a data-toggle="collapse" href="#'+ item +'">'+ list[i]['name'] + '</a>' + createTree(list, item, list[i]['id']) + '</li>';
 		}
 	}
-//	console.log(html);
+
 	html += '</ul>';
 	if ( html.indexOf('</li>')==-1){
-		console.log('here');
-		console.log(html);
 		html = '';
 	}
 	return html;
