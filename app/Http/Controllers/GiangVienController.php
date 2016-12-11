@@ -51,8 +51,12 @@ class GiangVienController extends Controller
   	}
 
   	public function getDeTaiKhoaLuan() {
-  	$pending = HocVien::join('detai', 'hocvien.mahocvien', '=', 'detai.mahocvien')->where('trangthai', 'cho')->get();
-  	$accepted = HocVien::join('detai', 'hocvien.mahocvien', '=', 'detai.mahocvien')->where('trangthai', 'chapnhan')->get();
+  	$pending = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                          ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                          ->where('trangthai', 'cho')->get();
+  	$accepted = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                          ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                          ->where('trangthai', 'chapnhan')->get();
     return view('giangvien.detaikhoaluan')->with('pending', $pending)
     										->with('accepted', $accepted);
   	}
