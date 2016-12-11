@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 });
 
-$(document).on('click', '.pagination li:not(.active) a',function(){
+$(document).on('click', '.pagination li:not(.active):not(.disabled) a',function(){
 	var url = $(this).attr('url');
 	var self = $(this);
 	

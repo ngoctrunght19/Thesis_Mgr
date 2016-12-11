@@ -17,6 +17,7 @@ use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\DeTai;
 use App\Helpers\Pagination;
+use App\Values\Value;
 use URL;
 
 class KhoaController extends Controller
@@ -75,12 +76,13 @@ class KhoaController extends Controller
         if (!$this->loggedin())
             return redirect()->route('login');
 
-        $giangvien = GiangVien::take(self::$limit)->get();
+        $itemPerPage = Value::getItemPerPage();
+        $giangvien = GiangVien::take($itemPerPage)->get();
         $total = GiangVien::count();
         $current = 1;
         $preurl = URL::to('/');
         $preurl .= '/query?obj=giangvien';
-        $paginationObj = new Pagination($current, $total, self::$limit, $preurl);
+        $paginationObj = new Pagination($current, $total, $itemPerPage, $preurl);
         $pagination = $paginationObj->getPagination();
         $donvi = Donvi::all();
         return view('khoa.qlgv')->with('giangvien', $giangvien)

@@ -46,6 +46,7 @@ class Controller1 extends Controller
                 } catch(Exception $e) {
                     $errorMessage = "Đã xảy ra lỗi";
                     $errorMessage = $e->getMessage();
+                    echo $e->getMessage();
                 }
             }
         }

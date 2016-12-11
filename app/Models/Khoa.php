@@ -31,12 +31,13 @@ class Khoa extends Model
 
             $makhoa = Session::get('makhoa');
 
+            echo $magiangvien.'<br>';
             $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
             
             if ($success) {
                 $query = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
                 $token = $query->password;
-                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
+//                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
                 $count++;
             }
 		}
