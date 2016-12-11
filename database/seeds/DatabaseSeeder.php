@@ -16,27 +16,31 @@ class DatabaseSeeder extends Seeder
          $users =[
         
 	        [
-	            'username'    => 'admin',
+	            'username' => 'admin',
 	            "password" => Hash::make("admin"),
-	            "quyen"  => "admin"
+	            "quyen"  => "admin",
+	            "actived" => 1
 	        ],
 
 	        [
-	        	'username'    => 'khoa',
+	        	'username' => 'khoa',
 	            "password" => Hash::make("khoa"),
-	            "quyen"  => "khoa"
+	            "quyen"  => "khoa",
+	            "actived" => 1
 	        ],
 
 	        [
-	            'username'    => 'hocvien',
+	            'username' => 'hocvien',
 	            "password" => Hash::make("hocvien"),
-	            "quyen"  => "hocvien"
+	            "quyen"  => "hocvien",
+	            "actived" => 1
 	        ],
 
 	        [
 	        	'username'    => 'giangvien',
 	            "password" => Hash::make("giangvien"),
-	            "quyen"  => "giangvien"
+	            "quyen"  => "giangvien",
+	            "actived" => 1
 	        ]
 	    ];
 	    
@@ -44,6 +48,44 @@ class DatabaseSeeder extends Seeder
 	    foreach ($users as $user){
 	//        User::create($user);
 	    	DB::table('taikhoan')->insert($user);
+	    }
+
+	    $khoa = [
+        
+	        [
+	            'tenkhoa' => 'Công nghệ thông tin'
+	        ],
+	        [
+	            'tenkhoa' => 'Điện tử viễn thông'
+	        ],
+	        [
+	            'tenkhoa' => 'Vật lý kỹ thuật'
+	        ]
+	    ];
+	//    DB::table('khoa')->delete();
+	    foreach ($khoa as $kh){
+	//        User::create($user);
+	    	DB::table('khoa')->insert($kh);
+	    }
+
+	    $query = DB::table('khoa')->where('tenkhoa','Công nghệ thông tin')->get();
+	    $makhoa = $query[0]->makhoa;
+
+	    $query = DB::table('taikhoan')->where('username','khoa')->get();
+	    $mataikhoan = $query[0]->id;
+	    $canbokhoa = [ 
+	        [
+	            'id' => 'khoa',
+	            'hoten' => 'Trần Văn Khoa',
+	            'makhoa' => $makhoa,
+	            'mataikhoan' => $mataikhoan,
+	        ]
+	    ];
+
+	    DB::table('canbokhoa')->delete();
+	    foreach ($canbokhoa as $cbk){
+	//        User::create($user);
+	    	DB::table('canbokhoa')->insert($cbk);
 	    }
     }
 }
