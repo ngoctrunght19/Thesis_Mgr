@@ -55,7 +55,7 @@ class KhoaController extends Controller
     }
 
     public function xoaNganh(Request $request) {
-      $id = $request->input('id');
+        $id = $request->input('id');
     	NganhHoc::find($id)->delete();
     	$nganhhoc = NganhHoc::all();
         return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);
@@ -72,6 +72,9 @@ class KhoaController extends Controller
     }
 
     public function getQLGV() {
+        if (!$this->loggedin())
+            return redirect()->route('login');
+
         $giangvien = GiangVien::take(self::$limit)->get();
         $total = GiangVien::count();
         $current = 1;
@@ -81,8 +84,8 @@ class KhoaController extends Controller
         $pagination = $paginationObj->getPagination();
         $donvi = Donvi::all();
         return view('khoa.qlgv')->with('giangvien', $giangvien)
-                                ->with('donvi', $donvi)
-                                ->with('pagination', $pagination);
+                               ->with('donvi', $donvi)
+                               ->with('pagination', $pagination);
     }
 
     public function getQLHV() {
@@ -99,5 +102,9 @@ class KhoaController extends Controller
     public function getDeTai() {
         $detai = DeTai::all();
         return view('khoa.detai')->with('detai', $detai);
+    }
+
+    public function loggedin() {
+        return Auth::check() && Auth::user()->quyen == 'khoa';
     }
 }

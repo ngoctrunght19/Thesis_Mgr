@@ -11,6 +11,9 @@ $(document).ready(function(){
 	$("#btn-themkhoahoc").click(function(event) {
 		/* Act on the event */
 		var tenkhoahoc = $('#input-khoahoc').val();
+		tenkhoahoc = tenkhoahoc.trim();
+		if (tenkhoahoc == '')
+			return;
 		console.log(tenkhoahoc);
 		$.ajax({
 	        url : "themkhoahoc", // gửi ajax đến url
@@ -32,6 +35,9 @@ $(document).ready(function(){
 	$("#btn-themnganh").click(function(event) {
 		/* Act on the event */
 		var tennganh = $('#input-nganh').val();
+		tennganh = tennganh.trim();
+		if (tennganh == '')
+			return;
 		console.log(tennganh);
 		$.ajax({
 	        url : "themnganh", // gửi ajax đến url
