@@ -49,15 +49,19 @@ $(document).ready(function(){
 
 $(document).on('click', '.pagination li:not(.active) a',function(){
 	var url = $(this).attr('url');
-	console.log(url);
+	var self = $(this);
+	
 	$.ajax({
         url : url, // gửi ajax đến url
         type : "get", // chọn phương thức gửi là post
         dateType:"text", // dữ liệu trả về dạng text
-        success : function (result){
-        	$( "#danhsachgiangvien" ).html(result);
-        	console.log(result);
-        }
+        context: this,
+        success : $.proxy(function (result){
+
+        	if ($('#danhsachgiangvien').has(self)) {
+				$( "#danhsachgiangvien" ).html(result);
+			}
+        }, self)
 	});
 });
 
