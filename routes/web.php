@@ -73,3 +73,5 @@ Route::get('danhsachgiangvien', 'Controller1@danhsachgiangvien');
 
 Route::get('query', 'QueryController@getResult');
 
+Route::get('search', 'QueryController@getResultSearch');
+

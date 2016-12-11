@@ -47,6 +47,20 @@ $(document).ready(function(){
 
 });
 
+$(document).on('click', '.pagination li:not(.active) a',function(){
+	var url = $(this).attr('url');
+	console.log(url);
+	$.ajax({
+        url : url, // gửi ajax đến url
+        type : "get", // chọn phương thức gửi là post
+        dateType:"text", // dữ liệu trả về dạng text
+        success : function (result){
+        	$( "#danhsachgiangvien" ).html(result);
+        	console.log(result);
+        }
+	});
+});
+
 function validateActive() {
 	var p = document.getElementById("password").value;
 	var rp = document.getElementById("re-password").value;

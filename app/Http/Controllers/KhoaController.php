@@ -76,7 +76,7 @@ class KhoaController extends Controller
         $total = GiangVien::count();
         $current = 1;
         $preurl = URL::to('/');
-        $preurl .= '/search/query=giangvien';
+        $preurl .= '/query?obj=giangvien';
         $paginationObj = new Pagination($current, $total, self::$limit, $preurl);
         $pagination = $paginationObj->getPagination();
         $donvi = Donvi::all();

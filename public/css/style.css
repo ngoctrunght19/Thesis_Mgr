@@ -82,6 +82,10 @@ a.nav-account, a.nav-account:hover, a.nav-account:focus {
     float: none;
 }
 
+a {
+    cursor: pointer;
+}
+
 
 /*Global Styles*/
 body {

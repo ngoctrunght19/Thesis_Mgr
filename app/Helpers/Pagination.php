@@ -37,9 +37,9 @@ class Pagination
 		for ($i = 1; $i <= $totalPage; $i++) {
 			$url = $this->preurl . '&page=' . $i;
 			if ($i == $this->current)
-				$pagination .= '<li class="active"><a href="#">'.$i.'</a></li>';
+				$pagination .= '<li class="active"><a>'.$i.'</a></li>';
 			else
-				$pagination .= '<li><a href="'.$url.'">'.$i.'</a></li>';
+				$pagination .= '<li><a url="'.$url.'">'.$i.'</a></li>';
 		}
 		$pagination .= '</ul>';
 	//	echo $pagination;

@@ -3,5 +3,9 @@
 namespace App\Values;
 
 class Value {
-	public static $nItemInList = 3;
+	public static $itemPerPage = 3;
+
+	public static function getItemPerPage() {
+		return self::$itemPerPage;
+	}
 }
