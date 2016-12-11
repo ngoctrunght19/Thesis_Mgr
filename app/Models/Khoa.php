@@ -8,6 +8,7 @@ use Exception;
 use DB;
 use Session;
 use Mail;
+use App\Models\Donvi;
 
 class Khoa extends Model
 {

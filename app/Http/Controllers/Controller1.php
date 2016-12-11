@@ -12,6 +12,7 @@ use App\Models\Taikhoan;
 use App\Helpers\CreateTree;
 use Session;  
 use App\Values\Value;  
+use App\Models\Donvi;
 
 class Controller1 extends Controller
 {
@@ -69,14 +70,17 @@ class Controller1 extends Controller
         $name = $request->get('name');
         $id = $request->get('id');
         $email = $request->get('email');
-        $donvi = $request->get('donvi');
-    
-        if ($name == null || $id == null || $email == null || $donvi == null
-            || trim($name)=="" || trim($id) == "" || trim($email)=="" || trim($donvi)=="") 
-        {
-            echo 'Nhập thiếu thông tin';
+        $madonvi = $request->get('donvi');
+        
+        $donvi = Donvi::where('id', '=', $madonvi)->first();
+        if ($donvi == null) {
+            echo 'Không thể thêm giảng viên';
             return;
         }
+        else {
+            $donvi = $donvi->tendonvi;
+        }
+
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
@@ -120,9 +124,11 @@ class Controller1 extends Controller
     public function getActive(Request $request)
     {
         $token = $request->get('token');
-        if ($token == null || $token == '')
-            return view('login');
-        if (Taikhoan::where('password', '=', $token)->first() == null)
+        $username = $request->get('username');
+        if (Taikhoan::where([['password', '=', $token],
+                             ['username', '=', $username],
+                             ['actived', '=', 0]])
+                            ->first() == null)
             return view('errors.404');
         return view('general.active');
     }
