@@ -27,4 +27,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function isAdmin() {
+      return $this->quyen == 'admin';
+    }
+
+    public function isKhoa() {
+      return $this->quyen == 'khoa';
+    }
+
+    public function isHocVien() {
+      return $this->quyen == 'hocvien';
+    }
+
+    public function isGiangVien() {
+      return $this->quyen == 'giangvien';
+    }
+
+
 }
