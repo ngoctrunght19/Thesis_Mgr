@@ -26,7 +26,7 @@ Route::get('logout', 'LoginController@getLogout');
 
 //routes trang khoa
 Route::get('khoa/khoahoc', [ 'as' => 'khoa/khoahoc', 'uses' => 'KhoaController@getKhoaHoc']);
-Route::get('khoa/ctdt', [ 'before' => 'auth', 'uses' => 'KhoaController@getCTDT']);
+Route::get('khoa/ctdt', [ 'as' => 'ctdt', 'uses' => 'KhoaController@getCTDT']);
 Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 Route::get('khoa/qlhv', 'KhoaController@getQLHV');
 Route::get('khoa/detai', 'KhoaController@getDeTai');
