@@ -37,7 +37,7 @@ class Khoa extends Model
             if ($success) {
                 $query = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
                 $token = $query->password;
-//                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
+                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
                 $count++;
             }
 		}
