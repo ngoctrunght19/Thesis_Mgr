@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@upload']);
 		Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'Controller1@typeLecturer']);
+
+		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@upload']);
+		Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'Controller1@typeLecturer']);
 	});
 
 	// HOC VIEN

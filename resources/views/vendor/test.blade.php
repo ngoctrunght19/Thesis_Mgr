@@ -60,7 +60,7 @@ $(document).ready(function(){
 function createTree(list=null, item=null, parent_id=null) {
 	var c = "nav ";
 	if (parent_id != null) {
-		c += "collapse deeper"
+		c += "collapse deeper in"
 		console.log("parent not null: " + parent_id);
 	}
 	else 

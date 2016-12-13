@@ -37,7 +37,7 @@ class Pagination
 		$x1 = 0;
 		$x2 = $totalPage + 1;
 		if ($this->current >= 6) {
-			$x1 = $this->current - 2;
+			$x1 = $this->current - 3;
 		}
 		if ($this->current < $totalPage-4) {
 			$x2 = $this->current + 2;
