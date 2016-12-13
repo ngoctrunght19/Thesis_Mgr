@@ -29,8 +29,12 @@
             <button type="submit" class="btn btn-primary">Thêm học viên</button>
           </div>
         </div>
+
     </form>
 
+    <div id="upload-result">
+    </div>
+  
   </div>
 
   <div id="typelstudent" class="tab-pane">

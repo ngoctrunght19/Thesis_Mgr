@@ -37,11 +37,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('khoa/themnganh', 'KhoaController@themNganh');
 		Route::post('khoa/xoanganh', 'KhoaController@xoaNganh');
 
-		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@upload']);
+		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@uploadLecturer']);
 		Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'Controller1@typeLecturer']);
 
-		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@upload']);
-		Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'Controller1@typeLecturer']);
+		Route::post('khoa/qlhv/upload', 'Controller1@uploadStudent');
+		Route::post('khoa/qlhv/typeStudent', ['as'=>'khoa/qlhv/typeStudent','uses'=>'Controller1@typeStudent']);
 	});
 
 	// HOC VIEN

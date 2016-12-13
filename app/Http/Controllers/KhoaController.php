@@ -79,6 +79,7 @@ class KhoaController extends Controller
 
         $itemPerPage = Value::getItemPerPage();
         $giangvien = GiangVien::take($itemPerPage)->get();
+   //     var_dump($giangvien[0]->magiangvien);
         $total = GiangVien::count();
         $current = 1;
         $preurl = URL::to('/');

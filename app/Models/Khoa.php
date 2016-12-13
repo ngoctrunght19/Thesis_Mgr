@@ -9,6 +9,7 @@ use DB;
 use Session;
 use Mail;
 use App\Models\Donvi;
+use App\HocVien;
 
 class Khoa extends Model
 {
@@ -87,6 +88,81 @@ class Khoa extends Model
         });
 
         return(count(Mail::failures()) == 0 );
+    }
+
+    public static function importStudentFromExcel($path) {
+        echo 'hello';
+        $message = null;
+
+        $objPHPExcel = PHPExcel_IOFactory::load($path);
+        $objWorksheet = $objPHPExcel->getActiveSheet();
+        $nRows = $objWorksheet->getHighestRow();
+
+        // đếm số học viên đã thêm thành công
+        $count = 0;
+
+        for ($row = 1; $row < $nRows; ++$row) {
+            $mahocvien = $objWorksheet->getCell("A" . $row)->getValue();
+            $hoten = $objWorksheet->getCell("B" . $row)->getValue();
+            $khoahoc = $objWorksheet->getCell("C" . $row)->getValue();
+            $chuongtrinhdaotao = $objWorksheet->getCell("D" . $row)->getValue();
+            $email = $objWorksheet->getCell("E" . $row)->getValue();
+
+            $makhoa = Session::get('makhoa');
+
+            $success = self::addStudent($mahocvien, $hoten, $khoahoc, 
+                                            $chuongtrinhdaotao, $email, $makhoa);
+            
+            if ($success) {
+                $query = Taikhoan::select('password')->where('username','=',$mahocvien)->first();
+                $token = $query->password;
+//                Khoa::sendEmailToLecturer($email, $mahocvienvien, $hoten, $token);
+                $count++;
+            }
+        }
+
+        $objPHPExcel->disconnectWorksheets();
+        unset($objPHPExcel);
+     
+        return $count;
+    }
+
+    // Thêm một giảng viên vào csdl
+    public static function addStudent($mahocvien, $hoten, $khoahoc, 
+                                    $chuongtrinhdaotao, $email, $makhoa) {
+        //    $password = str_random(8);
+        $password = \Hash::make('hello');
+        $account = ['username'=>$mahocvien, 'password'=>$password, 'quyen'=>'hocvien'];
+        try {
+        //    DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
+            echo Taikhoan::insert($account);
+        } catch(Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        
+    //    $query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
+        $query = Taikhoan::where('username', '=', $mahocvien)->first();
+        if ($query != null)
+            $account_id = $query->id;
+        //    var_dump($account_id);
+        else {
+            return false;
+        }
+
+        echo 'help me';
+
+        $makhoa = Session::get('makhoa');
+        $data = ['mahocvien'=>$mahocvien, 'hoten'=>$hoten, 'email'=>$email, 'makhoa'=>$makhoa, 
+                'mataikhoan'=>$account_id, 'khoahoc'=>$khoahoc, 'nganhhoc'=>$chuongtrinhdaotao];
+        try {
+            echo 'here' . Hocvien::insert($data);
+        //    DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa,mataikhoan, donvi) values (?, ?, ?, ?, ?, ?)', $data);
+        } catch(Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
 

@@ -23,7 +23,7 @@ class Controller1 extends Controller
 		return view('uploadexcel');
 	}
 
-    public function upload() {
+    public function uploadLecturer() {
         $path = null;
         $success = true;
         $errorMessage = null;
@@ -98,6 +98,83 @@ class Controller1 extends Controller
             echo 'Giảng viên đã tồn tại, không thể thêm vào nữa.';
         }
     }
+
+    public function uploadStudent() {
+        $path = null;
+        $success = true;
+        $errorMessage = null;
+        $message = null;
+
+        if (isset($_FILES['excel']))
+        {
+            // Nếu file upload không bị lỗi,
+            // Tức là thuộc tính error > 0
+            if ($_FILES['excel']['error'] > 0)
+            {
+                $errorMessage = 'File Upload Bị Lỗi';
+            }
+            else{
+                // Upload file
+                move_uploaded_file($_FILES['excel']['tmp_name'], './uploads/'.$_FILES['excel']['name']);
+                $path = './uploads/'.$_FILES['excel']['name'];
+                try {
+                    $message = Khoa::importStudentFromExcel($path);
+                } catch(Exception $e) {
+                    $errorMessage = "Đã xảy ra lỗi";
+                    $errorMessage = $e->getMessage();
+                    echo $e->getMessage();
+                }
+            }
+        }
+        else {
+            $errorMessage = 'Bạn chưa chọn file';
+            return;
+        }
+        $info = null;
+        if ($errorMessage == null) {
+            $info = 'Đã thêm thành công '.$message.' học viên';
+        }
+        else {
+            $info = $errorMessage;
+        }
+        
+    //    $giangvien = GiangVien::take(15)->get();
+        echo $info;
+    //    return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
+    }
+
+    public function typeStudentc(Request $request) {
+        $name = $request->get('name');
+        $id = $request->get('id');
+        $email = $request->get('email');
+        $madonvi = $request->get('donvi');
+        
+        $donvi = Donvi::where('id', '=', $madonvi)->first();
+        if ($donvi == null) {
+            echo 'Không thể thêm giảng viên';
+            return;
+        }
+        else {
+            $donvi = $donvi->tendonvi;
+        }
+
+        $name = trim($name);
+        $id = trim($id);
+        $email = trim($email);
+    
+        $makhoa = Session::get('makhoa');
+        $success = Khoa::themGiangVien($id, $name, $email, $donvi, $makhoa);
+        if ($success) {
+            $query = Taikhoan::select('password')->where('username','=',$id)->first();
+            $token = $query->password;
+            $success = Khoa::sendEmailToLecturer($email, $id, $name, $token);
+            echo 'Đã thêm giảng viên';
+        }
+        else {
+            echo 'Giảng viên đã tồn tại, không thể thêm vào nữa.';
+        }
+    }
+
 
     public function sendEmailToLecturer() {
         echo 'hello';

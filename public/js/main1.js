@@ -4,34 +4,53 @@ $(document).ready(function(){
 		console.log("test");
 	});
 
-	$('#form-upload').ajaxForm({
+	$('#uploadLecturer #form-upload').ajaxForm({
 	    complete: function(xhr) {
-	      $('#upload-result').html(xhr.responseText);
+	    	console.log("hihi");
+	    	console.log('hihi: ' + xhr.responseText);
+	      $('#uploadLecturer #upload-result').html(xhr.responseText);
 	    }
 	});
 
-	$('#active').ajaxForm({
+
+	$('#uploadLecturer #type-lecturer').ajaxForm({
 	    complete: function(xhr) {
 	//      $('#result').html(xhr.responseText);
-			$('#rp-error').html(xhr.responseText);
+			$('#uploadLecturer #type-result').html(xhr.responseText);
 	    }
 	});
 
-	$('#type-lecturer').ajaxForm({
+
+	$('#uploadStudent #form-upload').ajaxForm({
 	    complete: function(xhr) {
-	//      $('#result').html(xhr.responseText);
-			$('#type-result').html(xhr.responseText);
+	    	console.log('hihi: ' + xhr.responseText);
+	      	$('#upload-result').html(xhr.responseText);
 	    }
 	});
+
+	$('#uploadStudent #type-student').ajaxForm({
+	    complete: function(xhr) {
+	//      $('#result').html(xhr.responseText);
+			$('#uploadStudent #type-result').html(xhr.responseText);
+	    }
+	});
+	
 
 	$("#select-file").change(function(){
     	var file = $(this).val();
     	if (isExcelFile(file)) {	
-    		$('#uploadLecturer .form-error').html("&nbsp;");
+    		$('.form-error').html("&nbsp;");
 		}
 		else {
-			$('#uploadLecturer .form-error').html("Không phải file excel!");
+			$('.form-error').html("Không phải file excel!");
 		}
+	});
+
+	$('#active').ajaxForm({
+	    success: function(xhr) {
+	//      $('#result').html(xhr.responseText);
+			$('#rp-error').html(xhr.responseText);
+	    }
 	});
 
 	$("#active #re-password").keyup(function(event) {

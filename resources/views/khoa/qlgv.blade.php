@@ -29,9 +29,9 @@
             <button type="submit" class="btn btn-primary">Thêm giảng viên</button>
           </div>
         </div>
-    </form>
 
-    <span class="error form-error"></span>
+        <span class="error form-error"></span>
+    </form>
     
     <div id="upload-result">
     </div>
