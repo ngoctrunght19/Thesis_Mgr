@@ -12,6 +12,10 @@ class GiangVien extends Model
     //
     protected $table = 'giangvien';
 
+    protected $fillable = [
+        'hoten', 'email', 'donvi'
+    ];
+
     // lấy $n giảng viên từ vị trí pos trong bảng giangvien
     public static function get($pos, $n) {
     	try {

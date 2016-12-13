@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('giangvien/donvi', 'GiangVienController@getDonVi');
 		Route::get('giangvien/giangvien', 'GiangVienController@getGiangVien');
 		Route::get('giangvien/linhvuc', 'GiangVienController@getLinhVuc');
+		Route::get('giangvien/taikhoan', 'GiangVienController@getTaiKhoan');
+		Route::post('giangvien/taikhoan/edit', 'GiangVienController@editTaiKhoan');
 		Route::get('giangvien/detaikhoaluan',
 			[ 'as' => 'giangvien/detaikhoaluan', 'uses' => 'GiangVienController@getDeTaiKhoaLuan']);
 		});

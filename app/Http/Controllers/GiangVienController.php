@@ -22,42 +22,63 @@ use App\DeTai;
 class GiangVienController extends Controller
 {
   	public function show() {
-    $khoa      = Khoa::all();
-    $linhvuc   = LinhVuc::all();
-    $cdnc      = ChuDeNghienCuu::all();
-    $giangvien = GiangVien::all();
+      $khoa      = Khoa::all();
+      $linhvuc   = LinhVuc::all();
+      $cdnc      = ChuDeNghienCuu::all();
+      $giangvien = GiangVien::all();
 
-    return view('giangvien')->with('khoa', $khoa)
-                          ->with('linhvuc', $linhvuc)
-                          ->with('cdnc', $cdnc)
-                          ->with('giangvien', $giangvien);
+      return view('giangvien')->with('khoa', $khoa)
+                            ->with('linhvuc', $linhvuc)
+                            ->with('cdnc', $cdnc)
+                            ->with('giangvien', $giangvien);
   	}
 
-	public function getDonVi() {
-	$khoa = Khoa::all();
-	return view('giangvien.donvi')->with('khoa', $khoa);
+  	public function getDonVi() {
+    	$khoa = Khoa::all();
+    	return view('giangvien.donvi')->with('khoa', $khoa);
   	}
 
   	public function getGiangVien() {
-  	$giangvien = GiangVien::all();
-    return view('giangvien.giangvien')->with('giangvien', $giangvien);
+    	$giangvien = GiangVien::all();
+      return view('giangvien.giangvien')->with('giangvien', $giangvien);
   	}
 
   	public function getLinhVuc() {
-  	$linhvuc = LinhVuc::all();
-  	$cdnc = ChuDeNghienCuu::all();
-    return view('giangvien.linhvuc')->with('linhvuc', $linhvuc)
-    							->with('cdnc', $cdnc);
+    	$linhvuc = LinhVuc::all();
+    	$cdnc = ChuDeNghienCuu::all();
+      return view('giangvien.linhvuc')->with('linhvuc', $linhvuc)
+      							->with('cdnc', $cdnc);
   	}
 
   	public function getDeTaiKhoaLuan() {
-  	$pending = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
-                          ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
-                          ->where('trangthai', 'cho')->get();
-  	$accepted = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
-                          ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
-                          ->where('trangthai', 'chapnhan')->get();
-    return view('giangvien.detaikhoaluan')->with('pending', $pending)
-    										->with('accepted', $accepted);
+    	$pending = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'cho')->get();
+    	$accepted = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'chapnhan')->get();
+      return view('giangvien.detaikhoaluan')->with('pending', $pending)
+      										->with('accepted', $accepted);
   	}
+
+    public function getTaiKhoan() {
+      $id      = Auth::user()->id;
+      $accInfo = GiangVien::where('mataikhoan', $id)->first();
+      return view('giangvien.taikhoan')->with('accInfo', $accInfo);
+  	}
+
+    public function editTaiKhoan(Request $request) {
+      // Tim du lieu cua tai khoan
+      $id      = Auth::user()->id;
+      $accInfo = GiangVien::where('mataikhoan', $id)->first();
+
+      // Update tai khoan
+      $hoten = $request->input('hoten');
+      $email = $request->input('email');
+      $donvi = $request->input('donvi');
+
+
+      $accInfo->update(['hoten' => $hoten,'email' => $email,'donvi' => $donvi]);
+      return view('giangvien.taikhoan')->with('accInfo', $accInfo);
+    }
 }

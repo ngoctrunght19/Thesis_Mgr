@@ -3,7 +3,7 @@
 @section('title', 'Giảng viên')
 
 @section('nav_account')
-    @include('layout.nav_account')
+    @include('giangvien.nav_account')
 @endsection
 
 @section('body')
@@ -49,7 +49,7 @@
         @yield('tab-view')
        {{--  @include('hocvien.donvi')
         @include('hocvien.giangvien', ['giangvien' => $giangvien, 'khoa' => $khoa, 'cdnc' => $cdnc])
-        @include('hocvien.linhvuc') 
+        @include('hocvien.linhvuc')
         <!-- @include('khoa.qlgv')
         @include('khoa.qlhv') --> --}}
     </div>

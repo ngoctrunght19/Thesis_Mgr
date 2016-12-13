@@ -107,5 +107,33 @@ $(document).ready(function(){
 		alert("Sua");
 	});
 
+	$("#btn-editgiangvien").click(function(event) {
+		/* Act on the event */
+		var hoten = $('#hoten-gv').val();
+		var email = $('#email-gv').val();
+		var donvi = $('#donvi-gv').val();
+
+		hoten = hoten.trim();
+		email = email.trim();
+		donvi = donvi.trim();
+		console.log(hoten);
+		$.ajax({
+	        url : "edit", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+								hoten : hoten,
+								email : email,
+								donvi : donvi
+	        },
+	        success : function (result){
+
+	            $( "#info-gv" ).html(result);
+	        }
+    	});
+
+	});
+
+
 
 });
