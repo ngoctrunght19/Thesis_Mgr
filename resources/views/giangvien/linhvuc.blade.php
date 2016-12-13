@@ -7,8 +7,8 @@
   <ul class="nav menu" id="item-linhvuc">
     @foreach ($linhvuc as $l)
     <li class="">
-      <a data-toggle="collapse" href="#item-{{ $l->id+1000 }}">{{ $l->tenlinhvuc }}</a>
-      <ul class="nav collapse deeper" id="item-{{ $l->id+1000 }}">
+      <a data-toggle="collapse" href="#item-{{ $l->id }}">{{ $l->tenlinhvuc }}</a>
+      <ul class="nav collapse deeper" id="item-{{ $l->id }}">
         @foreach ($cdnc as $c)
           @if($c->linhvuc == $l->id)
             <li class="">

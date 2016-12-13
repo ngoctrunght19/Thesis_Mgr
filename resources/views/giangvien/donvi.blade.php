@@ -12,7 +12,7 @@
 					@foreach ($donvi as $d)
 						@if ($k->makhoa == $d->makhoa)
 							<li>
-								<a data-toggle="collapse" href="#item-{{ $k->makhoa+100 }}"> {{ $d->tendonvi }} </a>
+								<a href="#item-bm{{ $k->makhoa }}"> {{ $d->tendonvi }} </a>
 							</li>
 						@endif
 					@endforeach

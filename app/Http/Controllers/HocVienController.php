@@ -17,6 +17,7 @@ use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\HocVien;
 use App\DeTai;
+use App\Models\Donvi;
 
 class HocVienController extends Controller
 {
@@ -33,7 +34,9 @@ class HocVienController extends Controller
   }
   public function getDonVi() {
   	$khoa = Khoa::all();
-    return view('hocvien.donvi')->with('khoa', $khoa);
+    $donvi = Donvi::all();
+    return view('hocvien.donvi')->with('khoa', $khoa)
+                                ->with('donvi', $donvi);
   }
   public function getGiangVien() {
   	$giangvien = GiangVien::all();
@@ -63,8 +66,8 @@ class HocVienController extends Controller
     $mahocvien = HocVien::where('mataikhoan', Auth::user()->id)
                         ->pluck('mahocvien')
                         ->first();
-    DeTai::insert(['tendetai' => $tendetai, 
-                    'mahocvien' => $mahocvien, 
+    DeTai::insert(['tendetai' => $tendetai,
+                    'mahocvien' => $mahocvien,
                     'giangvienhuongdan' => $giangvien,
                     'trangthai' => 'cho']);
     return "Đăng ký thành công, chờ phê duyệt";
