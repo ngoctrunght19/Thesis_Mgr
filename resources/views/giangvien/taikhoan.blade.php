@@ -5,7 +5,7 @@
   <div class="col-sm-offset-3 col-sm-9">
     <h2>Thông tin giảng viên</h2>
   </div>
-  <form class="form-horizontal" form id="info-gv" method="post" action="taikhoan/edit">
+  <form class="form-horizontal" form id="edit-info-gv" method="post" action="taikhoan/edit">
     {{ csrf_field() }}
     <div class="form-group">
       <label class="control-label col-sm-3" for="name">Họ và tên:</label>
@@ -22,14 +22,14 @@
     <div class="form-group">
       <label class="control-label col-sm-3" for="email">Đơn vị:</label>
       <div class="col-sm-9">
-        <textarea class="form-control" rows="4" cols="50" id="donvi-gv">{{$accInfo->donvi}}</textarea>
+        <textarea class="form-control" rows="4" cols="50" name="donvi" id="donvi-gv">{{$accInfo->donvi}}</textarea>
       </div>
     </div>
 
 
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
-        <button type="submit" class="btn btn-primary" id="btn-editgiangvien">Cập nhật tài khoản</button>
+        <button type="submit" class="btn btn-primary">Cập nhật tài khoản</button>
       </div>
     </div>
   </form>

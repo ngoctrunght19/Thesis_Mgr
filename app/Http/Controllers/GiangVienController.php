@@ -74,13 +74,12 @@ class GiangVienController extends Controller
       $id      = Auth::user()->id;
       $accInfo = GiangVien::where('mataikhoan', $id)->first();
 
-      // Update tai khoan
-      $hoten = $request->input('hoten');
-      $email = $request->input('email');
-      $donvi = $request->input('donvi');
-
+      // // Update tai khoan
+       $hoten = $request->input('name');
+       $email = $request->input('email');
+       $donvi = $request->input('donvi');
 
       $accInfo->update(['hoten' => $hoten,'email' => $email,'donvi' => $donvi]);
-      return view('giangvien.taikhoan')->with('accInfo', $accInfo);
+      //return view('giangvien.taikhoan')->with('accInfo', $accInfo);
     }
 }

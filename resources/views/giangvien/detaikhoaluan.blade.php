@@ -28,8 +28,8 @@
     			<td>{{ $p->email }}</td>
     			<td>{{ $p->tendetai }}</td>
     			<td>
-    				<button class="btn btn-primary accept">Chấp nhận</button>
-    				<button class="btn btn-danger reject">Từ chối</button>
+    				<button id="accept" class="btn btn-primary">Chấp nhận</button>
+    				<button id="reject" class="btn btn-danger reject">Từ chối</button>
     			</td>
     		</tr>
     		@endforeach

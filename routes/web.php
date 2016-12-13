@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('hocvien/dangkydetai', 'HocVienController@dangkydetai');
 	});
 
-	// HOC VIEN
+	// GIANG VIEN
 	Route::group(['middleware' => 'isGiangVien'], function () {
 		Route::get('giangvien', [ 'as' => 'giangvien', 'uses' => 'GiangVienController@show']);
 
