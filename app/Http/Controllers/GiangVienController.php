@@ -17,7 +17,7 @@ use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\HocVien;
 use App\DeTai;
-
+use App\Models\Donvi;
 
 class GiangVienController extends Controller
 {
@@ -35,7 +35,9 @@ class GiangVienController extends Controller
 
   	public function getDonVi() {
     	$khoa = Khoa::all();
-    	return view('giangvien.donvi')->with('khoa', $khoa);
+      $donvi = Donvi::all();
+    	return view('giangvien.donvi')->with('khoa', $khoa)
+                                    ->with('donvi', $donvi);
   	}
 
   	public function getGiangVien() {
