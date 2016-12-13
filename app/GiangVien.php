@@ -17,6 +17,7 @@ class GiangVien extends Model
     ];
 
     protected $primaryKey = 'magiangvien';
+    public $incrementing = false;
 
     // lấy $n giảng viên từ vị trí pos trong bảng giangvien
     public static function get($pos, $n) {
