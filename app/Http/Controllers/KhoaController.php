@@ -16,6 +16,7 @@ use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\DeTai;
+use App\HocVien;
 use App\Helpers\Pagination;
 use App\Values\Value;
 use URL;
@@ -91,14 +92,26 @@ class KhoaController extends Controller
     }
 
     public function getQLHV() {
+        $itemPerPage = Value::getItemPerPage();
+
         $khoahoc = KhoaHoc::all();
         $nganhhoc = NganhHoc::all();
         $giangvien = GiangVien::all();
         $khoa = Khoa::all();
+        $hocvien = HocVien::take($itemPerPage)->get();
+        $total = HocVien::count();
+        $current = 1;
+        $preurl = URL::to('/');
+        $preurl .= '/query?obj=hocvien';
+        $paginationObj = new Pagination($current, $total, $itemPerPage, $preurl);
+        $pagination = $paginationObj->getPagination();
+
         return view('khoa.qlhv')->with('khoahoc', $khoahoc)
                                 ->with('nganhhoc', $nganhhoc)
                                 ->with('giangvien', $giangvien)
-                                ->with('khoa', $khoa);
+                                ->with('khoa', $khoa)
+                                ->with('hocvien', $hocvien)
+                                ->with('pagination', $pagination);
     }
 
     public function getDeTai() {
