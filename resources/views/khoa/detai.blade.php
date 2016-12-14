@@ -88,7 +88,7 @@
           </thead>
           <tbody>
           @foreach($detai as $dt)
-            @if($dt->trangthai == "chapnhan")
+            @if($dt->trangthai == "chapnhan" && ($dt->thaydoi == null || $dt->thaydoi == "dangsua"))
               <tr>
                   <td>{{ $dt->tendetai }}</td>
                   <td>{{ $dt->hocvien }}</td>
