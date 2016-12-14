@@ -5,7 +5,7 @@
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#uploadStudent">Upload excel</a></li>
-  <li><a data-toggle="tab" href="#typelstudent">Nhập tay</a></li>
+  <li><a data-toggle="tab" href="#typestudent">Nhập tay</a></li>
   <li><a data-toggle="tab" href="#student">Học viên</a></li>
 </ul>
 
@@ -26,23 +26,23 @@
         </div>
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Thêm học viên</button>
+            <button type="submit" class="btn btn-primary submit">Thêm học viên</button>
           </div>
         </div>
 
-    </form>
+        <div id="upload-result" class="result">
+        </div>
 
-    <div id="upload-result">
-    </div>
+    </form>
   
   </div>
 
-  <div id="typelstudent" class="tab-pane">
+  <div id="typestudent" class="tab-pane">
     <div class="container col-md-10" >
       <div class="col-sm-offset-3 col-sm-9">
         <h2>Nhập thông tin học viên</h2>
       </div>
-      <form class="form-horizontal" form id="typelstudent" method="post" action="qlhv/typelstudent">
+      <form class="form-horizontal" form id="type-student" method="post" action="qlhv/typestudent">
         {{ csrf_field() }}
         <div class="form-group">
           <label class="control-label col-sm-3" for="mahv">Mã giảng viên:</label>
@@ -59,9 +59,9 @@
         <div class="form-group">
           <label class="control-label col-sm-3" for="khoa">Khóa học:</label>
           <div class="col-sm-9">
-            <select class="form-control" id="sel-khoa">
+            <select class="form-control" id="sel-khoa" name="khoahoc">
               @foreach($khoahoc as $k)
-              <option>{{ $k->tenkhoahoc }}</option>
+              <option value={{ $k->id }}>{{ $k->tenkhoahoc }}</option>
               @endforeach
             </select>
           </div>
@@ -69,9 +69,9 @@
         <div class="form-group">
           <label class="control-label col-sm-3" for="khoa">Chương trình đào tạo:</label>
           <div class="col-sm-9">
-            <select class="form-control" id="sel-khoa">
+            <select class="form-control" id="sel-khoa" name="nganhhoc">
               @foreach($nganhhoc as $nganh)
-              <option>{{ $nganh->tennganh }}</option>
+              <option value={{ $nganh->id }}>{{ $nganh->tennganh }}</option>
               @endforeach
             </select>
           </div>
@@ -86,10 +86,13 @@
   
         <div class="form-group">        
           <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-primary">Thêm học viên</button>
+            <button type="submit" class="btn btn-primary submit">Thêm học viên</button>
           </div>
         </div>
+
+         <div id="result" class="result"></div>
       </form>
+
     </div>
   </div>
 

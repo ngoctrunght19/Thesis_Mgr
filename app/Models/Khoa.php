@@ -91,7 +91,6 @@ class Khoa extends Model
     }
 
     public static function importStudentFromExcel($path) {
-        echo 'hello';
         $message = null;
 
         $objPHPExcel = PHPExcel_IOFactory::load($path);
@@ -116,7 +115,7 @@ class Khoa extends Model
             if ($success) {
                 $query = Taikhoan::select('password')->where('username','=',$mahocvien)->first();
                 $token = $query->password;
-//                Khoa::sendEmailToLecturer($email, $mahocvienvien, $hoten, $token);
+                Khoa::sendEmailToLecturer($email, $mahocvien, $hoten, $token);
                 $count++;
             }
         }
@@ -134,30 +133,22 @@ class Khoa extends Model
         $password = \Hash::make('hello');
         $account = ['username'=>$mahocvien, 'password'=>$password, 'quyen'=>'hocvien'];
         try {
-        //    DB::insert('insert into taikhoan (username, password, quyen) values (?, ?, ?)', $account);
-            echo Taikhoan::insert($account);
+            Taikhoan::insert($account);
         } catch(Exception $e) {
-            echo $e->getMessage();
             return false;
         }
-        
-    //    $query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);
+    
         $query = Taikhoan::where('username', '=', $mahocvien)->first();
         if ($query != null)
             $account_id = $query->id;
-        //    var_dump($account_id);
         else {
             return false;
         }
-
-        echo 'help me';
-
         $makhoa = Session::get('makhoa');
         $data = ['mahocvien'=>$mahocvien, 'hoten'=>$hoten, 'email'=>$email, 'makhoa'=>$makhoa, 
                 'mataikhoan'=>$account_id, 'khoahoc'=>$khoahoc, 'nganhhoc'=>$chuongtrinhdaotao];
         try {
-            echo 'here' . Hocvien::insert($data);
-        //    DB::insert('insert into giangvien (magiangvien, hoten, email, makhoa,mataikhoan, donvi) values (?, ?, ?, ?, ?, ?)', $data);
+            Hocvien::insert($data);
         } catch(Exception $e) {
             return false;
         }

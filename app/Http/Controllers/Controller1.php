@@ -13,6 +13,8 @@ use App\Helpers\CreateTree;
 use Session;  
 use App\Values\Value;  
 use App\Models\Donvi;
+use App\NganhHoc;
+use App\KhoaHoc;
 
 class Controller1 extends Controller
 {
@@ -62,7 +64,6 @@ class Controller1 extends Controller
             $info = $errorMessage;
         }
         
-    //    $giangvien = GiangVien::take(15)->get();
         echo $info;
     //    return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
@@ -143,35 +144,32 @@ class Controller1 extends Controller
     //    return view('khoa.danhsachgiangvien')->with(['giangvien'=>$giangvien,'info'=> $info]);
     }
 
-    public function typeStudentc(Request $request) {
+    public function typeStudent(Request $request) {
         $name = $request->get('name');
         $id = $request->get('id');
         $email = $request->get('email');
-        $madonvi = $request->get('donvi');
-        
-        $donvi = Donvi::where('id', '=', $madonvi)->first();
-        if ($donvi == null) {
-            echo 'Không thể thêm giảng viên';
-            return;
-        }
-        else {
-            $donvi = $donvi->tendonvi;
-        }
+        $manganh = $request->get('nganhhoc');
+        $makhoahoc = $request->get('khoahoc');    
+        $nganh = NganhHoc::where('id', '=', $manganh)->first();
+        $nganh = $nganh->tennganh;
+        $khoahoc = KhoaHoc::where('id', '=', $makhoahoc)->first();
+        $khoahoc = $khoahoc->tenkhoahoc;
 
         $name = trim($name);
         $id = trim($id);
         $email = trim($email);
     
         $makhoa = Session::get('makhoa');
-        $success = Khoa::themGiangVien($id, $name, $email, $donvi, $makhoa);
+        $success = Khoa::addStudent($id, $name, $khoahoc, 
+                                    $nganh, $email, $makhoa);
         if ($success) {
             $query = Taikhoan::select('password')->where('username','=',$id)->first();
             $token = $query->password;
             $success = Khoa::sendEmailToLecturer($email, $id, $name, $token);
-            echo 'Đã thêm giảng viên';
+            echo 'Đã thêm học viên';
         }
         else {
-            echo 'Giảng viên đã tồn tại, không thể thêm vào nữa.';
+            echo 'Không thể thêm học viên';
         }
     }
 
@@ -271,7 +269,7 @@ class Controller1 extends Controller
 				echo 'vai cả exception';
 				return;
             } catch(Exception $e) {
-			//    echo $e . '<br />' . 'kệ tôi' . '<br />';
+			
 			}
 			
 			$query = DB::select('select id from taikhoan where username = ?', [$magiangvien]);

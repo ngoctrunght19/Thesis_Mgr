@@ -4,34 +4,41 @@ $(document).ready(function(){
 		console.log("test");
 	});
 
+	$('.submit').click( function(){
+		$(this).addClass('disabled')
+	});
+
+	$('form').submit( function(){
+		$(this).find(".result").html('Đang gửi yêu cầu');
+	});
+
 	$('#uploadLecturer #form-upload').ajaxForm({
 	    complete: function(xhr) {
-	    	console.log("hihi");
-	    	console.log('hihi: ' + xhr.responseText);
-	      $('#uploadLecturer #upload-result').html(xhr.responseText);
+			$('#uploadLecturer #upload-result').html(xhr.responseText);
+			$('#uploadLecturer .submit').removeClass('disabled')
 	    }
 	});
 
 
-	$('#uploadLecturer #type-lecturer').ajaxForm({
+	$('#type-lecturer').ajaxForm({
 	    complete: function(xhr) {
-	//      $('#result').html(xhr.responseText);
 			$('#uploadLecturer #type-result').html(xhr.responseText);
+			$('#type-lecturer .submit').removeClass('disabled')
 	    }
 	});
 
 
 	$('#uploadStudent #form-upload').ajaxForm({
 	    complete: function(xhr) {
-	    	console.log('hihi: ' + xhr.responseText);
 	      	$('#upload-result').html(xhr.responseText);
+	      	$('#uploadStudent .submit').removeClass('disabled')
 	    }
 	});
 
-	$('#uploadStudent #type-student').ajaxForm({
+	$('#type-student').ajaxForm({
 	    complete: function(xhr) {
-	//      $('#result').html(xhr.responseText);
-			$('#uploadStudent #type-result').html(xhr.responseText);
+			$('#typestudent #result').html(xhr.responseText);
+			$('#type-student .submit').removeClass('disabled')
 	    }
 	});
 	
@@ -48,7 +55,6 @@ $(document).ready(function(){
 
 	$('#active').ajaxForm({
 	    success: function(xhr) {
-	//      $('#result').html(xhr.responseText);
 			$('#rp-error').html(xhr.responseText);
 	    }
 	});
@@ -66,23 +72,35 @@ $(document).ready(function(){
 
 });
 
-$(document).on('click', '.pagination li:not(.active):not(.disabled) a',function(){
+$(document).on('click', '#danhsachgiangvien .pagination li:not(.active):not(.disabled) a',function(){
 	var url = $(this).attr('url');
-	var self = $(this);
 	
 	$.ajax({
         url : url, // gửi ajax đến url
         type : "get", // chọn phương thức gửi là post
         dateType:"text", // dữ liệu trả về dạng text
         context: this,
-        success : $.proxy(function (result){
-
-        	if ($('#danhsachgiangvien').has(self)) {
-				$( "#danhsachgiangvien" ).html(result);
-			}
-        }, self)
+        success : function(result) {
+			$( "#danhsachgiangvien" ).html(result);
+		}
 	});
 });
+
+
+$(document).on('click', '#danhsachhocvien .pagination li:not(.active):not(.disabled) a',function(){
+	var url = $(this).attr('url');
+	
+	$.ajax({
+        url : url, // gửi ajax đến url
+        type : "get", // chọn phương thức gửi là post
+        dateType:"text", // dữ liệu trả về dạng text
+        context: this,
+        success : function(result) {
+			$( "#danhsachhocvien" ).html(result);
+		}
+	});
+});
+
 
 function validateActive() {
 	var p = document.getElementById("password").value;

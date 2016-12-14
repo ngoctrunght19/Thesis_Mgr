@@ -26,15 +26,16 @@
         </div>
         <div class="form-group">        
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Thêm giảng viên</button>
+            <button type="submit" class="btn btn-primary submit">Thêm giảng viên</button>
           </div>
         </div>
 
         <span class="error form-error"></span>
+
+        <div id="upload-result" class="result">
+        </div>
     </form>
     
-    <div id="upload-result">
-    </div>
 
   </div>
 
@@ -77,13 +78,14 @@
   
         <div class="form-group">        
           <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-primary">Thêm giảng viên</button>
+            <button type="submit" class="btn btn-primary submit">Thêm giảng viên</button>
           </div>
+        </div>
+
+        <div id="type-result" class="result">
         </div>
       </form>
 
-      <div id="type-result">
-      </div>
     </div>
   </div>
 
