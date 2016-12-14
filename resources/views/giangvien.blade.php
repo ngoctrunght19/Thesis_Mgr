@@ -9,7 +9,18 @@
 @section('body')
 <div>
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <form role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </form>
         <ul class="nav menu">
+            <li class="parent">
+              <a href="{{ url('giangvien/chudenghiencuu') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                    Chủ đề nghiên cứu
+              </a>
+            </li>
             <li class="parent">
               <a href="{{ url('giangvien/donvi') }}">
                     <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>

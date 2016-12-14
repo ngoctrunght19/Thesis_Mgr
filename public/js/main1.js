@@ -82,6 +82,29 @@ $(document).ready(function(){
 	    }
 	});
 
+	$('#form-chude').submit( function() {
+		$('#form-chude').addClass('disabled')
+	});
+
+	$('#form-chude').ajaxForm({
+	    complete: function(xhr) {
+	    	$('#form-chude').removeClass('disabled')
+	      	var error = xhr.responseText;
+	      
+	      	// nếu có lỗi thì in thông báo lỗi và thoát
+	      	if (error != 'ok') {
+	      		$('#form-chude .error').html(responseText);
+	      		return;
+	      	}
+	      	
+	      	var chude = $('#form-chude #chude').val();
+
+	      	var chudemoi = "<tr><td class=\"col-md-10\">"+ chude +"</td><td><button machude=\"helo\" id=\"accept\" class=\"btn btn-primary\">Sửa</button><button machude=\"\" id=\"reject\" class=\"btn btn-danger\">Xóa chủ đề</button></td></tr>";
+	      	$('#bangchude tbody').append(chudemoi);
+	    	var url      = window.location.href;
+	      	$( "#bangchude" ).load( url + " #bangchude" );
+	    }
+	});
 });
 
 $(document).on('click', '#danhsachgiangvien .pagination li:not(.active):not(.disabled) a',function(){

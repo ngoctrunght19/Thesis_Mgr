@@ -120,4 +120,20 @@ class GiangVienController extends Controller
       return view('giangvien.detaikhoaluan-content')->with('pending', $pending)
                           ->with('accepted', $accepted);
     }
+
+    public function themchude(Request $request) {
+        $chude = $request->chude;
+        if ($chude == null || trim($chude) == "")
+           echo 'Không có chủ đề';
+
+        $chude = trim($chude);
+        $magiangvien = Auth::user()->username;
+        $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
+        if (!$success) {
+            echo 'Không thê thêm chủ đề'; 
+        }
+        else {
+            echo 'ok';
+        }
+    }
 }
