@@ -82,7 +82,7 @@ class KhoaController extends Controller
 
         $itemPerPage = Value::getItemPerPage();
         $giangvien = GiangVien::take($itemPerPage)->get();
-   //     var_dump($giangvien[0]->magiangvien);
+
         $total = GiangVien::count();
         $current = 1;
         $preurl = URL::to('/');
@@ -128,8 +128,8 @@ class KhoaController extends Controller
                         ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
                         ->where('detai.trangthai', 'chapnhan')->get();
         $soLuongDeTai = $detai->count();
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/ds-detai-template.docx');
 
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/ds-detai-template.docx');
         $templateProcessor->cloneRow('r1', $soLuongDeTai);
 
         for ($i =0; $i < $soLuongDeTai; $i++){
@@ -151,8 +151,8 @@ class KhoaController extends Controller
                         ->where('detai.trangthai', 'chapnhan')
                         ->where('detai.thaydoi', 'rut')->get();
         $soLuongDeTai = $detai->count();
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/rut-detai-template.docx');
 
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/rut-detai-template.docx');
         $templateProcessor->cloneRow('r1', $soLuongDeTai);
 
         for ($i =0; $i < $soLuongDeTai; $i++){
@@ -174,8 +174,8 @@ class KhoaController extends Controller
                         ->where('detai.trangthai', 'chapnhan')
                         ->where('detai.thaydoi', 'sua')->get();
         $soLuongDeTai = $detai->count();
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/sua-detai-template.docx');
 
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/sua-detai-template.docx');
         $templateProcessor->cloneRow('r1', $soLuongDeTai);
 
         for ($i =0; $i < $soLuongDeTai; $i++){
@@ -191,7 +191,6 @@ class KhoaController extends Controller
     }
 
     public function getDeTai() {
-        // $detai = DeTai::where('trangthai', 'chapnhan')->get();
         $detai = DeTai::all();
         foreach ($detai as $dt) {
             $hocvien = HocVien::where('mahocvien',$dt->mahocvien)->first();

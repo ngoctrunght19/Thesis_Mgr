@@ -9,7 +9,6 @@ use App\Values\Value;
 
 class GiangVien extends Model
 {
-    //
     protected $table = 'giangvien';
 
     protected $fillable = [

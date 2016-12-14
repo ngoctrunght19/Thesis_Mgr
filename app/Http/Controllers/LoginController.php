@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
-use Session;    
+use Session;
 use App\Khoa;
 use App\LinhVuc;
 use App\NganhHoc;
@@ -60,7 +60,7 @@ class LoginController extends Controller
         else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'hocvien', 'actived'=>'1'])) {
         	return redirect()->route('hocvien');
         }
-        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'giangvien', 
+        else if (Auth::attempt(['username' => $username, 'password' => $password, 'quyen' => 'giangvien',
             'actived'=>'1'])) {
         	return redirect()->route('giangvien');
         }
@@ -68,39 +68,6 @@ class LoginController extends Controller
         	return redirect()->route('login');
         }
     }
-
-    // public function redirectPage() {
-    //     if (isset(Auth::user()->quyen) ) {
-    //         if(Auth::user()->quyen=='admin') {
-    //             return view('admin');
-    //         }
-    //         else if (Auth::user()->quyen=='khoa') {
-    //             $khoahoc = KhoaHoc::all();
-    //             $nganhhoc = NganhHoc::all();
-    //             $giangvien = GiangVien::all();
-    //             return view('khoa')->with('khoahoc', $khoahoc)
-    //                                ->with('nganhhoc', $nganhhoc)
-    //                                ->with('giangvien', $giangvien);
-    //         }
-    //         else if (Auth::user()->quyen=='hocvien') {
-    //             $khoa = Khoa::all();
-    //             $linhvuc = LinhVuc::all();
-    //             $cdnc = ChuDeNghienCuu::all();
-    //             $giangvien = GiangVien::all();
-    //
-    //             return view('hocvien')->with('khoa', $khoa)
-    //                                   ->with('linhvuc', $linhvuc)
-    //                                   ->with('cdnc', $cdnc)
-    //                                   ->with('giangvien', $giangvien);
-    //         }
-    //         else if (Auth::user()->quyen=='giangvien') {
-    //             return view('giangvien');
-    //         }
-    //     }
-    //     else {
-    //         return redirect()->route('login');
-    //     }
-    // }
 
     public function getLogout() {
     	Auth::logout();
