@@ -137,12 +137,7 @@ class KhoaController extends Controller
             $templateProcessor->setValue($r2, $detai[$i]->hoten_hv);
             $templateProcessor->setValue($r3, $detai[$i]->hoten_gv);
         }
-        // $templateProcessor->setValue('r1#2', $detai[1]->tendetai);
-        // $templateProcessor->setValue($r2, $detai[1]->mahocvien);
-        // $templateProcessor->setValue($r3, $detai[1]->giangvienhuongdan);
         $templateProcessor->saveAs('downloads/cong-van.docx');
-
-
         return redirect()->route('khoa/congvan');
     }
 
