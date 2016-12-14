@@ -36,6 +36,12 @@
                      Đề tài khóa luận
                 </a>
             </li>
+            <li>
+                <a href="{{ url('hocvien/suadetai') }}">
+                    <svg class="glyph stroked star"><use xlink:href="#stroked-star"/></svg>
+                     Sửa đề tài
+                </a>
+            </li>
         </ul>
 
     </div><!--/.sidebar-->

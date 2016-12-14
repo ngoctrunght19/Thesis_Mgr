@@ -9,7 +9,7 @@
 
 @else @if($detai == null)
 
-	<h1>Đăng ký đề tài</h1>
+	<h2>Đăng ký đề tài</h2>
   <form id="form-detai" class="form-horizontal" method="post" action="dangkydetai" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
   {{ csrf_field() }}
     <div class="form-group">

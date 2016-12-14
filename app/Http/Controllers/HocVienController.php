@@ -74,4 +74,18 @@ class HocVienController extends Controller
     return "Đăng ký thành công, chờ phê duyệt";
   }
 
+  public function getSuaDeTai() {
+    $modangky = false;
+    $khoa = Khoa::all();
+    $giangvien = GiangVien::all();
+    $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
+    $detai = DeTai::join('giangvien', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                  ->where('mahocvien', $student->mahocvien)->first();
+    return view('hocvien.suadetai')->with('modangky', $modangky)
+                                        ->with('khoa', $khoa)
+                                        ->with('student', $student)
+                                        ->with('giangvien', $giangvien)
+                                        ->with('detai', $detai);
+  }
+
 }
