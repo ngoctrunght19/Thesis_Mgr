@@ -147,7 +147,9 @@ class KhoaController extends Controller
     public function exportRDT() {
         $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
                         ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
-                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')->get();
+                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                        ->where('detai.trangthai', 'chapnhan')
+                        ->where('detai.thaydoi', 'rut')->get();
         $soLuongDeTai = $detai->count();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/rut-detai-template.docx');
 

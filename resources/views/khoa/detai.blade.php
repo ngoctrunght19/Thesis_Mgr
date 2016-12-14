@@ -119,7 +119,7 @@
         </thead>
         <tbody>
         @foreach($detai as $dt)
-        @if($dt->trangthai == "")
+        @if($dt->trangthai == "chapnhan" && $dt->thaydoi == "rut")
           <tr>
               <td>{{ $dt->tendetai }}</td>
               <td>{{ $dt->hocvien }}</td>
