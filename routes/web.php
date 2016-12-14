@@ -90,6 +90,9 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('giangvien/chudenghiencuu', 'Controller1@getChudenghiencuu');
 		Route::post('giangvien/chudenghiencuu/themchude', 'GiangVienController@themchude');
 		Route::post('giangvien/chudenghiencuu/xoachude', 'GiangVienController@xoachude');
+
+		Route::get('giangvien/linhvuc', 'Controller1@getCategory');
+		Route::post('giangvien/linhvuc', 'Controller1@tickCategory');
 	});
 
 //chuyển trang khi đăng xuất

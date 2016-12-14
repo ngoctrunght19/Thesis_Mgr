@@ -131,30 +131,26 @@ $(document).ready(function(){
 		console.log('hello1');
 		$.ajax({
 	        url : "linhvuc", 
-	        type : "post",
+	        type : "get",
 	        dateType:"text", 
 	        success : function (result){
-	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
-	//            $("#input-khoahoc").val("");
-	//            $( "#list-khoahoc" ).html(result);
-				console.log(result);
+	          
 				var data = $.parseJSON(result);
-		//		console.log(result);
-				console.log(data);
+		
 				var tree = createTree(data);
-				console.log(tree);
+				
 				$( "#linhvuc" ).html(tree);
 
-				var li = $('#linhvucdachon li');
+				var li = $('.linhvuc-list');
+		
 				var checkboxes = $('.check');
-				console.log(checkboxes);
-				console.log(li);
+	
 				for (var i = 0; i < checkboxes.length; i++) {
+
 					for (var j = 0; j < li.length; j++) {
-						console.log(checkboxes[i].attr('malinhvuc'));
-						console.log(li[j].attr('malinhvuc'));
-						if (checkboxes[i].attr('malinhvuc') == li[j].attr('malinhvuc')) {
-							checkboxes[i].attr('checked', true);
+					
+						if ($(checkboxes[i]).attr('malinhvuc') == $(li[j]).attr('malinhvuc')) {
+							$(checkboxes[i]).attr('checked', true);
 							break;
 						}
 					}
@@ -169,10 +165,8 @@ function createTree(list=null, item=null, parent_id=null) {
 	var c = "nav ";
 	if (parent_id != null) {
 		c += "collapse deeper in"
-		console.log("parent not null: " + parent_id);
 	}
-	else 
-		console.log("parent: " + parent_id);
+	
 	var html = '<ul class="'+ c +'" id='+item+'>';
 //	var checked;
 	for(var i = 0; i < list.length; i++){
@@ -180,7 +174,7 @@ function createTree(list=null, item=null, parent_id=null) {
 		if(list[i]['parent_id'] == parent_id){
 			
 			item = list[i]['id'];
-		    html += '<li><div><input class="check" type="checkbox" malinhvuc='+ item +'/> <a data-toggle="collapse" href="#'+ item +'">'+ list[i]['tenlinhvuc'] + '</a></div>' + createTree(list, item, list[i]['id']) + '</li>';
+		    html += '<li><div><input class="check" type="checkbox" malinhvuc='+ item +'> <a data-toggle="collapse" href="#'+ item +'">'+ list[i]['tenlinhvuc'] + '</a></div>' + createTree(list, item, list[i]['id']) + '</li>';
 		}
 	}
 
@@ -241,6 +235,42 @@ $(document).on('click', '#danhsachhocvien .pagination li:not(.active):not(.disab
 		}
 	});
 });
+
+$(document).on('click', '#luulinhvuc',function(){
+	var checkboxes = $('.check');
+	var linhvuc = [];
+	var count = 0;
+	for (var i = 0; i < checkboxes.length; i++) {
+		if ($(checkboxes[i]).prop('checked')) {
+			linhvuc[count] = $(checkboxes[i]).attr('malinhvuc');
+			count++;
+		}
+	}
+	
+	$.ajax({
+        url : 'linhvuc', // gửi ajax đến url
+        type : "post", // chọn phương thức gửi là post
+        dateType:"text", // dữ liệu trả về dạng text
+        context: this,
+        data: {linhvuc:linhvuc},
+        success : function(result) {
+			
+			$('#linhvucdachon').html(result);
+			
+		}
+	});
+});
+
+$(document).on('change', '.check',function(){
+	
+	if ($(this).prop('checked') == false)
+		return;
+	var child_id = $(this).attr('malinhvuc');
+	child_id = "#" + child_id;
+	$(child_id + " .check").prop('checked', true)
+	
+});
+
 
 
 function validateActive() {

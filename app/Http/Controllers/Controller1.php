@@ -301,4 +301,22 @@ class Controller1 extends Controller
         $js_array = json_encode($list);
         echo $js_array;
     }
+
+    public function tickCategory(Request $request) {
+        $magiangvien = Auth::user()->username;
+        GiangvienLinhvuc::where('magiangvien', $magiangvien)->delete();
+        $linhvuc = $request->linhvuc;
+        foreach ($linhvuc as $value) {
+            $data = ['magiangvien'=>$magiangvien, 'malinhvuc'=>$value];
+            GiangvienLinhvuc::insert($data);
+        }
+
+        $linhvuc = GiangvienLinhvuc::join('linhvuc', function($join) {
+                        $join->on('linhvuc_gv.malinhvuc', '=', 'linhvuc.id');
+                    })
+                    ->where('magiangvien', $magiangvien)->get();
+
+        return view('giangvien.danhsachlinhvuc')
+                    ->with('linhvuc', $linhvuc);
+    }
 }

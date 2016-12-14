@@ -91,13 +91,14 @@
 	  	</div>
 	
 	</div>
+
 	
-	<div id="linhvuclienquan" clas="tab-pane">
-		<div class="linhvucdachon">
+	<div id="linhvuclienquan" class="tab-pane">
+		<div id="linhvucdachon">
 			<h2>Các lĩnh vực liên quan</h2>
 			<ul>
 				@foreach($linhvuc as $lv)
-				<li malinhvuc={{$lv->id}}>
+				<li class="linhvuc-list" malinhvuc={{$lv->id}}>
 					{{ $lv->tenlinhvuc }}
 				</li>
 				@endforeach
@@ -111,6 +112,10 @@
 			<div id="linhvuc">
 			</div>
 		</div>
+		
+		<br />
+		<br />
+		<button id="luulinhvuc" class="btn btn-primary">Lưu</button>
 	</div>
 </div>
 @endsection
