@@ -24,6 +24,8 @@ use App\Canbokhoa;
 use App\ThongBao;
 use URL;
 use PHPWord;
+use Exception;
+
 
 class KhoaController extends Controller
 {
@@ -253,5 +255,46 @@ class KhoaController extends Controller
         ThongBao::where('id', $mathongbao)->delete();
         $thongbao = ThongBao::all();
         return view('khoa.danhsachthongbao')->with('thongbao', $thongbao);
+    }
+
+    public function getDKBV() {
+
+        return view('khoa.dkbv');
+    }
+
+    public function nophoso(Request $request) {
+        $mahocvien = $request->id;
+
+        if ($mahocvien == null || trim($mahocvien) == "") {
+            echo "Học viên không tồn tại";
+            return;
+        }
+
+        $mahocvien = trim($mahocvien);
+        $makhoa = Session::get('makhoa');
+        $hocvien = HocVien::where('mahocvien', $mahocvien)->first();
+        if ($hocvien == null) {
+            echo "Học viên không tồn tại";
+            return;
+        }
+
+        $khoacuahocvien = $hocvien->makhoa;
+        // kiểm tra xem học viên có cung khoa vơi cán bộ khoa không
+        if ($khoacuahocvien != $makhoa) {
+            echo "Học viên không cùng khoa";
+            return;
+        }
+        try {
+        
+            $hoten = $hocvien->hoten;
+            $success = HocVien::where('mahocvien', '=', $mahocvien)
+                ->update(['danophoso' => '1']);
+            echo "Đã đánh dấu học viên " . $hoten . " mã học viên " . $mahocvien
+                    . " đã nộp hồ sơ bảo vệ";
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            echo "Đã xảy ra lỗi.";
+        }
     }
 }

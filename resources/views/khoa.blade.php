@@ -46,6 +46,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ url('khoa/dangkybaove') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                     Đăng ký bảo vệ
+                </a>
+            </li>
+            <li>
                 <a href="{{ url('khoa/thongbao') }}">
                     <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
                      Thông báo

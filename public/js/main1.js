@@ -76,6 +76,17 @@ $(document).ready(function(){
 	    }
 	});
 
+	$('#nophoso').ajaxForm({
+	    complete: function(xhr) {
+	   		var response = xhr.responseText;
+	   		$('#nophoso #result').html(response);
+	    }
+	});
+
+	$('#nophoso').submit(function() {
+	    $('#nophoso #result').html("");
+	});
+
 	$("#active #re-password").keyup(function(event) {
 		var p = $("#active #password").val();
 		var rp = $("#active #re-password").val();

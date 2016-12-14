@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('khoa/detai/upload', 'Controller1@uploadStudentThesis');
 		Route::post('khoa/detai/type', 'Controller1@typeStudentThesis');
 
+		Route::get('khoa/dangkybaove', 'KhoaController@getDKBV');
+		Route::post('khoa/dangkybaove/nophoso', 'KhoaController@nophoso');
 
 	});
 
