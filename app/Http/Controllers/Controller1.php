@@ -17,6 +17,7 @@ use App\NganhHoc;
 use App\KhoaHoc;
 use App\Models\HocVienModel;
 use App\HocVien;
+use App\ChuDeNghienCuu;
 
 class Controller1 extends Controller
 {
@@ -268,5 +269,10 @@ class Controller1 extends Controller
     public function danhsachgiangvien(Request $request) {
         $page = $request->get('page');
         echo Value::$nItemInList;
+    }
+
+    public function getChudenghiencuu() {
+        $chudenghiencuu = ChuDeNghienCuu::all();
+        return view('giangvien.chudenghiencuu')->with('chudenghiencuu', $chudenghiencuu);
     }
 }
