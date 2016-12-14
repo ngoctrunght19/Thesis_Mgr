@@ -173,4 +173,23 @@ $(document).ready(function(){
     	});
 	});
 
+	//rút đề tài
+	$('#rut-de-tai').click(function() {
+		var madetai = $(this).attr('madetai');
+		console.log(madetai);
+		$.ajax({
+	        url : "rutdetai", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+				id: madetai
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            var html = "<h3>" + result + "</h3>";
+	      		$('#detai-result').html(html);
+	        }
+    	});
+	});
+
 });

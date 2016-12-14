@@ -4,14 +4,18 @@
 
 <div id="detai-result">
 
-  @if($detai == null)
+  @if($modangky->trangthai == 'mo')
+    <div class="alert bg-danger" role="alert">
+          <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đang trong đợt đăng ký đề tài, bạn chưa được rút hoặc sửa đề tài
+    </div>
+  @else @if($detai == null)
     <div class="alert bg-danger" role="alert">
       <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
        Bạn chưa đăng ký đề tài
     </div>
-  @else @if($modangky->trangthai == 'mo')
-    <div class="alert bg-danger" role="alert">
-          <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đang trong đợt đăng ký đề tài, bạn chưa được rút hoặc sửa đề tài
+  @else @if($detai->thaydoi == 'sua' || $detai->thaydoi == 'rut')
+    <div class="alert bg-warning" role="alert">
+      <svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Thay đổi thành công, đang chờ phê duyệt
     </div>
   @else
     <ul class="nav nav-tabs">
@@ -84,6 +88,7 @@
 
     </div>
 
+    @endif
     @endif
   @endif
 

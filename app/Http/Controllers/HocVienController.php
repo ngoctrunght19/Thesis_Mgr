@@ -117,4 +117,12 @@ class HocVienController extends Controller
     return "Sửa thành công, chờ phê duyệt";
   }
 
+  public function rutdetai(Request $request) {
+    $madetai = $request->input('id');
+    $detai = DeTai::where('id', $madetai)->first();
+    $detai->thaydoi = 'rut';
+    $detai->save();
+    return "Rút thành công, chờ phê duyệt";
+  }
+
 }
