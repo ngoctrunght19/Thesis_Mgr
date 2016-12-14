@@ -19,6 +19,8 @@ use App\DeTai;
 use App\HocVien;
 use App\Helpers\Pagination;
 use App\Values\Value;
+use App\MoDangKy;
+use App\Canbokhoa;
 use URL;
 use PHPWord;
 
@@ -151,7 +153,31 @@ class KhoaController extends Controller
     }
 
     public function getMoDongDK() {
-        return view('khoa.modongdk');
+        $canbokhoa = Canbokhoa::where('mataikhoan', Auth::user()->id)->first();
+        $modangky = MoDangKy::where('makhoa', $canbokhoa->makhoa)->first();
+        $hanhdong = 'Đóng đăng ký';
+        if($modangky->trangthai == 'dong') {
+            $hanhdong = 'Mở đăng ký';
+        }
+        return view('khoa.modongdk')->with('hanhdong', $hanhdong);
+    }
+
+    public function postMoDongDK(Request $request) {
+        $canbokhoa = Canbokhoa::where('mataikhoan', Auth::user()->id)->first();
+        $modangky = MoDangKy::where('makhoa', $canbokhoa->makhoa)->first();
+        $hanhdong = 'Đóng đăng ký';
+        if($modangky->trangthai == 'dong') {
+            $modangky->trangthai = 'mo';
+            $modangky->save();
+            $hanhdong = 'Đóng đăng ký';
+        }
+        else {
+            $modangky->trangthai = 'dong';
+            $modangky->save();
+            $hanhdong = 'Mở đăng ký';
+        }
+
+        return $hanhdong;
     }
 
     public function getThongBao() {
