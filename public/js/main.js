@@ -114,6 +114,44 @@ $(document).ready(function(){
 	    }
 	});
 
+	//chấp nhận
+	$('#accept').click(function(event) {
+		var madetai = $(this).attr('madetai');
+		//console.log(madetai);
+		$.ajax({
+	        url : "detaikhoaluan/chapnhan", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+	             id : madetai
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            console.log(result);
+	            $("#de-tai").html(result);
+	            // $( "#list-khoahoc" ).html(result);
+	        }
+    	});
+	});
 
+	//từ chối
+	$('#reject').click(function(event) {
+		var madetai = $(this).attr('madetai');
+		//console.log(madetai);
+		$.ajax({
+	        url : "detaikhoaluan/tuchoi", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+	             id : madetai
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	            console.log(result);
+	            $("#de-tai").html(result);
+	            // $( "#list-khoahoc" ).html(result);
+	        }
+    	});
+	});
 
 });
