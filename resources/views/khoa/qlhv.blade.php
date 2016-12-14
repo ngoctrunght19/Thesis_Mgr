@@ -47,7 +47,7 @@
       <form class="form-horizontal" form id="type-student" method="post" action="qlhv/typestudent">
         {{ csrf_field() }}
         <div class="form-group">
-          <label class="control-label col-sm-3" for="mahv">Mã giảng viên:</label>
+          <label class="control-label col-sm-3" for="mahv">Mã học viên:</label>
           <div class="col-sm-9">          
             <input type="text" class="form-control" name="id" id="mahv" placeholder="Nhập mã học viên" required=""  oninvalid="this.setCustomValidity('Bạn chưa nhập mã học viên')" oninput="setCustomValidity('')">
           </div>
