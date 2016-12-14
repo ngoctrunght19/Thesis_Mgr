@@ -141,6 +141,11 @@ class KhoaController extends Controller
         return redirect()->route('khoa/congvan');
     }
 
+    public function getDeTai() {
+        $detai = DeTai::all();
+        return view('khoa.detai')->with('detai', $detai);
+    }
+
     public function loggedin() {
         return Auth::check() && Auth::user()->quyen == 'khoa';
     }
