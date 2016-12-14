@@ -145,6 +145,12 @@ class KhoaController extends Controller
 
     public function getDeTai() {
         $detai = DeTai::all();
+        foreach ($detai as $dt) {
+            $hocvien = HocVien::where('mahocvien',$dt->mahocvien)->first();
+            $dt->hocvien = $hocvien->hoten;
+            $giangvien = GiangVien::where('magiangvien',$dt->giangvienhuongdan)->first();
+            $dt->giangvien = $giangvien->hoten;
+        }
         return view('khoa.detai')->with('detai', $detai);
     }
 
