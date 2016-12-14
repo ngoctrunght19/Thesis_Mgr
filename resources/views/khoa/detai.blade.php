@@ -3,9 +3,9 @@
 @section('tab-view')
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#uploadStudent">Học viên</a></li>
-  <li><a data-toggle="tab" href="#typestudent">Quản lý</a></li>
-  <li><a data-toggle="tab" href="#student">Thống kê</a></li>
+  <li class="active"><a data-toggle="tab" href="#dudieukien">Học viên</a></li>
+  <li><a data-toggle="tab" href="#quanly">Quản lý</a></li>
+  <li><a data-toggle="tab" href="#thongke">Thống kê</a></li>
 </ul>
 
 <br />
@@ -62,6 +62,37 @@
       </form>
     </div>
   
+  </div>
+
+  <div id="quanly" class="tab-pane">
+    quanly
+  </div>
+
+  <div id="thongke" class="tab-pane">
+
+    <h2>Các đề tài đăng ký được chấp nhận</h2>
+    <button class="btn btn-primary">Xuất công văn đề nghị</button>
+    <div>
+      <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Tên đề tài</th>
+              <th>Học viên</th>
+              <th>Giảng viên hướng dẫn</th>
+          </tr>
+      </thead>
+      <tbody>
+      @foreach($detai as $dt)
+          <tr>
+              <td>{{ $dt->tendetai }}</td>
+              <td>{{ $dt->hocvien }}</td>
+              <td>{{ $dt->giangvien }}</td>
+          </tr>
+      @endforeach
+      </tbody>
+      
+
+      </table>
   </div>
 
 </div>
