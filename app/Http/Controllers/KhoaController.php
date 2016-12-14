@@ -167,6 +167,29 @@ class KhoaController extends Controller
         return redirect()->route('khoa/detai');
     }
 
+    public function exportSDT() {
+        $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
+                        ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
+                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                        ->where('detai.trangthai', 'chapnhan')
+                        ->where('detai.thaydoi', 'sua')->get();
+        $soLuongDeTai = $detai->count();
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/sua-detai-template.docx');
+
+        $templateProcessor->cloneRow('r1', $soLuongDeTai);
+
+        for ($i =0; $i < $soLuongDeTai; $i++){
+            $r1 = 'r1#'.($i+1);
+            $r2 = 'r2#'.($i+1);
+            $r3 = 'r3#'.($i+1);
+            $templateProcessor->setValue($r1, $detai[$i]->tendetai);
+            $templateProcessor->setValue($r2, $detai[$i]->hoten_hv);
+            $templateProcessor->setValue($r3, $detai[$i]->hoten_gv);
+        }
+        $templateProcessor->saveAs('downloads/sua-detai.docx');
+        return redirect()->route('khoa/detai');
+    }
+
     public function getDeTai() {
         // $detai = DeTai::where('trangthai', 'chapnhan')->get();
         $detai = DeTai::all();

@@ -79,28 +79,27 @@
         </a>
     <div>
       <table class="table table-striped">
-      <thead>
-          <tr>
-              <th>Tên đề tài</th>
-              <th>Học viên</th>
-              <th>Giảng viên hướng dẫn</th>
-          </tr>
-      </thead>
-      <tbody>
-      @foreach($detai as $dt)
-        @if($dt->trangthai == "chapnhan")
-          <tr>
-              <td>{{ $dt->tendetai }}</td>
-              <td>{{ $dt->hocvien }}</td>
-              <td>{{ $dt->giangvien }}</td>
-          </tr>
-        @endif
-      @endforeach
-      </tbody>
-
-
+          <thead>
+              <tr>
+                  <th>Tên đề tài</th>
+                  <th>Học viên</th>
+                  <th>Giảng viên hướng dẫn</th>
+              </tr>
+          </thead>
+          <tbody>
+          @foreach($detai as $dt)
+            @if($dt->trangthai == "chapnhan")
+              <tr>
+                  <td>{{ $dt->tendetai }}</td>
+                  <td>{{ $dt->hocvien }}</td>
+                  <td>{{ $dt->giangvien }}</td>
+              </tr>
+            @endif
+          @endforeach
+          </tbody>
       </table>
 
+      <br>
       <h2>Các đề tài xin rút</h2>
           <a href="{{ url('khoa/congvan/exportrdt') }}">
               <button class="btn btn-warning btn-md">Xuất công văn rút đề tài</button>
@@ -110,27 +109,55 @@
           </a>
       <div>
         <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Tên đề tài</th>
-                <th>Học viên</th>
-                <th>Giảng viên hướng dẫn</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($detai as $dt)
-        @if($dt->trangthai == "chapnhan" && $dt->thaydoi == "rut")
-          <tr>
-              <td>{{ $dt->tendetai }}</td>
-              <td>{{ $dt->hocvien }}</td>
-              <td>{{ $dt->giangvien }}</td>
-          </tr>
-        @endif
-        @endforeach
-        </tbody>
-
-
+            <thead>
+                <tr>
+                    <th>Tên đề tài</th>
+                    <th>Học viên</th>
+                    <th>Giảng viên hướng dẫn</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($detai as $dt)
+            @if($dt->trangthai == "chapnhan" && $dt->thaydoi == "rut")
+              <tr>
+                  <td>{{ $dt->tendetai }}</td>
+                  <td>{{ $dt->hocvien }}</td>
+                  <td>{{ $dt->giangvien }}</td>
+              </tr>
+            @endif
+            @endforeach
+            </tbody>
         </table>
+
+        <br>
+        <h2>Các đề tài xin sửa đổi</h2>
+            <a href="{{ url('khoa/congvan/exportsdt') }}">
+                <button class="btn btn-warning btn-md">Xuất công văn sửa đổi đề tài</button>
+            </a>
+            <a href="{{ url('downloads/sua-detai.docx') }}">
+                <button class="btn btn-primary btn-md">Tải công văn</button>
+            </a>
+        <div>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>Tên đề tài</th>
+                      <th>Học viên</th>
+                      <th>Giảng viên hướng dẫn</th>
+                  </tr>
+              </thead>
+              <tbody>
+              @foreach($detai as $dt)
+              @if($dt->trangthai == "chapnhan" && $dt->thaydoi == "sua")
+                <tr>
+                    <td>{{ $dt->tendetai }}</td>
+                    <td>{{ $dt->hocvien }}</td>
+                    <td>{{ $dt->giangvien }}</td>
+                </tr>
+              @endif
+              @endforeach
+              </tbody>
+          </table>
   </div>
 
 </div>

@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('khoa/congvan', [ 'as' => 'khoa/congvan', 'uses' => 'KhoaController@getCongVan']);
 		Route::get('khoa/congvan/exportdsdt', 'KhoaController@exportDSDT');
 		Route::get('khoa/congvan/exportrdt', 'KhoaController@exportRDT');
+		Route::get('khoa/congvan/exportsdt', 'KhoaController@exportSDT');
 		Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 		Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
 		Route::post('khoa/themnganh', 'KhoaController@themNganh');
