@@ -42,6 +42,16 @@ class GiangVienController extends Controller
 
   	public function getGiangVien() {
     	$giangvien = GiangVien::all();
+    foreach ($giangvien as $gv) {
+      $khoa = Khoa::where('makhoa', $gv->makhoa)->first();
+      $gv->khoa = $khoa->tenkhoa;
+      $chude = ChuDeNghienCuu::where('magiangvien', $gv->magiangvien)->get();
+      $gv->chude = $chude;
+      $linhvuc = LinhVuc::join('linhvuc_gv', 'linhvuc.id', '=', 'linhvuc_gv.malinhvuc')
+                          ->where('magiangvien', $gv->magiangvien)->get();
+      $gv->linhvuc = $linhvuc;
+
+    }
       return view('giangvien.giangvien')->with('giangvien', $giangvien);
   	}
 

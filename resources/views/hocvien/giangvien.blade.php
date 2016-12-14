@@ -20,10 +20,21 @@
 						    <tbody>
 						    @foreach ($giangvien as $gv)
 								<tr>
-									<td>{{ $gv->hoten }}</td>
-									<td>Khoa công nghệ thông tin</td>
-									<td>Phát triển ứng dụng web</td>
-									<td>web app</td>
+									<td><a href="#">{{ $gv->hoten }}</a></td>
+									<td>
+										<div>Khoa {{ $gv->khoa }}</div>
+										<div>{{ $gv->donvi }}</div>
+									</td>
+									<td>
+										@foreach ($gv->linhvuc as $linhvuc)
+										<div>{{ $linhvuc->tenlinhvuc }}</div>
+										@endforeach
+									</td>
+									<td>
+										@foreach ($gv->chude as $chude)
+										<div>{{ $chude->tenchude }}</div>
+										@endforeach
+									</td>
 								</tr>
 							@endforeach
 							</tbody>
