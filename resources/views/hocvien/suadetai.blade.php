@@ -13,7 +13,7 @@
       <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
        Bạn chưa đăng ký đề tài
     </div>
-  @else @if($detai->thaydoi == 'sua' || $detai->thaydoi == 'rut')
+  @else @if($detai->thaydoi == 'dangsua' || $detai->thaydoi == 'rut' || $detai->thaydoi == 'sua')
     <div class="alert bg-warning" role="alert">
       <svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Thay đổi thành công, đang chờ phê duyệt
     </div>

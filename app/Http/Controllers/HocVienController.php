@@ -109,14 +109,14 @@ class HocVienController extends Controller
     $mahocvien = HocVien::where('mataikhoan', Auth::user()->id)
                         ->pluck('mahocvien')
                         ->first();
+    $detai = DeTai::where('mahocvien', $mahocvien)->first();
+    $detai->thaydoi = 'dangsua';
+    $detai->save();
     DeTai::insert(['tendetai' => $tendetai,
                     'mahocvien' => $mahocvien,
                     'giangvienhuongdan' => $giangvien,
                     'trangthai' => 'cho',
                     'thaydoi' => 'sua']);
-    $detai = DeTai::where('mahocvien', $mahocvien)->first();
-    $detai->thaydoi = 'sua';
-    $detai->save();
     return "Sửa thành công, chờ phê duyệt";
   }
 
