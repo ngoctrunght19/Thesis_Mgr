@@ -193,20 +193,37 @@ $(document).ready(function(){
 	});
 
 	//thêm thông báo
-	$('#rut-de-tai').click(function() {
-		var madetai = $(this).attr('madetai');
-		console.log(madetai);
+	$('#dang-thong-bao').click(function() {
+		var thongbao = $('textarea#thongbao').val();
+		//console.log(thongbao);
 		$.ajax({
-	        url : "rutdetai", // gửi ajax đến url
+	        url : "themthongbao", // gửi ajax đến url
 	        type : "post", // chọn phương thức gửi là post
 	        dateType:"text", // dữ liệu trả về dạng text
 	        data : { // Danh sách các thuộc tính sẽ gửi đi
-				id: madetai
+				thongbao: thongbao
 	        },
 	        success : function (result){
 	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
-	            var html = "<h3>" + result + "</h3>";
-	      		$('#detai-result').html(html);
+	      		$('#thongbao-result').html(result);
+	        }
+    	});
+	});
+
+	//xoa thông báo
+	$('body').on('click', '.xoathongbao', function () {
+		var mathongbao = $(this).attr('mathongbao');
+		console.log(mathongbao);
+		$.ajax({
+	        url : "xoathongbao", // gửi ajax đến url
+	        type : "post", // chọn phương thức gửi là post
+	        dateType:"text", // dữ liệu trả về dạng text
+	        data : { // Danh sách các thuộc tính sẽ gửi đi
+				mathongbao: mathongbao
+	        },
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	      		$('#thongbao-result').html(result);
 	        }
     	});
 	});

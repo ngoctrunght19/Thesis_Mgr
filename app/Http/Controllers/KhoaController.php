@@ -240,7 +240,18 @@ class KhoaController extends Controller
         return view('khoa.thongbao')->with('thongbao', $thongbao);
     }
 
-    public function themThongBao() {
+    public function themThongBao(Request $request) {
+        $canbokhoa = Canbokhoa::where('mataikhoan', Auth::user()->id)->first();
+        $tenthongbao = $request->input('thongbao');
+        ThongBao::insert(['thongbao' => $tenthongbao, 'makhoa' => $canbokhoa->makhoa]);
+        $thongbao = ThongBao::all();
+        return view('khoa.danhsachthongbao')->with('thongbao', $thongbao);
+    }
 
+    public function xoaThongBao(Request $request) {
+        $mathongbao = $request->input('mathongbao');
+        ThongBao::where('id', $mathongbao)->delete();
+        $thongbao = ThongBao::all();
+        return view('khoa.danhsachthongbao')->with('thongbao', $thongbao);
     }
 }

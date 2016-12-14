@@ -7,7 +7,7 @@
 		<tr>
 			<td class="col-md-10 col-sm-9 col-xs-8 chu">{{ $t->thongbao }}</td>
 			<td>
-				<button mathongbao="{{ $t->id }}" id="xoa-thong-bao" class="xoachude btn btn-danger">Xóa thông báo</button>
+				<button mathongbao="{{ $t->id }}" class="xoathongbao btn btn-danger">Xóa thông báo</button>
 			</td>
 		</tr>
 		@endforeach

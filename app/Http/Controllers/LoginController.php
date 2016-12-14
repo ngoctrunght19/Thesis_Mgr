@@ -15,7 +15,7 @@ use App\KhoaHoc;
 use App\ChuDeNghienCuu;
 use App\GiangVien;
 use App\Canbokhoa;
-use App\Models\ThongBao;
+use App\ThongBao;
 
 class LoginController extends Controller
 {
@@ -40,7 +40,7 @@ class LoginController extends Controller
             }
         }
         else {
-            $thongbao = ThongBao::join('khoa', 'thongbao.id', '=', 'khoa.makhoa')
+            $thongbao = ThongBao::join('khoa', 'thongbao.makhoa', '=', 'khoa.makhoa')
                                 ->get();
             return view('login')->with('thongbao', $thongbao);
         }

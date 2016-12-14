@@ -9,9 +9,9 @@
     <div class="container container-login">
     <div class="row">
         <div class="col-sm-8">
-            <h4>Thông báo:</h4>
+            <h3>Thông báo:</h3>
             @foreach($thongbao as $t)
-                <h5>{{$t->tenkhoa}} :</h5>
+                <h5>Khoa {{$t->tenkhoa}} :</h5>
                 <p>{{$t->thongbao}}</p>
             @endforeach
         </div>
