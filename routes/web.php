@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('hocvien/detaikhoaluan', [ 'as' => 'hocvien/detaikhoaluan', 'uses' => 'HocVienController@getDeTaiKhoaLuan']);
 		Route::get('hocvien/suadetai', 'HocVienController@getSuaDeTai');
 		Route::post('hocvien/dangkydetai', 'HocVienController@dangkydetai');
+		Route::post('hocvien/suadetai', 'HocVienController@suadetai');
 
 	});
 

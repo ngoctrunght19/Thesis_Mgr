@@ -102,4 +102,19 @@ class HocVienController extends Controller
                                   ->with('detai', $detai);
   }
 
+  public function suadetai(Request $request) {
+    $tendetai = $request->input('tendetai');
+    $giangvien = $request->input('giangvien');
+    $motadetai = $request->input('motadetai');
+    $mahocvien = HocVien::where('mataikhoan', Auth::user()->id)
+                        ->pluck('mahocvien')
+                        ->first();
+    DeTai::insert(['tendetai' => $tendetai,
+                    'mahocvien' => $mahocvien,
+                    'giangvienhuongdan' => $giangvien,
+                    'trangthai' => 'cho',
+                    'thaydoi' => 'sua']);
+    return "Sửa thành công, chờ phê duyệt";
+  }
+
 }
