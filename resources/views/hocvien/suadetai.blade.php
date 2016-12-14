@@ -8,7 +8,7 @@
     <div class="alert bg-danger" role="alert">
           <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đang trong đợt đăng ký đề tài, bạn chưa được rút hoặc sửa đề tài
     </div>
-  @else @if($detai == null)
+  @else @if($detai == null || $detai->trangthai == 'cho')
     <div class="alert bg-danger" role="alert">
       <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
        Bạn chưa đăng ký đề tài
@@ -17,7 +17,7 @@
     <div class="alert bg-warning" role="alert">
       <svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Thay đổi thành công, đang chờ phê duyệt
     </div>
-  @else
+  @else 
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#rutdangky">Rút đăng ký</a></li>
       <li><a data-toggle="tab" href="#suadetai">Sửa đề tài</a></li>

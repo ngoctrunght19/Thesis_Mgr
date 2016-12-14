@@ -114,6 +114,9 @@ class HocVienController extends Controller
                     'giangvienhuongdan' => $giangvien,
                     'trangthai' => 'cho',
                     'thaydoi' => 'sua']);
+    $detai = DeTai::where('mahocvien', $mahocvien)->first();
+    $detai->thaydoi = 'sua';
+    $detai->save();
     return "Sửa thành công, chờ phê duyệt";
   }
 
