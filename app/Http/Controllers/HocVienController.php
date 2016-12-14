@@ -52,7 +52,8 @@ class HocVienController extends Controller
   	$khoa = Khoa::all();
     $giangvien = GiangVien::all();
     $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
-    $detai = DeTai::where('mahocvien', $student->mahocvien)->first();
+    $detai = DeTai::join('giangvien', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                  ->where('mahocvien', $student->mahocvien)->first();
     return view('hocvien.detaikhoaluan')->with('khoa', $khoa)
                                         ->with('student', $student)
                                         ->with('giangvien', $giangvien)

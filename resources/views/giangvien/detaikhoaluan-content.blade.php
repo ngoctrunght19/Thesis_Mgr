@@ -8,7 +8,7 @@
 
 <div class="tab-content">
   <div id="pendingApproval" class="tab-pane active">
-    <table class="table">
+    <table class="table table-striped">
     	<thead>
     		<th>Mã học viên</th>
     		<th>Họ và tên</th>
@@ -34,7 +34,7 @@
   </div>
 
   <div id="accepted" class="tab-pane">
-    <table class="table">
+    <table class="table table-striped">
     	<thead>
     		<th>Mã học viên</th>
     		<th>Họ và tên</th>
