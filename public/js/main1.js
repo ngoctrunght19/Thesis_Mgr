@@ -137,15 +137,23 @@ $(document).on('click', '#danhsachgiangvien .pagination li:not(.active):not(.dis
 });
 
 $(document).on('click', '.xoachude',function(){
-	var url = $(this).attr('machude');
+	var machude = $(this).attr('machude');
+	var grandparent = $(this).parent().parent();
 	
 	$.ajax({
-        url : chudenghiencuu/xoachude,
+        url : 'chudenghiencuu/xoachude',
         type : "post", 
         dateType:"text", 
-        success : function(result) {
+        data : { // Danh sách các thuộc tính sẽ gửi đi
+             machude : machude
+        },
+        success : $.proxy(function(result) {
+			grandparent.remove();
+		}, grandparent),
+		
+		error : function(result) {
         //	if (result != 'OK')
-        	alert(result);
+        	$('#form-chude .error').html(result);
 		}
 	});
 });

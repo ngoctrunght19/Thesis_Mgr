@@ -152,34 +152,17 @@ class GiangVienController extends Controller
         echo $result;
     }
 
-    public function xoaschude(Request $request) {
-        $chude = $request->chude;
-        $result = "";
-        if ($chude == null || trim($chude) == "") {
-           $result = 'Không có chủ đề';
-           echo $result;
-           return;
-        }
-
-        $chude = trim($chude);
-        $magiangvien = Auth::user()->username;
-        $query = ChuDeNghienCuu::where([['tenchude', $chude],['magiangvien', $magiangvien]])->first();
-        if ($query != null) {
-            $result = 'Đề tài đã bị trùng';
-            echo $result;
-            return;
-        }
-        $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
+    public function xoachude(Request $request) {
+         $machude = $request->machude;
+         $magiangvien = Auth::user()->username;
         
-        if (!$success) {
-            $result = 'Không thê thêm chủ đề'; 
-        }
-        else {
-            $result = 'ok';
-            // lấy mã chủ đề
-            $chude = ChuDeNghienCuu::where('tenchude', $chude)->first();
-            $result .= '-' . $chude->id;
-        }
-        echo $result;
+        try {
+            $chude = ChuDeNghienCuu::where([['id', $machude],['magiangvien', $magiangvien]])->first();
+            $chude->delete();
+      
+         } catch(Exception $e) {
+            echo $e->getMessage();
+         }
+
     }
 }
