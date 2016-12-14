@@ -18,6 +18,7 @@ use App\GiangVien;
 use App\HocVien;
 use App\DeTai;
 use App\Models\Donvi;
+use App\MoDangKy;
 
 class HocVienController extends Controller
 {
@@ -59,12 +60,15 @@ class HocVienController extends Controller
     							->with('cdnc', $cdnc);
   }
   public function getDeTaiKhoaLuan() {
+
   	$khoa = Khoa::all();
     $giangvien = GiangVien::all();
     $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
     $detai = DeTai::join('giangvien', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
                   ->where('mahocvien', $student->mahocvien)->first();
-    return view('hocvien.detaikhoaluan')->with('khoa', $khoa)
+    $modangky = MoDangKy::where('makhoa', $student->makhoa)->first();
+    return view('hocvien.detaikhoaluan')->with('modangky', $modangky)
+                                        ->with('khoa', $khoa)
                                         ->with('student', $student)
                                         ->with('giangvien', $giangvien)
                                         ->with('detai', $detai);
@@ -85,17 +89,17 @@ class HocVienController extends Controller
   }
 
   public function getSuaDeTai() {
-    $modangky = false;
     $khoa = Khoa::all();
     $giangvien = GiangVien::all();
     $student = HocVien::where('mataikhoan', Auth::user()->id)->first();
     $detai = DeTai::join('giangvien', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
                   ->where('mahocvien', $student->mahocvien)->first();
+    $modangky = MoDangKy::where('makhoa', $student->makhoa)->first();
     return view('hocvien.suadetai')->with('modangky', $modangky)
-                                        ->with('khoa', $khoa)
-                                        ->with('student', $student)
-                                        ->with('giangvien', $giangvien)
-                                        ->with('detai', $detai);
+                                  ->with('khoa', $khoa)
+                                  ->with('student', $student)
+                                  ->with('giangvien', $giangvien)
+                                  ->with('detai', $detai);
   }
 
 }

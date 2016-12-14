@@ -3,9 +3,16 @@
 @section('tab-view')
 
 <div id="detai-result">
-  @if($modangky == true)
+
+  @if($detai == null)
+    <div class="alert bg-danger" role="alert">
+      <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+       Bạn chưa đăng ký đề tài
+    </div>
+  @else @if($modangky->trangthai == 'mo')
     <div class="alert bg-danger" role="alert">
           <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Đang trong đợt đăng ký đề tài, bạn chưa được rút hoặc sửa đề tài
+    </div>
   @else
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#rutdangky">Rút đăng ký</a></li>
@@ -77,7 +84,9 @@
 
     </div>
 
+    @endif
   @endif
+
 </div>
 
   

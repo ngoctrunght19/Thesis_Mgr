@@ -3,9 +3,17 @@
 @section('tab-view')
 
 <div id="detai-result">
-@if($student->duocdangky == false)
+@if($modangky->trangthai == 'dong')
+  <div class="alert bg-danger" role="alert">
+    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+     Chưa mở đợt đăng ký đề tài
+  </div>
+@else @if($student->duocdangky == false)
   
-  <h3>Bạn chưa đủ điều kiện được phép đăng ký</h3>
+  <div class="alert bg-danger" role="alert">
+    <svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>
+     Bạn chưa đủ điều kiện đăng ký đề tài
+  </div>
 
 @else @if($detai == null)
 
@@ -57,8 +65,8 @@
         </div>
   @else 
     <div class="alert bg-success" role="alert">
-          <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> Đề tài của bạn được chấp nhận
-        </div>
+      <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> Đề tài của bạn được chấp nhận
+    </div>
     <div class="row">
           <div class="col-sm-2">
             <label class="detail-label">Tên đề tài: </label>
@@ -77,7 +85,7 @@
         </div>
     @endif
   @endif
-
+@endif
 @endif
 </div>
 
