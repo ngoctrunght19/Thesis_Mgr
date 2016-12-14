@@ -5,7 +5,7 @@
 <div id="detai-result">
 @if($student->duocdangky == false)
   
-  <h3>Bạn chưa đủ tuổi được phép đăng ký</h3>
+  <h3>Bạn chưa đủ điều kiện được phép đăng ký</h3>
 
 @else @if($detai == null)
 
@@ -28,12 +28,6 @@
         </select>
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-3" for="motadetai">Mô tả đề tài:</label>
-      <div class="col-sm-8">
-        <textarea class="form-control" rows="4" id="motadetai" name="motadetai"></textarea>
-      </div>
-    </div>
     <div class="form-group">        
       <div class="col-sm-offset-3 col-sm-9">
         <button type="submit" class="btn btn-primary">Đăng ký</button>
@@ -42,7 +36,45 @@
   </form>
 
   @else @if($detai->trangthai == 'cho')
-    <h3>Đang chờ phê duyệt</h3>
+        <div class="alert bg-warning" role="alert">
+          <svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Đang chờ giảng viên phê duyệt
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label class="detail-label">Tên đề tài: </label>
+          </div>
+          <div class="col-sm-10">
+            <p class="detail-text">{{ $detai->tendetai }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label class="detail-label">Tên giảng viên: </label>
+          </div>
+          <div class="col-sm-10">
+            <p class="detail-text">{{ $detai->hoten }}</p>
+          </div>
+        </div>
+  @else 
+    <div class="alert bg-success" role="alert">
+          <svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> Đề tài của bạn được chấp nhận
+        </div>
+    <div class="row">
+          <div class="col-sm-2">
+            <label class="detail-label">Tên đề tài: </label>
+          </div>
+          <div class="col-sm-10">
+            <p class="detail-text">{{ $detai->tendetai }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <label class="detail-label">Tên giảng viên: </label>
+          </div>
+          <div class="col-sm-10">
+            <p class="detail-text">{{ $detai->hoten }}</p>
+          </div>
+        </div>
     @endif
   @endif
 
