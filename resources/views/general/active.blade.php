@@ -9,8 +9,8 @@
     
     <div class="center">
         <div class="box-login">
-            <div class="title-login">Xin chào </div>
-            <div class="title-login">Đặt mật khẩu để kích hoạt tài khoản</div>
+            <div class="title-login">Hãy đặt mật khẩu để kích hoạt</div>
+            <div class="title-login">tài khoản với tên đăng nhập {{ $tendangnhap }}</div>
             <form id="active" class="login" method="POST" action="" onsubmit="return validateActive()">
                 <div class="form-group">
                     <label for="pwd">Mật khẩu:</label>
@@ -24,7 +24,8 @@
                 </div>
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-block btn-success">Xác nhận</button>
+                <button type="submit" id="submit" class="btn btn-block btn-success">Xác nhận</button>
+                <a href="{{ URL::to('/') }}" id="redirect" class="btn btn-block btn-success hidden">Kích để chuyển tới trang đăng nhập</a>
             </form>
         </div>
         

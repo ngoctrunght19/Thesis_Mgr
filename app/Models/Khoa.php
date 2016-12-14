@@ -10,6 +10,7 @@ use Session;
 use Mail;
 use App\Models\Donvi;
 use App\HocVien;
+use URL;
 
 class Khoa extends Model
 {
@@ -23,24 +24,27 @@ class Khoa extends Model
 
         // đếm số giảng viên đã thêm thành công
         $count = 0;
+        try{
+            for ($row = 1; $row <= $nRows; ++$row) {
+            	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
+                $hoten = $objWorksheet->getCell("B" . $row)->getValue();
+                $email = $objWorksheet->getCell("C" . $row)->getValue();
+                $donvi = $objWorksheet->getCell("D" . $row)->getValue();
 
-        for ($row = 1; $row <= $nRows; ++$row) {
-        	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
-            $hoten = $objWorksheet->getCell("B" . $row)->getValue();
-            $email = $objWorksheet->getCell("C" . $row)->getValue();
-            $donvi = $objWorksheet->getCell("D" . $row)->getValue();
+                $makhoa = Session::get('makhoa');
 
-            $makhoa = Session::get('makhoa');
-
-            $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
+                $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
+                
+                if ($success) {
+                    $query = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
+                    $token = $query->password;
+                    Khoa::sendEmailToActive($email, $magiangvien, $hoten, $token);
+                    $count++;
+                }
+    		}
+        } catch (Exception $e) {
             
-            if ($success) {
-                $query = Taikhoan::select('password')->where('username','=',$magiangvien)->first();
-                $token = $query->password;
-                Khoa::sendEmailToLecturer($email, $magiangvien, $hoten, $token);
-                $count++;
-            }
-		}
+        }
 
         $objPHPExcel->disconnectWorksheets();
         unset($objPHPExcel);
@@ -77,17 +81,18 @@ class Khoa extends Model
         return true;
     }
 
-    public static function sendEmailToLecturer($email, $id, $hoten, $token) {
+    public static function sendEmailToActive($email, $id, $hoten, $token) {
     	
-        $url = self::$domain.$id.'&token='.$token;
-		$data = array('url'=>$url, 'email'=>$email, 'hoten' => $hoten);
+        $preurl = URL::to('/');
+        $url = $preurl.'/active?username='.$id.'&token='.$token;
+		$data = array('url'=>$url, 'email'=>$email, 'hoten' => $hoten, 'tendangnhap'=>$id);
 	 	try {
-            Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
+            Mail::send('mails.activeAccount', $data, function($message) use ($data)
             {
                 $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
             });
         } catch(Exception $e) {
-
+            echo $e;
         }
 
         return(count(Mail::failures()) == 0 );
@@ -118,7 +123,7 @@ class Khoa extends Model
             if ($success) {
                 $query = Taikhoan::select('password')->where('username','=',$mahocvien)->first();
                 $token = $query->password;
-                Khoa::sendEmailToStudent($email, $mahocvien, $hoten, $token);
+                Khoa::sendEmailToActive($email, $mahocvien, $hoten, $token);
                 $count++;
             }
         }
@@ -135,9 +140,12 @@ class Khoa extends Model
         //    $password = str_random(8);
         $password = \Hash::make('hello');
         $account = ['username'=>$mahocvien, 'password'=>$password, 'quyen'=>'hocvien'];
+
         try {
             Taikhoan::insert($account);
+            
         } catch(Exception $e) {
+        //    echo $e->getMessage();
             return false;
         }
     
@@ -147,12 +155,15 @@ class Khoa extends Model
         else {
             return false;
         }
+
         $makhoa = Session::get('makhoa');
         $data = ['mahocvien'=>$mahocvien, 'hoten'=>$hoten, 'email'=>$email, 'makhoa'=>$makhoa, 
                 'mataikhoan'=>$account_id, 'khoahoc'=>$khoahoc, 'nganhhoc'=>$chuongtrinhdaotao];
         try {
             Hocvien::insert($data);
+
         } catch(Exception $e) {
+            echo $e->getMessage();
             return false;
         }
 

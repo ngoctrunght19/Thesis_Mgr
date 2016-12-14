@@ -156,7 +156,8 @@ class Controller1 extends Controller
         if ($success) {
             $query = Taikhoan::select('password')->where('username','=',$id)->first();
             $token = $query->password;
-            $success = Khoa::sendEmailToLecturer($email, $id, $name, $token);
+            $success = Khoa::sendEmailToActive($email, $id, $name, $token);
+            echo $success;
             echo 'Đã thêm học viên';
         }
         else {
@@ -243,12 +244,16 @@ class Controller1 extends Controller
     {
         $token = $request->get('token');
         $username = $request->get('username');
+    //    var_dump(Taikhoan::where('password', '=', $token)->first());
+
+
         if (Taikhoan::where([['password', '=', $token],
                              ['username', '=', $username],
                              ['actived', '=', 0]])
                             ->first() == null)
             return view('errors.404');
-        return view('general.active');
+        return view('general.active')
+                    ->with('tendangnhap', $username);
     }
 
     public function active(Request $request)
@@ -260,10 +265,10 @@ class Controller1 extends Controller
             echo 'error';
             return;
         }
-   
+        
         $actived = Taikhoan::active($username, $token, $password);
         if ($actived) {
-            echo 'Đã kích hoạt thành công';
+            echo 'ok';
         }
         else {
             echo 'Không thể kích hoạt tài khoản của bạn';

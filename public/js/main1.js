@@ -58,8 +58,21 @@ $(document).ready(function(){
 	});
 
 	$('#active').ajaxForm({
-	    success: function(xhr) {
-			$('#rp-error').html(xhr.responseText);
+	    complete: function(xhr) {
+	   		var response = xhr.responseText;
+	   		console.log(response);
+	    	if (response == "ok") {
+	    		$('#rp-error').html("Bạn đã kích hoạt tài khoản thành công !!!");
+	    		$('#active input').prop('disabled', true);
+	    		
+	    		$('#active #submit').addClass('hidden');
+
+	    		$('#active #redirect').removeClass('hidden');
+	   
+	    	}
+			else {
+				$('#rp-error').html(xhr.responseText);
+			}
 	    }
 	});
 
@@ -87,7 +100,6 @@ $(document).ready(function(){
 	});
 
 	$('#goto-themchude').click(function() {
-		console.log('thllo');
 		$('#form-chude #chude').focus();
 	});
 
