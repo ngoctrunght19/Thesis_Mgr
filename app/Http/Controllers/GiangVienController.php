@@ -19,6 +19,7 @@ use App\HocVien;
 use App\DeTai;
 use App\Models\Donvi;
 
+
 class GiangVienController extends Controller
 {
   	public function show() {
@@ -35,7 +36,7 @@ class GiangVienController extends Controller
 
   	public function getDonVi() {
     	$khoa = Khoa::all();
-      $donvi = Donvi::all();
+        $donvi = Donvi::all();
     	return view('giangvien.donvi')->with('khoa', $khoa)
                                     ->with('donvi', $donvi);
   	}
@@ -139,9 +140,9 @@ class GiangVienController extends Controller
             return;
         }
         $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
-        
+
         if (!$success) {
-            $result = 'Không thê thêm chủ đề'; 
+            $result = 'Không thê thêm chủ đề';
         }
         else {
             $result = 'ok';
@@ -155,11 +156,11 @@ class GiangVienController extends Controller
     public function xoachude(Request $request) {
          $machude = $request->machude;
          $magiangvien = Auth::user()->username;
-        
+
         try {
             $chude = ChuDeNghienCuu::where([['id', $machude],['magiangvien', $magiangvien]])->first();
             $chude->delete();
-      
+
          } catch(Exception $e) {
             echo $e->getMessage();
          }

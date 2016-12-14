@@ -10,6 +10,10 @@
     <div class="row">
         <div class="col-sm-8">
             <h4>Thông báo:</h4>
+            @foreach($thongbao as $t)
+                <h5>{{$t->tenkhoa}} :</h5>
+                <p>{{$t->thongbao}}</p>
+            @endforeach
         </div>
 
         <div class="col-sm-4">
@@ -29,7 +33,7 @@
                     <button type="submit" class="btn btn-block btn-success">Đăng nhập</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
     </div>
