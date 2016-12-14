@@ -3,7 +3,14 @@
 @section('tab-view')
 
 <div id="chudenghiencuu">
+
 	<h3>Các chủ đề nghiên cứu</h3>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-10">
+			<button id="goto-themchude" class="btn btn-primary">thêm chủ đề</button>
+		</div>
+	</div>
 
 	<div id="pendingApproval" class="tab-pane active">
 	    <table class="table" id="bangchude">
@@ -13,10 +20,10 @@
 	    	<tbody>
 	    		@foreach($chudenghiencuu as $c)
 	    		<tr>
-	    			<td class="col-md-10">{{ $c->tenchude }}</td>
+	    			<td class="col-md-10 col-sm-9 col-xs-8 chu">{{ $c->tenchude }}</td>
 	    			<td>
-	    				<button machude="{{ $c->id }}" id="accept" class="btn btn-primary">Sửa</button>
-	    				<button machude="{{ $c->id }}" id="reject" class="btn btn-danger">Xóa chủ đề</button>
+	    				<button machude="{{ $c->id }}" class="suachude btn btn-primary">Sửa</button>
+	    				<button machude="{{ $c->id }}" class="xoachude btn btn-danger">Xóa chủ đề</button>
 	    			</td>
 	    		</tr>
 	    		@endforeach
@@ -45,10 +52,8 @@
 		    <div class="error"></div>
 		</form>
 
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAddGroup">Thêm chủ đề</button>
 
-		<!-- Modal -->
-		<!-- Modal Add Group -->
+		<!-- Sửa chủ đề -->
 		<div class="modal fade" id="modalAddGroup" role="dialog">
 		    <div class="modal-dialog modal-lg">
 		    	<div class="modal-content">
@@ -57,7 +62,8 @@
 			        	<h2 class="modal-title">Thêm chủ đề</h2>
 			        </div>
 			        <div class="modal-body">
-			        	<form class="form" id="addGroup" method="post" action="">
+			        	<form id="form-chude" class="form-horizontal" method="post" action="chudenghiencuu/themchude" enctype="multipart/form-data">
+		  					{{ csrf_field() }}
 			        		<div class="">
 								<label class="detail-label">Chủ đề: </label>
 							</div>
@@ -69,7 +75,7 @@
 						</form>
 			        </div>
 		        	<div class="modal-footer">
-		        		<button type="button" class="btn btn-primary">Thêm chủ đề</button>
+		        		<button type="button" id="themchude" class="btn btn-primary">Thêm chủ đề</button>
 		        		<button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
 		        	</div>
 		    	</div>

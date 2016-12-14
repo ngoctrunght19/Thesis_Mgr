@@ -123,17 +123,29 @@ class GiangVienController extends Controller
 
     public function themchude(Request $request) {
         $chude = $request->chude;
-        if ($chude == null || trim($chude) == "")
-           echo 'Không có chủ đề';
+        if ($chude == null || trim($chude) == "") {
+           $result['message'] = 'Không có chủ đề';
+           echo json_encode($result);
+           return;
+        }
 
         $chude = trim($chude);
         $magiangvien = Auth::user()->username;
+        $query = ChuDeNghienCuu::where([['tenchude', $chude],['magiangvien', $magiangvien]])->first();
+        if ($query != null) {
+            $result['message'] = 'Đề tài đã bị trùng';
+            echo json_encode($result);
+            return;
+        }
         $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
+        
+        $js_array = json_encode(CreateTree::$list);
         if (!$success) {
-            echo 'Không thê thêm chủ đề'; 
+            $result['message'] = 'Không thê thêm chủ đề'; 
         }
         else {
-            echo 'ok';
+            $result['message'] = 'ok';
+            $machude = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
         }
     }
 }

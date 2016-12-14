@@ -86,20 +86,31 @@ $(document).ready(function(){
 		$('#form-chude').addClass('disabled')
 	});
 
+	$('#goto-themchude').click(function() {
+		console.log('thllo');
+		$('#form-chude #chude').focus();
+	});
+
+
 	$('#form-chude').ajaxForm({
 	    complete: function(xhr) {
 	    	$('#form-chude').removeClass('disabled')
-	      	var error = xhr.responseText;
+	    //	var data = $.parseJSON(result);
+	    //	console.log(data);
+	      	var responseText = xhr.responseText;
+	      	console.log(responseText);
+	      	var message = responseText['message'];
+	      	console.log(message);
 	      
 	      	// nếu có lỗi thì in thông báo lỗi và thoát
-	      	if (error != 'ok') {
+	      	if (responseText != 'ok') {
 	      		$('#form-chude .error').html(responseText);
 	      		return;
 	      	}
 	      	
 	      	var chude = $('#form-chude #chude').val();
 
-	      	var chudemoi = "<tr><td class=\"col-md-10\">"+ chude +"</td><td><button machude=\"helo\" id=\"accept\" class=\"btn btn-primary\">Sửa</button><button machude=\"\" id=\"reject\" class=\"btn btn-danger\">Xóa chủ đề</button></td></tr>";
+	      	var chudemoi = "<tr><td class=\"col-md-10 col-sm-9 col-xs-8 chude\">"+ chude +"</td><td><button machude=\"helo\" id=\"accept\" class=\"btn btn-primary\">Sửa</button><button machude=\"\" id=\"reject\" class=\"btn btn-danger\">Xóa chủ đề</button></td></tr>";
 	      	$('#bangchude tbody').append(chudemoi);
 	    	var url      = window.location.href;
 	      	$( "#bangchude" ).load( url + " #bangchude" );
