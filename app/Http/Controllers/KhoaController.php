@@ -144,7 +144,7 @@ class KhoaController extends Controller
     }
 
     public function getDeTai() {
-        $detai = DeTai::all();
+        $detai = DeTai::where('trangthai', 'chapnhan')->get();
         foreach ($detai as $dt) {
             $hocvien = HocVien::where('mahocvien',$dt->mahocvien)->first();
             $dt->hocvien = $hocvien->hoten;
