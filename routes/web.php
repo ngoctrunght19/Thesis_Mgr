@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// ADMIN
 	Route::group(['middleware' => 'isAdmin'], function () {
 		Route::get('admin', [ 'as' => 'admin', 'uses' => 'AdminController@show']);
+		Route::get('admin/linhvuc', [ 'as' => 'admin/linhvuc', 'uses' => 'AdminController@getLinhVuc']);
 	});
 
 	// KHOA
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 		Route::get('khoa/qlhv', 'KhoaController@getQLHV');
 		Route::get('khoa/detai', 'KhoaController@getDeTai');
+		Route::get('khoa/modongdk', 'KhoaController@getMoDongDK');
+		Route::get('khoa/thongbao', 'KhoaController@getThongBao');
 		Route::get('addGV', 'KhoaController@addGV');
 		Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 		Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');

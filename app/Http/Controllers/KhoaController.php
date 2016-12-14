@@ -123,4 +123,12 @@ class KhoaController extends Controller
     public function loggedin() {
         return Auth::check() && Auth::user()->quyen == 'khoa';
     }
+
+    public function getMoDongDK() {
+        return view('khoa.modongdk');
+    }
+
+    public function getThongBao() {
+        return view('khoa.thongbao');
+    }
 }

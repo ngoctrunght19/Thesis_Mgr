@@ -16,4 +16,8 @@ class AdminController extends Controller
     return view('admin');
   }
 
+  public function getLinhVuc() {
+  	return view('admin.linhvuc');
+  }
+
 }

@@ -9,11 +9,6 @@
 @section('body')
 <div>
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-        <form role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-        </form>
         <ul class="nav menu">
             <li class="parent ">
       				<a href="{{ url('khoa/khoahoc') }}">
@@ -42,6 +37,18 @@
                 <a href="{{ url('khoa/detai') }}">
                     <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
                      Đề tài
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('khoa/modongdk') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                     Mở đóng đăng ký
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('khoa/thongbao') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                     Thông báo
                 </a>
             </li>
         </ul>
