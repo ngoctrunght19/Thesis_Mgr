@@ -20,6 +20,7 @@ use App\HocVien;
 use App\Helpers\Pagination;
 use App\Values\Value;
 use URL;
+use PHPWord;
 
 class KhoaController extends Controller
 {
@@ -115,9 +116,34 @@ class KhoaController extends Controller
                                 ->with('pagination', $pagination);
     }
 
-    public function getDeTai() {
-        $detai = DeTai::all();
-        return view('khoa.detai')->with('detai', $detai);
+    public function getCongVan() {
+        return view('khoa.congvan');
+    }
+
+    public function exportCongVan() {
+        $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
+                        ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
+                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')->get();
+        $soLuongDeTai = $detai->count();
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/cong-van-template.docx');
+
+        $templateProcessor->cloneRow('r1', $soLuongDeTai);
+
+        for ($i =0; $i < $soLuongDeTai; $i++){
+            $r1 = 'r1#'.($i+1);
+            $r2 = 'r2#'.($i+1);
+            $r3 = 'r3#'.($i+1);
+            $templateProcessor->setValue($r1, $detai[$i]->tendetai);
+            $templateProcessor->setValue($r2, $detai[$i]->hoten_hv);
+            $templateProcessor->setValue($r3, $detai[$i]->hoten_gv);
+        }
+        // $templateProcessor->setValue('r1#2', $detai[1]->tendetai);
+        // $templateProcessor->setValue($r2, $detai[1]->mahocvien);
+        // $templateProcessor->setValue($r3, $detai[1]->giangvienhuongdan);
+        $templateProcessor->saveAs('downloads/cong-van.docx');
+
+
+        return redirect()->route('khoa/congvan');
     }
 
     public function loggedin() {

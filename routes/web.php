@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('khoa/modongdk', 'KhoaController@getMoDongDK');
 		Route::get('khoa/thongbao', 'KhoaController@getThongBao');
 		Route::get('addGV', 'KhoaController@addGV');
+		Route::get('khoa/congvan', [ 'as' => 'khoa/congvan', 'uses' => 'KhoaController@getCongVan']);
+		Route::get('khoa/congvan/export', 'KhoaController@exportCongVan');
 		Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 		Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
 		Route::post('khoa/themnganh', 'KhoaController@themNganh');
@@ -48,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::post('khoa/detai/upload', 'Controller1@uploadStudentThesis');
 		Route::post('khoa/detai/type', 'Controller1@typeStudentThesis');
+
 	});
 
 	// HOC VIEN
