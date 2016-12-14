@@ -122,12 +122,13 @@ class KhoaController extends Controller
         return view('khoa.congvan');
     }
 
-    public function exportCongVan() {
+    public function exportDSDT() {
         $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
                         ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
-                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')->get();
+                        ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                        ->where('detai.trangthai', 'chapnhan')->get();
         $soLuongDeTai = $detai->count();
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/cong-van-template.docx');
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/ds-detai-template.docx');
 
         $templateProcessor->cloneRow('r1', $soLuongDeTai);
 
@@ -139,8 +140,8 @@ class KhoaController extends Controller
             $templateProcessor->setValue($r2, $detai[$i]->hoten_hv);
             $templateProcessor->setValue($r3, $detai[$i]->hoten_gv);
         }
-        $templateProcessor->saveAs('downloads/cong-van.docx');
-        return redirect()->route('khoa/congvan');
+        $templateProcessor->saveAs('downloads/ds-detai.docx');
+        return redirect()->route('khoa/detai');
     }
 
     public function getDeTai() {

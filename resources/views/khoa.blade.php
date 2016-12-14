@@ -51,12 +51,6 @@
                      Thông báo
                 </a>
             </li>
-            <li>
-                <a href="{{ url('khoa/congvan') }}">
-                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
-                     Công văn
-                </a>
-            </li>
         </ul>
 
     </div><!--/.sidebar-->

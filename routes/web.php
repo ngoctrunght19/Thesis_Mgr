@@ -31,12 +31,13 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('khoa/ctdt', [ 'as' => 'ctdt', 'uses' => 'KhoaController@getCTDT']);
 		Route::get('khoa/qlgv', 'KhoaController@getQLGV');
 		Route::get('khoa/qlhv', 'KhoaController@getQLHV');
-		Route::get('khoa/detai', 'KhoaController@getDeTai');
+		Route::get('khoa/detai', [ 'as' => 'khoa/detai', 'uses' => 'KhoaController@getDeTai']);
 		Route::get('khoa/modongdk', 'KhoaController@getMoDongDK');
 		Route::get('khoa/thongbao', 'KhoaController@getThongBao');
 		Route::get('addGV', 'KhoaController@addGV');
 		Route::get('khoa/congvan', [ 'as' => 'khoa/congvan', 'uses' => 'KhoaController@getCongVan']);
-		Route::get('khoa/congvan/export', 'KhoaController@exportCongVan');
+		Route::get('khoa/congvan/exportdsdt', 'KhoaController@exportDSDT');
+		Route::get('khoa/congvan/exportrdt', 'KhoaController@exportRDT');
 		Route::post('khoa/themkhoahoc', 'KhoaController@themKhoaHoc');
 		Route::post('khoa/xoakhoahoc', 'KhoaController@xoaKhoaHoc');
 		Route::post('khoa/themnganh', 'KhoaController@themNganh');

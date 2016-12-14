@@ -16,24 +16,24 @@
       <h2>Nhập danh sách các sinh viên đủ điều kiện đăng ký băng file</h2>
       <form id="form-upload" class="form-horizontal" method="post" action="detai/upload" onsubmit="return validateUploadForm(this)" enctype="multipart/form-data">
           {{ csrf_field() }}
-      
+
           <div class="form-group">
             <label class="control-label col-sm-2" for="select-file">Chọn file excel:</label>
-            <div class="col-sm-10">          
+            <div class="col-sm-10">
               <input type="file" name="excel" class="file" id="select-file" accept=".xlsx, .xls"/>
             </div>
           </div>
-          <div class="form-group">        
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-primary submit">Upload</button>
             </div>
           </div>
-          
+
           <span class="error form-error"></span>
 
           <div id="upload-result" class="result">
           </div>
-      
+
       </form>
     </div>
 
@@ -43,25 +43,25 @@
       <h2>Nhập mã học viên đủ điều kiện đăng ký</h2>
       <form id="type" class="form-horizontal" method="post" action="detai/type" enctype="multipart/form-data">
           {{ csrf_field() }}
-      
+
           <div class="form-group">
             <label class="control-label col-sm-3" for="mahv">Mã giảng viên:</label>
-            <div class="col-sm-9">          
+            <div class="col-sm-9">
               <input type="text" class="form-control" name="mahv" id="mahv" placeholder="Nhập mã học viên" required=""  oninvalid="this.setCustomValidity('Bạn chưa nhập mã học viên')" oninput="setCustomValidity('')">
             </div>
           </div>
-          <div class="form-group">        
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-primary submit">Cập nhật</button>
             </div>
           </div>
-      
+
           <div class="result">
           </div>
-      
+
       </form>
     </div>
-  
+
   </div>
 
   <div id="quanly" class="tab-pane">
@@ -71,7 +71,10 @@
   <div id="thongke" class="tab-pane">
 
     <h2>Các đề tài đăng ký được chấp nhận</h2>
-    <button class="btn btn-primary">Xuất công văn đề nghị</button>
+    <a href="{{ url('khoa/congvan/exportdsdt') }}">
+        <button class="btn btn-warning">Xuất công văn đề nghị đề tài</button>
+    </a>
+    <a href="{{ url('downloads/ds-detai.docx') }}"><button class="btn btn-primary btn-md">Tải Công Văn</button></a>
     <div>
       <table class="table table-striped">
       <thead>
@@ -90,7 +93,7 @@
           </tr>
       @endforeach
       </tbody>
-      
+
 
       </table>
   </div>
