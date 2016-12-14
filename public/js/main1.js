@@ -95,26 +95,30 @@ $(document).ready(function(){
 	$('#form-chude').ajaxForm({
 	    complete: function(xhr) {
 	    	$('#form-chude').removeClass('disabled')
-	    //	var data = $.parseJSON(result);
-	    //	console.log(data);
+
 	      	var responseText = xhr.responseText;
-	      	console.log(responseText);
-	      	var message = responseText['message'];
+	      	var result = responseText.split("-");
+	      	var message = result[0];
 	      	console.log(message);
 	      
 	      	// nếu có lỗi thì in thông báo lỗi và thoát
-	      	if (responseText != 'ok') {
+	      	if (message != 'ok') {
 	      		$('#form-chude .error').html(responseText);
 	      		return;
 	      	}
 	      	
 	      	var chude = $('#form-chude #chude').val();
+	      	var machude = result[1];
 
-	      	var chudemoi = "<tr><td class=\"col-md-10 col-sm-9 col-xs-8 chude\">"+ chude +"</td><td><button machude=\"helo\" id=\"accept\" class=\"btn btn-primary\">Sửa</button><button machude=\"\" id=\"reject\" class=\"btn btn-danger\">Xóa chủ đề</button></td></tr>";
+	      	var chudemoi = "<tr><td class=\"col-md-10 col-sm-9 col-xs-8 chude\">"+ chude +"</td><td><button machude=\""+machude+"\" id=\"accept\" class=\"btn btn-primary suachude\">Sửa</button><button machude=\""+machude+"\" class=\"xoachude btn btn-danger\">Xóa chủ đề</button></td></tr>";
 	      	$('#bangchude tbody').append(chudemoi);
 	    	var url      = window.location.href;
 	      	$( "#bangchude" ).load( url + " #bangchude" );
 	    }
+	});
+
+	$('#form-chude').submit(function() {
+		$('#form-chude .error').html("");
 	});
 });
 
@@ -128,6 +132,20 @@ $(document).on('click', '#danhsachgiangvien .pagination li:not(.active):not(.dis
         context: this,
         success : function(result) {
 			$( "#danhsachgiangvien" ).html(result);
+		}
+	});
+});
+
+$(document).on('click', '.xoachude',function(){
+	var url = $(this).attr('machude');
+	
+	$.ajax({
+        url : chudenghiencuu/xoachude,
+        type : "post", 
+        dateType:"text", 
+        success : function(result) {
+        //	if (result != 'OK')
+        	alert(result);
 		}
 	});
 });

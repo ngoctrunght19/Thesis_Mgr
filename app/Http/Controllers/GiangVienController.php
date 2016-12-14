@@ -123,9 +123,10 @@ class GiangVienController extends Controller
 
     public function themchude(Request $request) {
         $chude = $request->chude;
+        $result = "";
         if ($chude == null || trim($chude) == "") {
-           $result['message'] = 'Không có chủ đề';
-           echo json_encode($result);
+           $result = 'Không có chủ đề';
+           echo $result;
            return;
         }
 
@@ -133,19 +134,52 @@ class GiangVienController extends Controller
         $magiangvien = Auth::user()->username;
         $query = ChuDeNghienCuu::where([['tenchude', $chude],['magiangvien', $magiangvien]])->first();
         if ($query != null) {
-            $result['message'] = 'Đề tài đã bị trùng';
-            echo json_encode($result);
+            $result = 'Đề tài đã bị trùng';
+            echo $result;
             return;
         }
         $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
         
-        $js_array = json_encode(CreateTree::$list);
         if (!$success) {
-            $result['message'] = 'Không thê thêm chủ đề'; 
+            $result = 'Không thê thêm chủ đề'; 
         }
         else {
-            $result['message'] = 'ok';
-            $machude = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
+            $result = 'ok';
+            // lấy mã chủ đề
+            $chude = ChuDeNghienCuu::where('tenchude', $chude)->first();
+            $result .= '-' . $chude->id;
         }
+        echo $result;
+    }
+
+    public function xoaschude(Request $request) {
+        $chude = $request->chude;
+        $result = "";
+        if ($chude == null || trim($chude) == "") {
+           $result = 'Không có chủ đề';
+           echo $result;
+           return;
+        }
+
+        $chude = trim($chude);
+        $magiangvien = Auth::user()->username;
+        $query = ChuDeNghienCuu::where([['tenchude', $chude],['magiangvien', $magiangvien]])->first();
+        if ($query != null) {
+            $result = 'Đề tài đã bị trùng';
+            echo $result;
+            return;
+        }
+        $success = ChuDeNghienCuu::insert(['tenchude'=>$chude, 'magiangvien'=>$magiangvien]);
+        
+        if (!$success) {
+            $result = 'Không thê thêm chủ đề'; 
+        }
+        else {
+            $result = 'ok';
+            // lấy mã chủ đề
+            $chude = ChuDeNghienCuu::where('tenchude', $chude)->first();
+            $result .= '-' . $chude->id;
+        }
+        echo $result;
     }
 }
