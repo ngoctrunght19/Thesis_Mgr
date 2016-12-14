@@ -69,7 +69,7 @@ function createTree(list=null, item=null, parent_id=null) {
 	for(var i = 0; i < list.length; i++){
 		if(list[i]['parent_id'] == parent_id){
 			item = list[i]['id'];
-		    html += '<li><a data-toggle="collapse" href="#'+ item +'">'+ list[i]['name'] + '</a>' + createTree(list, item, list[i]['id']) + '</li>';
+		    html += '<li><div><input type="checkbox"/> <a data-toggle="collapse" href="#'+ item +'">'+ list[i]['tenlinhvuc'] + '</a></div>' + createTree(list, item, list[i]['id']) + '</li>';
 		}
 	}
 

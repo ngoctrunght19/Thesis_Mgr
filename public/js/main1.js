@@ -120,7 +120,76 @@ $(document).ready(function(){
 	$('#form-chude').submit(function() {
 		$('#form-chude .error').html("");
 	});
+
+	$.ajaxSetup({
+	  headers: {
+	    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	  }
+	});
+
+	$(window).on('load', function() {
+		console.log('hello1');
+		$.ajax({
+	        url : "linhvuc", 
+	        type : "post",
+	        dateType:"text", 
+	        success : function (result){
+	            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+	//            $("#input-khoahoc").val("");
+	//            $( "#list-khoahoc" ).html(result);
+				console.log(result);
+				var data = $.parseJSON(result);
+		//		console.log(result);
+				console.log(data);
+				var tree = createTree(data);
+				console.log(tree);
+				$( "#linhvuc" ).html(tree);
+
+				var li = $('#linhvucdachon li');
+				var checkboxes = $('.check');
+				console.log(checkboxes);
+				console.log(li);
+				for (var i = 0; i < checkboxes.length; i++) {
+					for (var j = 0; j < li.length; j++) {
+						console.log(checkboxes[i].attr('malinhvuc'));
+						console.log(li[j].attr('malinhvuc'));
+						if (checkboxes[i].attr('malinhvuc') == li[j].attr('malinhvuc')) {
+							checkboxes[i].attr('checked', true);
+							break;
+						}
+					}
+				}
+	        }
+		});
+	});
+
 });
+
+function createTree(list=null, item=null, parent_id=null) {
+	var c = "nav ";
+	if (parent_id != null) {
+		c += "collapse deeper in"
+		console.log("parent not null: " + parent_id);
+	}
+	else 
+		console.log("parent: " + parent_id);
+	var html = '<ul class="'+ c +'" id='+item+'>';
+//	var checked;
+	for(var i = 0; i < list.length; i++){
+		checked = "";
+		if(list[i]['parent_id'] == parent_id){
+			
+			item = list[i]['id'];
+		    html += '<li><div><input class="check" type="checkbox" malinhvuc='+ item +'/> <a data-toggle="collapse" href="#'+ item +'">'+ list[i]['tenlinhvuc'] + '</a></div>' + createTree(list, item, list[i]['id']) + '</li>';
+		}
+	}
+
+	html += '</ul>';
+	if ( html.indexOf('</li>')==-1){
+		html = '';
+	}
+	return html;
+}
 
 $(document).on('click', '#danhsachgiangvien .pagination li:not(.active):not(.disabled) a',function(){
 	var url = $(this).attr('url');

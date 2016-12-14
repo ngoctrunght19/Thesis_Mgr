@@ -18,6 +18,9 @@ use App\KhoaHoc;
 use App\Models\HocVienModel;
 use App\HocVien;
 use App\ChuDeNghienCuu;
+use App\LinhVuc;
+use App\GiangvienLinhvuc;
+use Auth;
 
 class Controller1 extends Controller
 {
@@ -231,7 +234,8 @@ class Controller1 extends Controller
 
 //        echo $tree;
 //        return CreateTree::$list;
-        $js_array = json_encode(CreateTree::$list);
+        $list = LinhVuc::all();
+        $js_array = json_encode($list);
         echo $js_array;
     }
 
@@ -273,6 +277,28 @@ class Controller1 extends Controller
 
     public function getChudenghiencuu() {
         $chudenghiencuu = ChuDeNghienCuu::all();
-        return view('giangvien.chudenghiencuu')->with('chudenghiencuu', $chudenghiencuu);
+        $magiangvien = Auth::user()->username;
+
+        $linhvuc = GiangvienLinhvuc::join('linhvuc', function($join) {
+                        $join->on('linhvuc_gv.malinhvuc', '=', 'linhvuc.id');
+                    })
+                    ->where('magiangvien', $magiangvien)->get();
+        return view('giangvien.chudenghiencuu')
+                   ->with('chudenghiencuu', $chudenghiencuu)
+                   ->with('linhvuc', $linhvuc);
+    }
+
+    public function getCategory() {
+        $list = LinhVuc::all();
+        // $list = LinhVuc::leftJoin('linhvuc_gv', function($join) {
+        //             $join->on('linhvuc_gv.malinhvuc', '=', 'linhvuc.id');
+        //         })
+        //         ->get([
+        //             'linhvuc.id',
+        //             'linhvuc.tenlinhvuc',
+        //             'linhvuc.parent_id',
+        //             'linhvuc_gv.magiangvien']);
+        $js_array = json_encode($list);
+        echo $js_array;
     }
 }
