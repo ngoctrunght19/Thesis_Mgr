@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('khoa/themnganh', 'KhoaController@themNganh');
 		Route::post('khoa/xoanganh', 'KhoaController@xoaNganh');
 		Route::post('khoa/modongdk', 'KhoaController@postMoDongDK');
+		Route::post('khoa/thongbao/themthongbao', 'KhoaController@themThongBao');
 
 		Route::post('khoa/qlgv/upload', ['as'=>'khoa/qlgv/upload','uses'=>'Controller1@uploadLecturer']);
 		Route::post('khoa/qlgv/typelecturer', ['as'=>'khoa/qlgv/typelecturer','uses'=>'Controller1@typeLecturer']);
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::post('khoa/detai/upload', 'Controller1@uploadStudentThesis');
 		Route::post('khoa/detai/type', 'Controller1@typeStudentThesis');
+
 
 	});
 

@@ -21,6 +21,7 @@ use App\Helpers\Pagination;
 use App\Values\Value;
 use App\MoDangKy;
 use App\Canbokhoa;
+use App\ThongBao;
 use URL;
 use PHPWord;
 
@@ -234,6 +235,12 @@ class KhoaController extends Controller
     }
 
     public function getThongBao() {
-        return view('khoa.thongbao');
+        $canbokhoa = Canbokhoa::where('mataikhoan', Auth::user()->id)->first();
+        $thongbao = ThongBao::where('makhoa', $canbokhoa->makhoa)->get();
+        return view('khoa.thongbao')->with('thongbao', $thongbao);
+    }
+
+    public function themThongBao() {
+
     }
 }
