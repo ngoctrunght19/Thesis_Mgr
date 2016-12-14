@@ -9,6 +9,8 @@ class HocVien extends Model
     //
     protected $table = 'hocvien';
 
+    public $timestamps = false;
+
 
     // lấy $n giảng viên từ vị trí pos trong bảng hocvien
     public static function get($pos, $n) {

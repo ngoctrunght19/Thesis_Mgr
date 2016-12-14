@@ -24,7 +24,7 @@ class Khoa extends Model
         // đếm số giảng viên đã thêm thành công
         $count = 0;
 
-        for ($row = 1; $row < $nRows; ++$row) {
+        for ($row = 1; $row <= $nRows; ++$row) {
         	$magiangvien = $objWorksheet->getCell("A" . $row)->getValue();
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $email = $objWorksheet->getCell("C" . $row)->getValue();
@@ -32,7 +32,6 @@ class Khoa extends Model
 
             $makhoa = Session::get('makhoa');
 
-            echo $magiangvien.'<br>';
             $success = self::themGiangVien($magiangvien, $hoten, $email, $donvi, $makhoa);
             
             if ($success) {
@@ -82,10 +81,14 @@ class Khoa extends Model
     	
         $url = self::$domain.$id.'&token='.$token;
 		$data = array('url'=>$url, 'email'=>$email, 'hoten' => $hoten);
-	 	Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
-	 	{
-            $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
-        });
+	 	try {
+            Mail::send('mails.taikhoangiangvien', $data, function($message) use ($data)
+            {
+                $message->to($data['email'], $data['hoten'])->subject('Kích hoạt tài khoản');
+            });
+        } catch(Exception $e) {
+
+        }
 
         return(count(Mail::failures()) == 0 );
     }
@@ -100,7 +103,7 @@ class Khoa extends Model
         // đếm số học viên đã thêm thành công
         $count = 0;
 
-        for ($row = 1; $row < $nRows; ++$row) {
+        for ($row = 1; $row <= $nRows; ++$row) {
             $mahocvien = $objWorksheet->getCell("A" . $row)->getValue();
             $hoten = $objWorksheet->getCell("B" . $row)->getValue();
             $khoahoc = $objWorksheet->getCell("C" . $row)->getValue();
@@ -115,7 +118,7 @@ class Khoa extends Model
             if ($success) {
                 $query = Taikhoan::select('password')->where('username','=',$mahocvien)->first();
                 $token = $query->password;
-                Khoa::sendEmailToLecturer($email, $mahocvien, $hoten, $token);
+                Khoa::sendEmailToStudent($email, $mahocvien, $hoten, $token);
                 $count++;
             }
         }

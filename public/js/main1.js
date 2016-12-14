@@ -5,11 +5,7 @@ $(document).ready(function(){
 	});
 
 	$('.submit').click( function(){
-		$(this).addClass('disabled')
-	});
-
-	$('form').submit( function(){
-		$(this).find(".result").html('Đang gửi yêu cầu');
+//		$(this).addClass('disabled')
 	});
 
 	$('#uploadLecturer #form-upload').ajaxForm({
@@ -41,12 +37,20 @@ $(document).ready(function(){
 			$('#type-student .submit').removeClass('disabled')
 	    }
 	});
+
+	$('#type').ajaxForm({
+	    complete: function(xhr) {
+	    	console.log(xhr.responseText);
+			$('#type .result').html(xhr.responseText);
+			$('#type .submit').removeClass('disabled')
+	    }
+	});
 	
 
 	$("#select-file").change(function(){
     	var file = $(this).val();
     	if (isExcelFile(file)) {	
-    		$('.form-error').html("&nbsp;");
+    		$('.form-error').html("");
 		}
 		else {
 			$('.form-error').html("Không phải file excel!");
@@ -68,6 +72,14 @@ $(document).ready(function(){
 		else {
 			$("#active #rp-error").html('&nbsp;');
 		}
+	});
+
+
+	$('#dudieukien #upload #form-upload').ajaxForm({
+	    complete: function(xhr) {
+	      	$('#upload-result').html(xhr.responseText);
+	      	$('#dudieukien #upload .submit').removeClass('disabled')
+	    }
 	});
 
 });
@@ -119,17 +131,18 @@ function validateActive() {
 function validateUploadForm(self) {
 	var file = document.getElementsByClassName('file')[0].value;
 	if (file == '') {
-		$('#uploadLecturer .form-error').html("Chưa chọn file!");
+		$('#form-upload .form-error').html("Chưa chọn file!");
 		return false;
 	}
 	else if (!isExcelFile(file)) {
-		$('#uploadLecturer .form-error').html("Không phải file excel!");
+		$('#form-upload .form-error').html("Không phải file excel!");
 		return false;
 	}
 
 	// la phai excel
-	$('#uploadLecturer .form-error').html("");
-	$('#uploadLecturer #upload-result').html("");
+	$('#form-upload .form-error').html("");
+	$('#form-upload #upload-result').html("Đang gửi yêu cầu");
+	$('#form-upload .submit').addClass('disabled');
 	return true;
 }
 

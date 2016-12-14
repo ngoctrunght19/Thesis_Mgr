@@ -30,6 +30,8 @@
           </div>
         </div>
 
+        <span class="error form-error"></span>
+
         <div id="upload-result" class="result">
         </div>
 
