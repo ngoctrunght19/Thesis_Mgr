@@ -82,4 +82,32 @@ class GiangVienController extends Controller
       $accInfo->update(['hoten' => $hoten,'email' => $email,'donvi' => $donvi]);
       //return view('giangvien.taikhoan')->with('accInfo', $accInfo);
     }
+
+    public function acceptDeTai(Request $request) {
+      $id = $request->id;
+      $detai = DeTai::where('id', $id)->first();
+      $detai ->trangthai ="chapnhan";
+      $detai -> save();
+      $pending = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'cho')->get();
+      $accepted = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'chapnhan')->get();
+      return view('giangvien.detaikhoaluan-content')->with('pending', $pending)
+                          ->with('accepted', $accepted);
+    }
+
+    public function rejectDeTai(Request $request) {
+      $id = $request->id;
+      DeTai::where('id', $id)->delete();
+      $pending = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'cho')->get();
+      $accepted = GiangVien::join('detai', 'giangvien.magiangvien', '=', 'detai.giangvienhuongdan')
+                            ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
+                            ->where('trangthai', 'chapnhan')->get();
+      return view('giangvien.detaikhoaluan-content')->with('pending', $pending)
+                          ->with('accepted', $accepted);
+    }
 }
