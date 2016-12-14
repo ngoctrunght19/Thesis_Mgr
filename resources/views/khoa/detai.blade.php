@@ -71,10 +71,12 @@
   <div id="thongke" class="tab-pane">
 
     <h2>Các đề tài đăng ký được chấp nhận</h2>
-    <a href="{{ url('khoa/congvan/exportdsdt') }}">
-        <button class="btn btn-warning">Xuất công văn đề nghị đề tài</button>
-    </a>
-    <a href="{{ url('downloads/ds-detai.docx') }}"><button class="btn btn-primary btn-md">Tải Công Văn</button></a>
+        <a href="{{ url('khoa/congvan/exportdsdt') }}">
+            <button class="btn btn-warning">Xuất công văn đề nghị đề tài</button>
+        </a>
+        <a href="{{ url('downloads/ds-detai.docx') }}">
+            <button class="btn btn-primary btn-md">Tải công văn</button>
+        </a>
     <div>
       <table class="table table-striped">
       <thead>
@@ -86,16 +88,49 @@
       </thead>
       <tbody>
       @foreach($detai as $dt)
+        @if($dt->trangthai == "chapnhan")
           <tr>
               <td>{{ $dt->tendetai }}</td>
               <td>{{ $dt->hocvien }}</td>
               <td>{{ $dt->giangvien }}</td>
           </tr>
+        @endif
       @endforeach
       </tbody>
 
 
       </table>
+
+      <h2>Các đề tài xin rút</h2>
+          <a href="{{ url('khoa/congvan/exportrdt') }}">
+              <button class="btn btn-warning btn-md">Xuất công văn rút đề tài</button>
+          </a>
+          <a href="{{ url('downloads/rut-detai.docx') }}">
+              <button class="btn btn-primary btn-md">Tải công văn</button>
+          </a>
+      <div>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tên đề tài</th>
+                <th>Học viên</th>
+                <th>Giảng viên hướng dẫn</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($detai as $dt)
+        @if($dt->trangthai == "")
+          <tr>
+              <td>{{ $dt->tendetai }}</td>
+              <td>{{ $dt->hocvien }}</td>
+              <td>{{ $dt->giangvien }}</td>
+          </tr>
+        @endif
+        @endforeach
+        </tbody>
+
+
+        </table>
   </div>
 
 </div>
