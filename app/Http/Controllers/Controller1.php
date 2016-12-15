@@ -96,7 +96,7 @@ class Controller1 extends Controller
         if ($success) {
             $query = Taikhoan::select('password')->where('username','=',$id)->first();
             $token = $query->password;
-            $success = Khoa::sendEmailToLecturer($email, $id, $name, $token);
+            $success = Khoa::sendEmailToActive($email, $id, $name, $token);
             echo 'Đã thêm giảng viên';
         }
         else {
@@ -157,7 +157,6 @@ class Controller1 extends Controller
             $query = Taikhoan::select('password')->where('username','=',$id)->first();
             $token = $query->password;
             $success = Khoa::sendEmailToActive($email, $id, $name, $token);
-            echo $success;
             echo 'Đã thêm học viên';
         }
         else {
@@ -229,7 +228,7 @@ class Controller1 extends Controller
         return view('vendor.test');
     }
 
-    public function test() {
+    public function linhvuc() {
 //        Khoa::sendEmail();
 //        $tree = CreateTree::create_list(CreateTree::$list);
 

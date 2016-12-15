@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('khoa/detai', [ 'as' => 'khoa/detai', 'uses' => 'KhoaController@getDeTai']);
 		Route::get('khoa/modongdk', 'KhoaController@getMoDongDK');
 		Route::get('khoa/thongbao', 'KhoaController@getThongBao');
+		Route::get('khoa/phanbienbaove', 'KhoaController@getPhanve');
 		Route::get('addGV', 'KhoaController@addGV');
 		Route::get('khoa/congvan', [ 'as' => 'khoa/congvan', 'uses' => 'KhoaController@getCongVan']);
 		Route::get('khoa/congvan/exportdsdt', 'KhoaController@exportDSDT');
@@ -57,7 +58,10 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('khoa/detai/type', 'Controller1@typeStudentThesis');
 
 		Route::get('khoa/dangkybaove', 'KhoaController@getDKBV');
+
 		Route::post('khoa/dangkybaove/nophoso', 'KhoaController@nophoso');
+
+		Route::post('khoa/guinhacnho', 'KhoaController@guinhacnho');
 
 	});
 
@@ -73,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('hocvien/dangkydetai', 'HocVienController@dangkydetai');
 		Route::post('hocvien/suadetai', 'HocVienController@suadetai');
 		Route::post('hocvien/rutdetai', 'HocVienController@rutdetai');
+		Route::post('hocvien/linhvuc', 'Controller1@linhvuc');
 
 	});
 

@@ -65,7 +65,43 @@
   </div>
 
   <div id="quanly" class="tab-pane">
-    quanly
+      <h2>Tổng quan</h2>
+      <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Mã học viên</th>
+                    <th>Tên học viên</th>
+                    <th>Được đăng ký</th>
+                    <th>Giảng viên hướng dẫn</th>
+                    <th>Đề tài</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($tongquan as $dt)
+                <tr>
+                    <td>{{ $dt->mahocvien }}</td>
+                    <td>{{ $dt->tenhocvien }}</td>
+                    @if($dt->duocdangky == 1)
+                      <td>Được đăng ký</td>
+                    @else
+                      <td>không được đăng ký</td>
+                    @endif
+                    <td>{{ $dt->tengiangvien }}</td>
+                    <td>{{ $dt->tendetai }}</td>
+                    @if($dt->trangthai == null)
+                      <td></td>
+                    @else @if($dt->trangthai == 'cho')
+                      <td>Đang chờ</td>
+                    @else
+                      <td>Đã chấp nhận</td>
+                      @endif
+                    @endif
+                    
+                </tr>
+            @endforeach
+            </tbody>
+          </table>
   </div>
 
   <div id="thongke" class="tab-pane">

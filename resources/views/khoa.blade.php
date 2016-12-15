@@ -57,6 +57,12 @@
                      Thông báo
                 </a>
             </li>
+            <li>
+                <a href="{{ url('khoa/phanbienbaove') }}">
+                    <svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad"/></svg>
+                     Phản biện và bảo vệ
+                </a>
+            </li>
         </ul>
 
     </div><!--/.sidebar-->

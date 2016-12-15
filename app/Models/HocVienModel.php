@@ -41,4 +41,10 @@ class HocVienModel extends Model
         return $count;
     }
 
+    //lấy những học viên chưa nộp hồ sơ
+    public static function chuanop() {
+      $list = HocVien::where([['danophoso', 0],['duocdangky', 1]])->get();
+      return $list;
+    }
+
 }

@@ -9,8 +9,8 @@
     
     <div class="center">
         <div class="box-login">
-            <div class="title-login">Hãy đặt mật khẩu để kích hoạt</div>
-            <div class="title-login">tài khoản với tên đăng nhập {{ $tendangnhap }}</div>
+            <div class="title-login center">Hãy đặt mật khẩu để kích hoạt</div>
+            <div class="title-login center">tài khoản với tên đăng nhập {{ $tendangnhap }}</div>
             <form id="active" class="login" method="POST" action="" onsubmit="return validateActive()">
                 <div class="form-group">
                     <label for="pwd">Mật khẩu:</label>

@@ -41,6 +41,9 @@ class KhoaController extends Controller
                          ->with('donvi', $donvi);
     }
 
+    /*
+        Thêm khóa học
+    */
     public function themKhoaHoc(Request $request) {
         $tenkhoahoc = $request->input('khoahoc');
     	KhoaHoc::insert(['tenkhoahoc' => $tenkhoahoc]);
@@ -48,6 +51,7 @@ class KhoaController extends Controller
         return view('khoa.danhsachkhoahoc')->with('khoahoc', $khoahoc);
     }
 
+    // thêm nghành
     public function themNganh(Request $request) {
     	$tennganh = $request->input('nganh');
         NganhHoc::insert(['tennganh' => $tennganh]);
@@ -55,6 +59,7 @@ class KhoaController extends Controller
         return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);
     }
 
+    // xóa khóa học
     public function xoaKhoaHoc(Request $request) {
         $id = $request->input('id');
     	KhoaHoc::find($id)->delete();
@@ -62,6 +67,7 @@ class KhoaController extends Controller
         return view('khoa.danhsachkhoahoc')->with('khoahoc', $khoahoc);
     }
 
+    // xóa ngành
     public function xoaNganh(Request $request) {
         $id = $request->input('id');
     	NganhHoc::find($id)->delete();
@@ -69,16 +75,20 @@ class KhoaController extends Controller
         return view('khoa.danhsachnganh ')->with('nganhhoc', $nganhhoc);
     }
 
+
+    // lấy khóa học
     public function getKhoaHoc() {
         $khoahoc = KhoaHoc::all();
         return view('khoa.khoahoc')->with('khoahoc', $khoahoc);
     }
 
+    // lấy chương trình đào tạo
     public function getCTDT() {
         $nganhhoc = NganhHoc::all();
         return view('khoa.ctdt')->with('nganhhoc', $nganhhoc);
     }
 
+    // lấy view quản lý giảng viên
     public function getQLGV() {
         if (!$this->loggedin())
             return redirect()->route('login');
@@ -98,6 +108,7 @@ class KhoaController extends Controller
                                ->with('pagination', $pagination);
     }
 
+    // Lấy view quan lý giảng viên
     public function getQLHV() {
         $itemPerPage = Value::getItemPerPage();
 
@@ -125,11 +136,15 @@ class KhoaController extends Controller
         return view('khoa.congvan');
     }
 
+
+    // lấy danh sách đề tài
     public function exportDSDT() {
         $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
                         ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
                         ->join('hocvien', 'detai.mahocvien', '=', 'hocvien.mahocvien')
-                        ->where('detai.trangthai', 'chapnhan')->get();
+                        ->where('detai.trangthai', 'chapnhan')    
+                        ->where([['detai.thaydoi', '<>','sua'], ['detai.thaydoi', '<>','rut']])
+                        ->get();
         $soLuongDeTai = $detai->count();
 
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('docTemplate/ds-detai-template.docx');
@@ -147,6 +162,7 @@ class KhoaController extends Controller
         return redirect()->route('khoa/detai');
     }
 
+    // lấy danh sách rút đề tài
     public function exportRDT() {
         $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
                         ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
@@ -170,6 +186,7 @@ class KhoaController extends Controller
         return redirect()->route('khoa/detai');
     }
 
+    // export file danh sách các đề tài có yêu cầu sửa
     public function exportSDT() {
         $detai = DeTai::select('giangvien.hoten as hoten_gv', 'hocvien.hoten as hoten_hv', 'detai.*')
                         ->join('giangvien', 'detai.giangvienhuongdan', '=', 'giangvien.magiangvien')
@@ -193,6 +210,7 @@ class KhoaController extends Controller
         return redirect()->route('khoa/detai');
     }
 
+    // lấy đề tài trang biểu diễn đề tài
     public function getDeTai() {
         $detai = DeTai::all();
         foreach ($detai as $dt) {
@@ -201,7 +219,18 @@ class KhoaController extends Controller
             $giangvien = GiangVien::where('magiangvien',$dt->giangvienhuongdan)->first();
             $dt->giangvien = $giangvien->hoten;
         }
-        return view('khoa.detai')->with('detai', $detai);
+
+        $tongquan = Array();
+        $tongquan = HocVien::tongquan();
+    //    var_dump($tongquan);
+        return view('khoa.detai')
+            ->with('detai', $detai)
+            ->with('tongquan', $tongquan);
+    }
+
+    // lấy trang phản biện và bảo vệ
+    public function getPhanve() {
+        return view('khoa.phanve');
     }
 
     public function loggedin() {
@@ -258,8 +287,12 @@ class KhoaController extends Controller
     }
 
     public function getDKBV() {
-
-        return view('khoa.dkbv');
+        $chuanop = HocVien::chuanop();
+        $dudieukien = HocVien::dudieukien();
+       
+        return view('khoa.dkbv')
+                    ->with('chuanop', $chuanop)
+                    ->with('dudieukien', $dudieukien);
     }
 
     public function nophoso(Request $request) {
@@ -296,5 +329,21 @@ class KhoaController extends Controller
             echo $e->getMessage();
             echo "Đã xảy ra lỗi.";
         }
+    }
+
+    public function guinhacnho() {
+        $chuanop = HocVien::chuanop();
+        var_dump($chuanop);
+        return;
+        try {
+            foreach ($chuanop as $value) {
+                App\Models\Khoa::guiEmailNhacNho($value->email, $value->mahocvien, $value->hoten);
+            }
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+
+        echo 'hello';
     }
 }

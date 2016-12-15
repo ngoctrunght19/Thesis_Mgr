@@ -8,6 +8,8 @@ $(document).ready(function(){
 //		$(this).addClass('disabled')
 	});
 
+
+	//tải file excel của giảng viên
 	$('#uploadLecturer #form-upload').ajaxForm({
 	    complete: function(xhr) {
 			$('#uploadLecturer #upload-result').html(xhr.responseText);
@@ -15,15 +17,22 @@ $(document).ready(function(){
 	    }
 	});
 
-
+	//thêm giảng viên bằng tay
 	$('#type-lecturer').ajaxForm({
 	    complete: function(xhr) {
-			$('#uploadLecturer #type-result').html(xhr.responseText);
+			$('#type-lecturer #type-result').html(xhr.responseText);
 			$('#type-lecturer .submit').removeClass('disabled')
 	    }
 	});
 
+	//đợi khi thêm
+	$('#type-lecturer').submit(function(xhr) {
+		$('#type-lecturer #type-result').html("Đang gửi yêu cầu");
+		$('#type-lecturer .submit').addClass('disabled');
+	});
 
+
+	//thêm học viên bằng tải excel
 	$('#uploadStudent #form-upload').ajaxForm({
 	    complete: function(xhr) {
 	      	$('#upload-result').html(xhr.responseText);
@@ -31,6 +40,7 @@ $(document).ready(function(){
 	    }
 	});
 
+	//thêm tay học viên
 	$('#type-student').ajaxForm({
 	    complete: function(xhr) {
 			$('#typestudent #result').html(xhr.responseText);
@@ -38,6 +48,13 @@ $(document).ready(function(){
 	    }
 	});
 
+	//đợi khi thêm
+	$('#type-student').submit(function(xhr) {
+		$('#typestudent #result').html("Đang gửi yêu cầu");
+		$('#type-student .submit').addClass('disabled')
+	});
+
+	//nhập 
 	$('#type').ajaxForm({
 	    complete: function(xhr) {
 	    	console.log(xhr.responseText);
@@ -259,6 +276,21 @@ $(document).on('click', '#danhsachhocvien .pagination li:not(.active):not(.disab
 	});
 });
 
+$(document).on('click', '#guinhacnho',function(){
+	
+	$.ajax({
+        url : 'guinhacnho', // gửi ajax đến url
+        type : "post", // chọn phương thức gửi là post
+        dateType:"text", // dữ liệu trả về dạng text
+        context: this,
+        success : function(result) {
+			
+			console.log(result);
+			
+		}
+	});
+});
+
 $(document).on('click', '#luulinhvuc',function(){
 	var checkboxes = $('.check');
 	var linhvuc = [];
@@ -338,4 +370,55 @@ function isExcelFile(file) {
 	else {
 		return true;
 	}
+}
+
+
+
+$(window).on('load', function(){
+	/* Act on the event */
+	var tenkhoahoc = 'hello';
+//	console.log(tenkhoahoc);
+	$.ajax({
+        url : "linhvuc", // gửi ajax đến url
+        type : "post", // chọn phương thức gửi là post
+        dateType:"text", // dữ liệu trả về dạng text
+		data : { // Danh sách các thuộc tính sẽ gửi đi
+		    khoahoc : tenkhoahoc
+		},
+        success : function (result){
+            // Sau khi gửi và kết quả trả về thành công thì gán nội dung trả về
+//            $("#input-khoahoc").val("");
+//            $( "#list-khoahoc" ).html(result);
+			var data = $.parseJSON(result);
+		
+			var tree = createTree2(data);
+			console.log(tree);
+			$( "#linhvuc-result" ).html(tree);
+        }
+	});
+	
+});
+
+
+function createTree2(list=null, item=null, parent_id=null) {
+	var c = "nav ";
+	if (parent_id != null) {
+		c += "collapse deeper in"
+		console.log("parent not null: " + parent_id);
+	}
+	else 
+		console.log("parent: " + parent_id);
+	var html = '<ul class="'+ c +'" id='+item+'>';
+	for(var i = 0; i < list.length; i++){
+		if(list[i]['parent_id'] == parent_id){
+			item = list[i]['id'];
+		    html += '<li><a data-toggle="collapse" href="#'+ item +'">'+ list[i]['tenlinhvuc'] + '</a>' + createTree2(list, item, list[i]['id']) + '</li>';
+		}
+	}
+
+	html += '</ul>';
+	if ( html.indexOf('</li>')==-1){
+		html = '';
+	}
+	return html;
 }

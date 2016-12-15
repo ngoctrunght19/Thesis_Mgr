@@ -98,6 +98,21 @@ class Khoa extends Model
         return(count(Mail::failures()) == 0 );
     }
 
+    public static function guiEmailNhacNho($email, $hoten, $mahocvien) {
+    
+        $data = array('email'=>$email, 'hoten' => $hoten, 'tendangnhap'=>$mahocvien);
+        try {
+            Mail::send('mails.nhacnho', $data, function($message) use ($data)
+            {
+                $message->to($data['email'], $data['hoten'])->subject('Nhắc nhở nộp hồ sơ');
+            });
+        } catch(Exception $e) {
+            echo $e;
+        }
+
+        return(count(Mail::failures()) == 0 );
+    }
+
     public static function importStudentFromExcel($path) {
         $message = null;
 

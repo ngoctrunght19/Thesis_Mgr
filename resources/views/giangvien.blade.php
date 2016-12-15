@@ -29,13 +29,6 @@
                      Giảng viên
                 </a>
             </li>
-            <li class="parent">
-                <a href="{{ url('giangvien/linhvuc') }}">
-                    <svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"/></svg>
-                     Lĩnh vực
-                </a >
-
-            </li>
             <li>
                 <a href="{{ url('giangvien/detaikhoaluan') }}">
                     <svg class="glyph stroked star"><use xlink:href="#stroked-star"/></svg>
